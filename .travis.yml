@@ -1,8 +1,2 @@
-install:
-- sudo apt update && apt install make cmake build-essential g++ gcc
-
-language:
-- python
-
 script:
 - make build
