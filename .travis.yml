@@ -1,7 +1,2 @@
-addons:
-  apt:
-    packages:
-    - cmake
-    - build-essential
 script:
 - make build
