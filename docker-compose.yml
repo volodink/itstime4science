@@ -4,6 +4,6 @@ services:
   web:
     build: web
     ports:
-      - "80:5000"
-  db:
-    image: "redis"
+      - "5000:5000"
+    volumes:
+      - ./web:/code
