@@ -3,5 +3,6 @@ Lab website repo
 
 Project status: 
 
-MASTER: ![alt tag](https://travis-ci.org/volodink/itstime4science.svg?branch=master)
-DEV: ![alt tag](https://travis-ci.org/volodink/itstime4science.svg?branch=dev)
+Master: ![alt tag](https://travis-ci.org/volodink/itstime4science.svg?branch=master)
+
+Dev: ![alt tag](https://travis-ci.org/volodink/itstime4science.svg?branch=dev)
