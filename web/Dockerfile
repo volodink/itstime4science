@@ -7,6 +7,5 @@ WORKDIR /code
 COPY ./backend/requirements.txt /
 RUN pip install -r /requirements.txt
 
-
 #CMD ["ls", "-a"]
 CMD ["python3", "backend/app.py"]
