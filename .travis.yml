@@ -1,2 +1,8 @@
+install:
+- sudo apt update && apt install make cmake build-essential g++ gcc
+
+language:
+- python
+
 script:
-- echo "Hello"
+- make build
