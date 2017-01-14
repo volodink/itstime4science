@@ -1,7 +1,7 @@
 all: clean build
 
 build:
-  echo "Build."
+	echo "Build."
 
 clean:
-  echo "Clean."
+	echo "Clean."
