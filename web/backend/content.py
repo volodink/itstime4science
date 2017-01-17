@@ -20,8 +20,9 @@ def getContent():
 			  "head_photo": "https://pp.vk.me/c637528/v637528262/19735/c7J0oC93950.jpg",
 			  "head_title": "Коптер",
 			  "head_footer": "Тут будет текст",
-			  "gallery": setIMG("http://4vision.ru/files/categories/thumbs/phantom_category.jpg",
-								"https://www3.djicdn.com/assets/images/products/phantom/phantom-241665483f93b3565a8d2c7b71c991db.png")
+			  "gallery": setIMG("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
+								"http://formula7moto.ru/wp-content/uploads/2015/10/Kak-ustroen-kvadrokopter.jpg",
+								"https://lh6.googleusercontent.com/yUHGOjWik0p2SXhRTVNLkNzlBqfSEG4ILxhIADG4L-2LGfGBLZmPeMoiOpRTD3I1_YBkNqRTVtjzV2s=w1366-h598-rw")
 			}
 
 	
@@ -29,8 +30,8 @@ def getContent():
 				 "head_photo": "http://www.roscosmos.ru/media/gallery/big/20544/744950758.jpg",
 				 "head_title": "Студенческая лига",
 				 "head_footer": "Тут будет текст",
-				 "gallery": setIMG("http://zablugdeniyam-net.ru/wp-content/uploads/CHto-takoe-sputnik-i-chto-on-delaet.jpg",
-				 					"http://sdnnet.ru/images/uploads/sputnik_yamal-401_pristupil_k_rabote.jpg")}
+				 "gallery": setIMG("https://i.ytimg.com/vi/SXW5eAjPD2U/maxresdefault.jpg",
+				 				   "http://i.ytimg.com/vi/teArassP_E4/maxresdefault.jpg")}
 	
 
 	return {"main": main,
