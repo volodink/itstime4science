@@ -21,8 +21,7 @@ def getContent():
 			  "head_title": "Коптер",
 			  "head_footer": "Тут будет текст",
 			  "gallery": setIMG("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
-								"http://formula7moto.ru/wp-content/uploads/2015/10/Kak-ustroen-kvadrokopter.jpg",
-								"https://lh6.googleusercontent.com/yUHGOjWik0p2SXhRTVNLkNzlBqfSEG4ILxhIADG4L-2LGfGBLZmPeMoiOpRTD3I1_YBkNqRTVtjzV2s=w1366-h598-rw")
+								"http://formula7moto.ru/wp-content/uploads/2015/10/Kak-ustroen-kvadrokopter.jpg")
 			}
 
 	
@@ -43,4 +42,4 @@ if __name__ == "__main__":
 	lal = getContent()
 
 	for i in lal["main"]["gallery"]:
-		print(i[0])
+		print(i)
