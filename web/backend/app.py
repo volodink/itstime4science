@@ -1,10 +1,12 @@
 from flask import Flask, render_template
-import params
 import sys
-
-sys.path.append("../../utils/data-emulator")
-
+import os
 import content
+
+sys.path.append(str(os.path.abspath(sys.argv[0])))
+
+from params import Parser
+
 
 app = Flask(__name__)
 app.template_folder = '../frontend/templates/'
@@ -13,13 +15,9 @@ app.static_folder = "../frontend/static/"
 data = content.getContent() # Новый контент можно добавить в файл
 							# /web/backend/content.py
 
-
-Parser = params.Parser()
-gen = telemetrySenderEmulator.generateData()
-argv = Parser.createParser()
-host = ip_and_port.ip
-port = int(ip_and_port.port)
-addr = (host, port)
+parser = Parser()
+argv = parser.createParser()
+namespace = argv.parse_args(sys.argv[1:])
 
 @app.route("/")
 def main():
@@ -39,4 +37,4 @@ def mcc():
 
 
 if __name__ == "__main__":
-    app.run(host='{}'.format(host), port=port, debug=True)
+    app.run(host='{}'.format(namespace.ip), port=namespace.port, debug=True)

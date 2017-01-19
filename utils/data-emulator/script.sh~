@@ -1,2 +1,0 @@
- #!/bin/bash 
-python3 server.py -i 0.0.0.0 -p 5111 & python3 client.py -i 0.0.0.0 -p 5111 
