@@ -102,50 +102,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Our Team</h2>
+                <h2 class="page-header">{{ data["team_photo"]["team_row_title"] }}</h2>
             </div>
+            {% for row_data in data["team_photo"]["people"] %}
             <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
+                <img class="img-circle img-responsive img-center" src="{{ row_data["link_to_photo"] }}" alt="">
+                <h3>{{ row_data["name"] }}
+                    <br>
+                    <small>{{ row_data["job_title"] }}</small>
                 </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                <p>{{ row_data["comment"] }}</p>
             </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
