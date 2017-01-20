@@ -21,7 +21,7 @@ namespace = argv.parse_args(sys.argv[1:])
 
 @app.route("/")
 def main():
-    return render_template('index.html', data = data["main"])
+    return render_template('index.html', data = data["main"], main = True)
 
 @app.route("/copter")
 def copter():

@@ -26,14 +26,40 @@
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
+    <!-- Yandex Maps API -->
+    
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <!-- <script src="{{ url_for('static', filename='js/yandex_maps.js') }}"></script> -->
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respoеnd.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
+
+<script type="text/javascript">
+    ymaps.ready(init);
+    var myMap;
+
+    function init(){     
+        myMap = new ymaps.Map("map", {
+            center: [53.22544088, 45.00208070],
+            zoom: 17
+        });
+        myPlacemark = new ymaps.Placemark([53.22553745, 45.00223627], { 
+            hintContent: 'Мы тут!', 
+            balloonContentHeader: 'Лаборатория ВВиВС' ,
+            balloonContentBody: 'улица Гагарина, 13Б<br>ПензГТУ (Корпус №2)<br>Кабинет: №316',
+            balloonContentFooter: 'Здесь творится магия :)'
+        });
+
+        myMap.geoObjects.add(myPlacemark);
+    }
+</script> 
+
 <body>
 
     <!-- Navigation -->
@@ -163,6 +189,22 @@
             </div>
         </div>
     </div>  
+    
+    {% if main %}
+    <!-- Yandex Maps -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Как до нас добраться</h2>
+            </div>
+            <div class="col-lg-12">
+                <div id="map" style="height: 400px"></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <hr>
 
     <!-- Footer -->
     <footer>
@@ -213,6 +255,8 @@
 
     <!-- Theme JavaScript -->
     <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
+
+
 
 </body>
 
