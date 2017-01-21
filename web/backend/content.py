@@ -103,7 +103,7 @@ def getContent():
 
 
 	copter = {"title": "itstime4science | Коптер",
-			  "head_photo": "https://pp.vk.me/c637528/v637528262/19735/c7J0oC93950.jpg",
+			  "head_photo": "https://pp.vk.me/c636728/v636728996/52d16/2oWW37OQqEI.jpg",
 			  "head_title": "Коптер",
 			  "head_footer": "Тут будет текст",
 			  "gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
