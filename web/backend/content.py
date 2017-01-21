@@ -109,7 +109,7 @@ def getContent():
 			  "gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
 								"https://pp.vk.me/c836227/v836227262/1db5d/Oao-irsb8Sc.jpg",
 								"https://pp.vk.me/c636323/v636323235/44708/oaaCdr02RSU.jpg"),
-			  "team_photo": {"team_row_title": 'Команда "Копер"',
+			  "team_photo": {"team_row_title": 'Команда "Коптер"',
 							"people": (kulikovo,
 										garkaeva,
 										stramovd,
