@@ -1,9 +1,13 @@
 version: "2"
 
 services:
+  loadb:
+    build: loadb
+    ports:
+      - "80:80"
+    depends_on:
+      - "web"
   web:
     build: web
-    ports:
-      - "80:5000"
     volumes:
       - ./web:/code
