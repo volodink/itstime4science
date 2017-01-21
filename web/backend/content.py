@@ -79,7 +79,7 @@ def getContent():
 
 
 	main = {"title": "itstime4science | Главная",
-			"head_photo": "https://pp.vk.me/c637528/v637528262/1976f/rx5wxLsuZyQ.jpg",
+			"head_photo": "img/main_head.jpg",
 			"head_title": "ВВиВС",
 			"head_footer": "Добро пожаловать на интернет-портал лаборатории ВВиВС (ПензГТУ)!",
 			"gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/44666/CYzELG7-Lf0.jpg",
@@ -103,7 +103,7 @@ def getContent():
 
 
 	copter = {"title": "itstime4science | Коптер",
-			  "head_photo": "https://pp.vk.me/c636728/v636728996/52d16/2oWW37OQqEI.jpg",
+			  "head_photo": "img/copter_head.jpg",
 			  "head_title": "Коптер",
 			  "head_footer": "Тут будет текст",
 			  "gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
@@ -119,7 +119,7 @@ def getContent():
 
 	
 	satellite = {"title": "itstime4science | Студенческая лига",
-				 "head_photo": "http://www.roscosmos.ru/media/gallery/big/20544/744950758.jpg",
+				 "head_photo": "img/sat_head.jpg",
 				 "head_title": "Студенческая лига",
 				 "head_footer": "Тут будет текст",
 				 "gallery": setGalleryImg("https://i.ytimg.com/vi/SXW5eAjPD2U/maxresdefault.jpg",

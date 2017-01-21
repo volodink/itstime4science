@@ -12,7 +12,7 @@
     <title>{{ data["title"] }}</title>
 	
 	<!-- Title icon -->
-	<link rel="shortcut icon" href="https://pp.vk.me/c636728/v636728996/52d1d/neISVDE_cXI.jpg" type="image/x-icon">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/title_icon.ico') }}" type="image/x-icon">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -98,7 +98,7 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url({{ data['head_photo'] }})">
+    <header class="intro-header" style="background-image: url({{ url_for('static', filename=data['head_photo']) }})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
