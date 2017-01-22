@@ -16,7 +16,7 @@ def getContent():
 				"comment": ""}
 
 	kulikovo = {"name": "Олег Куликов",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d25/fnZ1sJghFTY.jpg",
 				"job_title": "Технический консультант",
 				"comment": ""}
 
@@ -31,12 +31,12 @@ def getContent():
 				"comment": ""}
 
 	vavilova = {"name": "Андрей Вавилов",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d1e/62mNrwj_tZI.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
 	caplinm = {"name": "Михаил Цаплин",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d2c/lqA7jPBiAiM.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
@@ -46,7 +46,7 @@ def getContent():
 				"comment": ""}
 
 	volckovs = {"name": "Сергей Волчков",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d33/CwSrB0ZM6Y0.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
@@ -107,10 +107,10 @@ def getContent():
 			  "head_title": "Коптер",
 			  "head_footer": "Разработка рабочего прототипа автоматизированного комплекса мониторинга очагов пожаров",
 			  "gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
-								"https://pp.vk.me/c836227/v836227262/1db5d/Oao-irsb8Sc.jpg",
 								"https://pp.vk.me/c636323/v636323235/44708/oaaCdr02RSU.jpg"),
 			  "team_photo": {"team_row_title": 'Команда "Коптер"',
-							"people": (kulikovo,
+							"people": (volodink,
+										kulikovo,
 										garkaeva,
 										stramovd,
 										vavilova,					
@@ -125,7 +125,8 @@ def getContent():
 				 "gallery": setGalleryImg("https://i.ytimg.com/vi/SXW5eAjPD2U/maxresdefault.jpg",
 				 				   "http://i.ytimg.com/vi/teArassP_E4/maxresdefault.jpg"),
 				 "team_photo": {"team_row_title": 'Команда "Спутник"',
-							"people": (kulikovo,
+							"people": (volodink,
+										kulikovo,
 										garkaeva,
 										kedelidzeo,
 										caplinm,
