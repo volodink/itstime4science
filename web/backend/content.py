@@ -21,7 +21,7 @@ def getContent():
 				"comment": ""}
 
 	garkaeva = {"name": "Александр Гарькаев",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18c8d/RPFIBHyrQZ4.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
@@ -51,7 +51,7 @@ def getContent():
 				"comment": ""}
 
 	kopylovv = {"name": "Вадим Копылов",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18ca1/zg1YdCWAHNY.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
@@ -105,7 +105,7 @@ def getContent():
 	copter = {"title": "itstime4science | Коптер",
 			  "head_photo": "img/copter_head.jpg",
 			  "head_title": "Коптер",
-			  "head_footer": "Тут будет текст",
+			  "head_footer": "Разработка рабочего прототипа автоматизированного комплекса мониторинга очагов пожаров",
 			  "gallery": setGalleryImg("https://pp.vk.me/c636323/v636323235/43d6f/HfCDSO1iE_w.jpg",
 								"https://pp.vk.me/c836227/v836227262/1db5d/Oao-irsb8Sc.jpg",
 								"https://pp.vk.me/c636323/v636323235/44708/oaaCdr02RSU.jpg"),
@@ -121,7 +121,7 @@ def getContent():
 	satellite = {"title": "itstime4science | Студенческая лига",
 				 "head_photo": "img/sat_head.jpg",
 				 "head_title": "Студенческая лига",
-				 "head_footer": "Тут будет текст",
+				 "head_footer": "Разработка аппарата “Громозека” на базе платформы CubeSat",
 				 "gallery": setGalleryImg("https://i.ytimg.com/vi/SXW5eAjPD2U/maxresdefault.jpg",
 				 				   "http://i.ytimg.com/vi/teArassP_E4/maxresdefault.jpg"),
 				 "team_photo": {"team_row_title": 'Команда "Спутник"',
