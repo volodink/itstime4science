@@ -61,7 +61,7 @@ def getContent():
 				"comment": ""}
 
 	volkova = {"name": "Александр Волков",
-				"link_to_photo": "https://pp.vk.me/c638023/v638023262/1bc85/PNEW2q7TdbQ.jpg",
+				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18c53/j6J4fFI-Ttc.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
