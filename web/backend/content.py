@@ -41,7 +41,7 @@ def getContent():
 				"comment": ""}
 
 	baikova = {"name": "Антон Байков",
-				"link_to_photo": "http://placehold.it/200x200",
+				"link_to_photo": "https://pp.vk.me/c837420/v837420262/24068/L3iT5Oy5ruI.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
 
@@ -55,7 +55,7 @@ def getContent():
 				"job_title": "Лаборант",
 				"comment": ""}
 
-	kolginp = {"name": "Паша Колодкин",
+	kolodkin = {"name": "Паша Колодкин",
 				"link_to_photo": "http://placehold.it/200x200",
 				"job_title": "Лаборант",
 				"comment": ""}
@@ -97,7 +97,7 @@ def getContent():
 										baikova,
 										volckovs,
 										kopylovv,
-										kolginp,
+										# kolodkin,
 										volkova)}
 			}
 
@@ -131,8 +131,8 @@ def getContent():
 										kedelidzeo,
 										caplinm,
 										volckovs,
-										kopylovv,
-										kolginp)}
+										# kolodkin,
+										kopylovv)}
 				}
 	
 
