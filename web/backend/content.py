@@ -190,7 +190,7 @@ def getContent():
 										# kolodkin,
 										kopylovv)},
 				"description": """
-					<p align='right'><i>SpaceY - потому-что SpaceX уже есть.</i></p>
+					<p align='right'><i>SpaceY - потому, что SpaceX уже есть.</i></p>
 										
 					<p>
 					   Задача "Студенческой лиги" состоит в проведении 
