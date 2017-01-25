@@ -33,7 +33,7 @@ def satellite():
 
 @app.route("/mcc")
 def mcc():
-    return render_template('coming_soon.html')
+    return render_template('mcc.html')
 
 
 if __name__ == "__main__":
