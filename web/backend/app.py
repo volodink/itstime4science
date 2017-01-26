@@ -5,7 +5,7 @@ import content
 
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 
-from params import Parser
+from itstime4science.params import Parser
 
 
 app = Flask(__name__)

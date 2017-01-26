@@ -1,8 +1,8 @@
 from socket import *
 import sys
-import telemetrySenderEmulator
+import itstime4science.utils.dataemulator.telemetrySenderEmulator
 import time
-import params
+from itstime4science.params import params
 
 Parser = params.Parser()
 gen = telemetrySenderEmulator.generateData()
