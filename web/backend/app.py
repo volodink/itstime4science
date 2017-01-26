@@ -15,9 +15,7 @@ app.static_folder = "../frontend/static/"
 data = content.getContent() # Новый контент можно добавить в файл
 							# /web/backend/content.py
 
-parser = Parser()
-argv = parser.createParser()
-namespace = argv.parse_args(sys.argv[1:])
+namespace = Parser().createParser().parse_args(sys.argv[1:])
 
 @app.route("/")
 def main():
