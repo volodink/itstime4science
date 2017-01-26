@@ -1,13 +1,27 @@
 version: "2"
 
 services:
-  loadb:
-    build: loadb
-    ports:
-      - "80:80"
-    depends_on:
-      - "web"
-  web:
-    build: web
+  #loadb:
+  #  build: loadb
+  #  ports:
+  #    - "80:80"
+  #  depends_on:
+  #    - "web"
+  #web:
+  #  build: web
+  #  volumes:
+  #    - ./web:/code
+  server:
+    build: web_server/server/
     volumes:
-      - ./web:/code
+      - ./web_server/server:/code
+    ports:
+      - "5100:5100"
+    #depends_on:
+    #  - "web"
+  client:
+    build: test_client/client
+    volumes:
+      - ./test_client/client:/code
+    #depends_on:
+    #  - "web"

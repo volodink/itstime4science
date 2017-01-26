@@ -4,7 +4,6 @@ import random
 import time
 import socket
 import sys
-
 class generateData():
 	
 	def __init__(self):

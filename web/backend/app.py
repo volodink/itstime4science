@@ -2,10 +2,8 @@ from flask import Flask, render_template
 import sys
 import os
 import content
-
 sys.path.append(str(os.path.abspath(sys.argv[0])))
-
-from itstime4science.params import Parser
+import params
 
 
 app = Flask(__name__)
@@ -15,7 +13,7 @@ app.static_folder = "../frontend/static/"
 data = content.getContent() # Новый контент можно добавить в файл
 							# /web/backend/content.py
 
-parser = Parser()
+parser = params.Parser()
 argv = parser.createParser()
 namespace = argv.parse_args(sys.argv[1:])
 
