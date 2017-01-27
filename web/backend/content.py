@@ -16,7 +16,7 @@ def getContent():
 				"comment": ""}
 
 	kulikovo = {"name": "Олег Куликов",
-				"link_to_photo": "https://pp.vk.me/c837420/v837420262/240c7/THj2nW2dtZQ.jpg",
+				"link_to_photo": "https://pp.vk.me/c837629/v837629262/21197/X6V6yNLUBI8.jpg",
 				"job_title": "Технический консультант",
 				"comment": ""}
 
