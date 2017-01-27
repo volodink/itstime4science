@@ -64,18 +64,13 @@
 	.button {
 		text-align: center;
 	}
-
+	
+	.lable {
+		font-family: sans-serif;
+	}
 
 
 </style>
-
-<script type="text/javascript">
-    // $(window).load(function(){
-    //     $('#myModal').modal('show');
-    // });
-    
-</script>
-
 
 <body>
 	<!-- Data panel -->
@@ -83,23 +78,23 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
 			<span><i class="fa fa-clock-o" aria-hidden="true"></i> Timestamp</span><br>
-			<span id="ts"></span> s
+			<span id="ts">0.000</span> s
 		</div>
 		<div class="col-md-2 col-sm-4 col-xs-5 param_block">
 			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Latitude</span><br>
-			<span id="lat"></span>
+			<span id="lat">0.000</span>
 		</div>
 		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
 			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Longitude</span><br>
-			<span id="lon"></span>
+			<span id="lon">0.000</span>
 		</div>
 		<div class="col-md-2 col-sm-4 col-xs-5 param_block">
 			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Altitude</span><br>
-			<span id="alt"></span> km
+			<span id="alt">0.000</span> km
 		</div>
 		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
 			<span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Battery charge</span><br>
-			<span id="bat"></span> %
+			<span id="bat">0.000</span> %
 		</div>
 		<div class="col-md-1"></div>
 	</div>
@@ -115,13 +110,32 @@
 		<div class="col-lg-1"></div>
 	</div>
 	
-
-	<!-- Button -->
-	<div class="row">
-		<div class="clo-lg-12 button">
-			<a type="button" class="btn btn-primary" href="/">Вернутся на главную страницу</a>
+	<!-- div.row(div.clo-) -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">
+				<!-- <input type="range" min="1" max="10000" id="size" oninput="sizeSlider()" value="3"> -->
+				
+			</div>
+			<div class="col-lg-1">
+				<!-- <span id="slider">###</span> -->
+			</div>
+			<div class="col-lg-4 button">
+				<a type="button" class="btn btn-primary" href="/">Вернутся на главную страницу</a>
+			</div>
+			<div class="col-lg-4 button" >
+				<input id="follow" type="checkbox" name="follow" value="a4"> <span class = "lable"><b>СЛЕЖЕНИЕ ЗА МЕТКОЙ</b></span>
+			</div>
 		</div>
 	</div>
+
+	<!-- Button -->
+	<!-- <div class="row">
+		<div class="col-lg-12 button">
+			<span id="slider"></span>
+			
+		</div>
+	</div> -->
 	
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

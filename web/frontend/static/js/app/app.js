@@ -12,6 +12,13 @@ function genData(count) {
 	};
 }
 
+// function sizeSlider() {
+// 	size = document.getElementById("size").value;
+// 	$("#slider").html(size);
+// }
+
+// while(true)
+// 	sizeSlider();
 function tipoMap(start, stop, step) {
 
 	finalArr = [];
@@ -24,31 +31,18 @@ function tipoMap(start, stop, step) {
 }
 
 function getSomething(data, max_count) {
-	// var neighborhoods = [
-	// 	{lat: 52.511, lng: 13.447},
-	// 	{lat: 52.549, lng: 13.422},
-	//   	{lat: 52.497, lng: 13.396},
-	//   	{lat: 52.517, lng: 13.394}
-	// ];
-
 
 	$("#ts").html(data["ts"][count]);
 	$("#lat").html(data["lat"][count]);
 	$("#lon").html(data["lon"][count]);
 	$("#alt").html(data["alt"][count]);
 	$("#bat").html(data["bat"][count]);
-
+	// sizeSlider();
 	var position = {lat: Number(data["lat"][count]), lng: Number(data["lon"][count])}
-	// console.log(position)
 	addMarker(position, map);
-	
-	// marker = new google.maps.Marker({
-	//     position: new google.maps.LatLng(data["lat"][count], data["lon"][count]),
-	//     map: map
-	// });
+	// console.log(size);
 	count++;
 	if(count == max_count){
-		marker.setMap(null);
 		count = 0;
 	}
 }
@@ -56,10 +50,10 @@ function getSomething(data, max_count) {
 function addMarker(location, map) {
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
-  console.log(location);
+	if($("#follow").prop('checked'))
+ 		 map.setCenter(location);
   var marker = new google.maps.Marker({
     position: location,
-    // label: labels[labelIndex++ % labels.length],
     map: map,
     icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
   });
@@ -73,6 +67,7 @@ function printData(data, sleep, max_count){
 		console.log(data)
 		setInterval(function(){
 		    getSomething(data, max_count) 
+		    // console.log(size);
 		}, sleep);
 	// }
 
@@ -84,7 +79,7 @@ function initMap() {
   var myLatLng = {lat:  53.22544088, lng: 45.00208070};
 
   	map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
+    zoom: 11,
     center: myLatLng
   });
 
