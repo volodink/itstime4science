@@ -18,18 +18,22 @@
     <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
 </head>
 
 <style>
 	html, body {
 		padding: 0;
 		margin: 0;
-		background-color: #fff;
+		background-color: #F7F7F7;
 	}
 	
 	.title_row {
 		margin-top: 10px;
 		height: auto;
+        
 	}		
 
 	.param_block {
@@ -45,11 +49,15 @@
 
 	#map {
 		height: 450px;
+        border-radius: 5px;
+
 	}
 
 	.map {
+        padding: 0;
 		padding-top: 10px;
-		padding-bottom: 15px
+		padding-bottom: 15px;
+        margin: 0;
 	}
 
 	i.fa {
@@ -62,106 +70,266 @@
 	}
 
 	.button {
-		text-align: center;
+        width: 100%;
+        margin: 10px 0px 10px 0px;
+        text-align: center;
+/*        min-height: 100vh;*/
 	}
 	
 	.lable {
-		font-family: sans-serif;
+		font-family: Roboto;
+		color: #fff;
+		font-size: 14px;
+	}
+	
+
+	 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	   border: none;
+	    
 	}
 
 
+	.navbar-inverse {
+	    background-color: #0176D6;
+	   border: none;
+	}
+
+	.navbar-inverse .navbar-nav>li>a {
+	    color: #fff;
+	    font-weight: bold;
+	    background-color: #0176D6;
+	    border-color: #0176D6;
+/*	    text-transform: uppercase;*/
+	    font-family: Roboto;
+	    font-size: 16px;
+        
+	}
+
+	.navbar-inverse .navbar-nav>li>a:hover {
+/*	    color: #dedede;*/
+        background-color: #056bbe;
+	}
+
+	.navbar-inverse .navbar-brand {
+	    color: #1e5f95;
+	    font-size: 23px;
+	    font-weight: bold;
+	    font-family: Roboto;
+	}
+    
+    .navbar-inverse .navbar-brand:active {
+        color: #1e5f95;
+    }
+    
+    .navbar-inverse .navbar-brand:visited {
+        color: #1e5f95;
+    }
+
+	.navbar-inverse .navbar-brand:hover {
+	    color: #22547e;
+	}
+
+	.content_container {
+	    margin-top: 50px;
+	}
+
+	.menu {
+	    height: auto;
+	    background-color: #222;
+        padding-top: 10px;
+        text-align: center;
+        padding-bottom: 15px;
+        border-radius: 5px;
+/*        margin-ri: -7.5px;*/
+	}
+    footer {
+        background-color: #222; 
+        border-top: 6px solid #0176D6;
+    }
+    
+    .data_container {
+/*        margin-left: 7.5px;   */
+    }
+    ul.param_data {
+        margin: 0; /* Обнуляем значение отступов */
+        padding: 4px; /* Значение полей */
+        width: 100%;
+        text-align: center;
+   }
+    ul.param_data li {
+        display: inline-block;
+/*        margin-right: 5px; */
+        padding: 5px; 
+/*
+        border-right: 1px solid #000;
+        border-left: 1px solid #000;
+*/
+        margin: 0 25px 0 25px;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 24px;
+    }
+    .gen_report {
+        background-color: #0176D6;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        text-align: center;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #1e5f95;
+    }
+    
+    .param_bg_color {
+        background-color: #eaeaea;
+        border-radius: 5px;
+    }
+    ul.footer_link {
+        text-align: center;
+    }
+
+    ul.footer_link li{
+        color: #fff;
+        display: inline-block;
+        margin: 10px;
+        margin-top: 0;
+        
+    }
+    ul.footer_link li a {
+        color: #fff;
+
+    }
+    
+    ul.footer_link li a:hover {
+        color: #0176D6;
+        text-decoration: none;
+        
+    }
+    a.up {
+        font-size: 30px;
+        text-align: center;
+    }
+    
+
+    
+    
 </style>
 
 <body>
-	<!-- Data panel -->
-	<div class="row title_row center clearfix">
-		<div class="col-md-1"></div>
-		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
-			<span><i class="fa fa-clock-o" aria-hidden="true"></i> Timestamp</span><br>
-			<span id="ts">0.000</span> s
-		</div>
-		<div class="col-md-2 col-sm-4 col-xs-5 param_block">
-			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Latitude</span><br>
-			<span id="lat">0.000</span>
-		</div>
-		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
-			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Longitude</span><br>
-			<span id="lon">0.000</span>
-		</div>
-		<div class="col-md-2 col-sm-4 col-xs-5 param_block">
-			<span><i class="fa fa-area-chart" aria-hidden="true"></i> Altitude</span><br>
-			<span id="alt">0.000</span> km
-		</div>
-		<div class="col-md-2 col-sm-4 col-xs-5 param_block cent-col">
-			<span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Battery charge</span><br>
-			<span id="bat">0.000</span> %
-		</div>
-		<div class="col-md-1"></div>
-	</div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/mcc"><i class="fa fa-plane" aria-hidden="true"></i>
+ МКЦ</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/copter">Копетр</a></li>
+            <li><a href="/satellite">Студенческая лига</a></li>
+            <li><a href="/mcc">МКЦ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+        
+    <div class="container-fluid">
+        <div class="row content_container">
+            <div class="col-xs-12 col-md-2 col-sm-2" style="margin-top:10px; ">
+            	<div class="container-fluid menu" >
+            	    <div class="row">
+                        <input id="follow" type="checkbox" name="follow" value="a4"> <span class = "lable">Слежение за меткой</span><br>
+                        <button class="gen_report" LANGUAGE="Javascript" onclick="alert('Coming soon')">
+                            Сгенерировать отчет
+                        </button>
+					</div>
+				</div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 data_container">
+            	 <div class="container-fluid">
+	            	<!-- Data panel -->
+					<div class="row title_row">
+					    <div class="col-lg-12 param_bg_color">
+					        <ul class="param_data">
+					            <li>
+                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i> Timestamp</span><br>
+                                    <span id="ts">0.000</span> s
+					            </li>
+					            <li>
+					                <span><i class="fa fa-area-chart" aria-hidden="true"></i> Latitude</span><br>
+							        <span id="lat">0.000</span>
+					            </li>
+					            <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Longitude</span><br>
+                                    <span id="lon">0.000</span>					                
+					            </li>
+					            <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Altitude</span><br>
+							        <span id="alt">0.000</span> km
+					            </li>
+					            <li>
+					                <span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Battery charge</span><br>
+							        <span id="bat">0.000</span> %
+					            </li>
+					        </ul>
+					    </div>
+					</div>
 
-	<!-- <hr> -->
-	
-	<!-- Google Maps -->
-	<div class="row map">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-10">
-			<div id="map"></div>			
-		</div>
-		<div class="col-lg-1"></div>
-	</div>
-	
-	<!-- div.row(div.clo-) -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3">
-				<!-- <input type="range" min="1" max="10000" id="size" oninput="sizeSlider()" value="3"> -->
-				
-			</div>
-			<div class="col-lg-1">
-				<!-- <span id="slider">###</span> -->
-			</div>
-			<div class="col-lg-4 button">
-				<a type="button" class="btn btn-primary" href="/">Вернутся на главную страницу</a>
-			</div>
-			<div class="col-lg-4 button" >
-				<input id="follow" type="checkbox" name="follow" value="a4"> <span class = "lable"><b>СЛЕЖЕНИЕ ЗА МЕТКОЙ</b></span>
-			</div>
-		</div>
-	</div>
+					<!-- Google Maps -->
+					
+					<div class="row">
+                        <div class="col-lg-12 map">
+                            <div id="map"></div>
+                        </div>
+					</div>	
+				</div>		
+            </div>
+        </div>
+    </div>
 
-	<!-- Button -->
-	<!-- <div class="row">
-		<div class="col-lg-12 button">
-			<span id="slider"></span>
-			
-		</div>
-	</div> -->
-	
 	<!-- Modal -->
+	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel" style="text-align: center;">МКЦ</h4>
-	      </div>
-	      <div class="modal-body">
-	        Добро пожаловать в мобильный командный центр!
-	        Данная страница еще находится в разработке и лишь является демонстационным вариантом 
-	        который показывает что то...
-	      </div>
-	      <div class="modal-footer">
-	        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-	        <button id="startDemo" type="button" class="btn btn-primary" data-dismiss="modal">Запуск демо</button>
-	      </div>
-	    </div>
-	  </div>
+        <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="text-align: center;">МКЦ</h4>
+                </div>
+                <div class="modal-body">
+                    Добро пожаловать в мобильный командный центр!
+                    Данная страница еще находится в разработке и лишь является демонстационным вариантом 
+                    который показывает что то...
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                    <button id="startDemo" type="button" class="btn btn-primary" data-dismiss="modal">Запуск демо</button>
+                </div>
+            </div>
+        </div>
 	</div>
 
-
-
-
-
+	<!-- Footer -->
+   
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 " style="text-align: center;">
+                    <a href="#" class="arr_up"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size:45px; color:#fff"></i>
+</a>
+                    <p class="copyright text-muted"style="color:#fff">Copyright &copy; ВВиВС 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 	<!-- jQuery -->
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
@@ -175,27 +343,12 @@
 
     <!-- Theme JavaScript -->
     <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
-    <script type="text/javascript">
 
-			// var map;
-			// function initMap() {
-			//   map = new google.maps.Map(document.getElementById('map'), {
-			//     center: {lat: 53.22544088, lng: 45.00208070},
-			//     zoom: 17
-			//   });
-			// }
-
-			</script>
 	<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap">
     </script>
     <!-- <script type="text/JavaScript" src="http://maps.google.com/maps/apis/
 js?sensor=true"></script>  -->
 	<script src= {{ url_for('static', filename='js/app/app.js') }}></script>
-    
-
-   
-    
-
 </body>
 </html>
