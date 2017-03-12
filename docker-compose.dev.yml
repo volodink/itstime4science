@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  loadb:
+    build: loadb
+    ports:
+      - "212.109.220.21:80:80"
+    depends_on:
+      - "web"
+    networks:
+      - dev.itstime4science.ru
+  web:
+    build: web
+    volumes:
+      - ./web:/code
+    networks:
+      - dev.itstime4science.ru
+
+networks:
+  dev.itstime4science.ru:
+    
