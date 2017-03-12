@@ -7,10 +7,13 @@ services:
       - "${PROD_IP}:80:80"
     depends_on:
       - "web"
+    networks:
+      - itstime4science.ru
   web:
     build: web
     volumes:
       - ./web:/code
-
+    networks:
+      - itstime4science.ru
 networks:
   itstime4science.ru:
