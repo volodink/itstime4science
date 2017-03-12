@@ -77,8 +77,12 @@
                     <span class="sr-only">Toggle navigation</span>
                     Меню <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/"><span><i class="fa fa-rocket" aria-hidden="true"></i>          itstime4science</span></a>
-            </div>
+	        {% if is_dev == 1 %}
+                	<a class="navbar-brand" href="/"><span><i class="fa fa-rocket" aria-hidden="true"></i>[dev]itstime4science</span></a>
+            	{% else %}
+                	<a class="navbar-brand" href="/"><span><i class="fa fa-rocket" aria-hidden="true"></i>          itstime4science</span></a>
+		{% endif %}
+	    </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
