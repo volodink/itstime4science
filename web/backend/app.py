@@ -22,19 +22,19 @@ namespace = Parser().createParser().parse_args(sys.argv[1:])
 
 @app.route("/")
 def main():
-    return render_template('index.html', is_dev, data = data["main"], main = True)
+    return render_template('index.html', is_dev=is_dev, data = data["main"], main = True)
 
 @app.route("/copter")
 def copter():
-    return render_template('index.html', is_dev, data = data["copter"])
+    return render_template('index.html', is_dev=is_dev, data = data["copter"])
 
 @app.route("/satellite")
 def satellite():
-    return render_template('index.html', is_dev, data = data["satellite"])
+    return render_template('index.html', is_dev=is_dev, data = data["satellite"])
 
 @app.route("/mcc")
 def mcc():
-    return render_template('mcc.html')
+    return render_template('mcc.html', is_dev=is_dev)
 
 
 if __name__ == "__main__":
