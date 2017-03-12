@@ -11,3 +11,6 @@ services:
     build: web
     volumes:
       - ./web:/code
+
+networks:
+  itstime4science.ru:
