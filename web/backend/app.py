@@ -5,6 +5,7 @@ import content
 
 # get env variable to make dev version of website different
 is_dev = os.getenv('DEV', 0)
+print('Now in DEV={} mode.'.format(is_dev))
 
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 
