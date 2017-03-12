@@ -1,15 +1,15 @@
 version: "2"
 
 services:
-  loadb:
-    build: loadb
+  loadb_dev:
+    build: loadb_dev
     ports:
-      - "212.109.220.21:80:80"
+      - "${DEV_IP}:80:80"
     depends_on:
-      - "web"
+      - "web_dev"
     networks:
       - dev.itstime4science.ru
-  web:
+  web_dev:
     build: web
     volumes:
       - ./web:/code
