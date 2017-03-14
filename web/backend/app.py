@@ -4,8 +4,7 @@ import os
 import content
 
 # get env variable to make dev version of website different
-is_dev = os.getenv('DEV', 0)
-print('Now in DEV={} mode.'.format(is_dev))
+is_dev = os.getenv("DEV", "0")
 
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 
@@ -20,6 +19,7 @@ data = content.getContent() # Новый контент можно добави�
 							# /web/backend/content.py
 
 namespace = Parser().createParser().parse_args(sys.argv[1:])
+
 
 @app.route("/")
 def main():
