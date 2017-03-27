@@ -3,8 +3,8 @@ import sys
 import os
 import content
 
-# get env variable to differ dev version from prod
-is_dev = int(os.getenv("DEV", "0"))
+# get env variable to make dev version of website different
+is_dev = os.getenv("DEV", "0")
 
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 
@@ -39,8 +39,4 @@ def mcc():
 
 
 if __name__ == "__main__":
-    if is_dev == 1:
-        app.run(host='{}'.format(namespace.ip), port=namespace.port, debug=True)
-    else:
-        app.run(host='{}'.format(namespace.ip), port=namespace.port)
-
+    app.run(host='{}'.format(namespace.ip), port=namespace.port, debug=True)
