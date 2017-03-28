@@ -77,7 +77,7 @@ int main()
 {
     int start_t,end_t,i=0,l;
     FILE *file;
-    file = fopen("/home/argo/PycharmProjects/untitled/gprs_packet.bin","w");
+    file = fopen("../gprs_packet.bin","w");
     uint8_t *p;
     gprs_telem_packet packet;
     packet = gprsTelemetryPacketBuilder();

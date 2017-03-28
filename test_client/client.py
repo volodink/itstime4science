@@ -3,6 +3,8 @@ import sys
 from dataemulator import telemetrySenderEmulator
 import time
 import params
+import string
+import base64
 
 Parser = params.Parser()
 gen = telemetrySenderEmulator.generateData()
@@ -17,12 +19,14 @@ print(host,port)
 addr = (host, port)
 tcp_socket = socket(AF_INET, SOCK_STREAM)
 tcp_socket.connect(addr)
-file = open("binary.file", "rb")
-while not file.eof:
-    buff = file.read(89)  # считать 1024 байт
-    string = base64.b64encode(buff)  # base64 кодирование
-    buff = str.encode(buff) # Вот это под вопросом, перед этим вместо buff  на обоих местах стояла data
-    tcp_socket.send(file)
-    print('Data has been sent')
+file = open("generate_packet/gprs_packet.bin", "rb")
+while True:
+    buf = file.read()
 
+    if len(buf) == 0:
+        break
+    print(buf)
+    tcp_socket.send(buf)
+    print ('Data has been sent')
+file.close() 
 tcp_socket.close()
