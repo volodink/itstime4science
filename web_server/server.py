@@ -2,6 +2,7 @@ from socket import *
 import params
 import sys
 
+
 Parser = params.Parser()
 argv = Parser.createParser()
 ip_and_port = argv.parse_args(sys.argv[1:])
@@ -14,7 +15,7 @@ print(host,port)
 tcp_socket = socket(AF_INET, SOCK_STREAM)
 tcp_socket.bind(addr)
 tcp_socket.listen(1)
-f = open('packet.txt', 'wb')
+f = open('packet.bin', 'wb')
 while True:
     tcp_socket.settimeout(5)
     print('wait connection...')
@@ -25,6 +26,7 @@ while True:
         f.write(data)
     else:
         break
+
 f.close()
 conn.close()
 tcp_socket.close()
