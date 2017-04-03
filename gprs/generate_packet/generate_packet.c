@@ -7,6 +7,7 @@
 #include <malloc.h>
 
 #pragma pack (push,1)
+
 struct gprs_telem_packet {
     uint8_t start[3]; /* SYT */
     uint32_t time;
@@ -66,6 +67,7 @@ gprs_telem_packet gprsTelemetryPacketBuilder() {
     packet.sats = 14;
     packet.radiation = 14.4;
     packet.dust = 15.0;
+    packet.ozone = true;
     packet.stop[0] = 0x54;
     packet.stop[1] = 0x59;
     packet.stop[2] = 0x53;
@@ -87,7 +89,6 @@ int main()
     printf("sizeof(struct gprs_telem_packet) = %lu\n", sizeof(gprs_telem_packet));
     for(i=0;i<sizeof(packet);i++) {
         printf("[%04d] %X\n", i, p[i]);
-
     }
     fwrite (&packet, sizeof(char),sizeof(packet), file );
     fclose(file);
