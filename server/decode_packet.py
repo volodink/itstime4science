@@ -2,98 +2,136 @@ import struct
 f = open('packet.bin', 'rb')
 SYT=f.read(3)
 print(SYT)
+
+def clear_string(str):
+    new_str = ''
+    for s in str:
+        return s
+
+def str_to_float(str):
+    # попробуем воспользоваться самым простым методом
+    try:
+        return float(str)
+    except:
+        # других вариантов не осталось. скорее всего функция приняла на входе мусор
+        return 0
+
+def check_float(str):
+    try:
+        float(str)
+        return True
+    except:
+        return False
+
 def read_data(file,n):
     var = []
     var = file.read(n)
     return var
-time = read_data(f, 4)
-time =int.from_bytes(time, byteorder='little')
-print(time)
+d = [] #time
 
-lat = read_data(f, 4)
-lat = struct.unpack('f',lat)
-print(lat)
+data = read_data(f, 4)#time
+data =int.from_bytes(data, byteorder='little')
+d.append(data)
 
-lon = read_data(f, 4)
-lon = struct.unpack('f',lon)
-print(lon)
+data = read_data(f, 4) #lat
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-alt = read_data(f, 4)
-alt = struct.unpack('f',alt)
-print(alt)
+data = read_data(f, 4) #lon
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-temp1 = read_data(f, 4)
-temp1 = struct.unpack('f',temp1)
-print(temp1)
 
-temp2 = read_data(f, 4)
-temp2 = struct.unpack('f',temp2)
-print(temp2)
+data = read_data(f, 4) #alt
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-pressure1 = read_data(f, 4)
-pressure1= struct.unpack('f',pressure1)
-print(pressure1)
 
-pressure2 = read_data(f, 4)
-pressure2= struct.unpack('f',pressure2)
-print(pressure2)
+data = read_data(f, 4)#temp1
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-bat_crg = read_data(f, 1)
-bat_crg = int.from_bytes(bat_crg, byteorder='little')
-print(bat_crg)
+data = read_data(f, 4)#temp2
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-bat_volt = read_data(f, 4)
-bat_volt= struct.unpack('f',bat_volt)
-print(bat_volt)
 
-bat_temp = read_data(f, 4)
-bat_temp= struct.unpack('f',bat_temp)
-print(bat_temp)
+data = read_data(f, 4)#pressure1
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-vect_axel1 = read_data(f, 4)
-vect_axel1= struct.unpack('f',vect_axel1)
-print(vect_axel1)
+data = read_data(f, 4)#pressure2
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-vect_axel2 = read_data(f, 4)
-vect_axel2= struct.unpack('f',vect_axel2)
-print(vect_axel2)
+data = read_data(f, 1)#bat_crg
+d.append (int.from_bytes(data, byteorder='little'))
 
-ultraviolet1 = read_data(f, 4)
-ultraviolet1= struct.unpack('f',ultraviolet1)
-print(ultraviolet1)
+data = read_data(f, 4)#bat_volt
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-ultraviolet2 = read_data(f, 4)
-ultraviolet2= struct.unpack('f',ultraviolet2)
-print(ultraviolet2)
 
-infrared1 = read_data(f, 4)
-infrared1= struct.unpack('f',infrared1)
-print(infrared1)
+data = read_data(f, 4)#bat_temp
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-infrared2 = read_data(f, 4)
-infrared2= struct.unpack('f',infrared2)
-print(infrared2)
+data = read_data(f, 4)#vect_axel1
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-hdop = read_data(f, 4)
-hdop= struct.unpack('f',hdop)
-print(hdop)
+data = read_data(f, 4)#vect_axel2
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-vdop = read_data(f, 4)
-vdop= struct.unpack('f',vdop)
-print(vdop)
+data = read_data(f, 4)#ultraviolet1
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-sats = read_data(f, 1)
-sats= int.from_bytes(sats, byteorder='little')
-print(sats)
+data = read_data(f, 4)#ultraviolet2
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-radiation = read_data(f, 4)
-radiation= struct.unpack('f',radiation)
-print(radiation)
-dust = read_data(f, 4)
-dust= struct.unpack('f',dust)
-print(dust)
-#ozone = read_data(f, 1)
+data = read_data(f, 4)#infrared1
+data= struct.unpack('f',data)
+d.append (clear_string(data))
 
-stop = read_data(f, 3)
+data = read_data(f, 4)#infrared2
+data = struct.unpack('f',data)
+d.append (clear_string(data))
 
-# ГЛЯНУТЬ ЕМЕТ
+
+data = read_data(f, 4)#hdop
+data = struct.unpack('f',data)
+d.append (clear_string(data))
+
+
+data = read_data(f, 4)#vdop
+data= struct.unpack('f',data)
+d.append (clear_string(data))
+
+data = read_data(f, 1)#sats
+d.append(int.from_bytes(data, byteorder='little'))
+
+data = read_data(f, 4)#radiation
+data= struct.unpack('f',data)
+d.append (clear_string(data))
+
+data = read_data(f, 4)#dust
+data= struct.unpack('f',data)
+d.append (clear_string(data))
+
+data = read_data(f, 1)#ozone
+print(bool(data))
+d.append(bool(data))
+
+data = read_data(f, 4)#status
+data =int.from_bytes(data, byteorder='little')
+d.append(data)
+
+f = open('formated_dates.txt', 'w')
+print(d[0:24])
+for i in range(len(d)):
+    f.write(str(d[i]) + '    ')
+f.close()
+# # ГЛЯНУТЬ ЕМЕТ

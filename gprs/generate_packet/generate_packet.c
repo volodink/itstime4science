@@ -33,8 +33,7 @@ struct gprs_telem_packet {
     float radiation;
     float dust;
     uint8_t ozone;
-     /* status */
-     /*uint32_t status;*/
+    uint32_t status;
     uint8_t stop[3]; /* TYS */
 };
 #pragma pack (pop)
@@ -68,6 +67,7 @@ gprs_telem_packet gprsTelemetryPacketBuilder() {
     packet.radiation = 14.4;
     packet.dust = 15.0;
     packet.ozone = true;
+    packet.status = "11101111111111111111111";
     packet.stop[0] = 0x54;
     packet.stop[1] = 0x59;
     packet.stop[2] = 0x53;
@@ -78,6 +78,7 @@ gprs_telem_packet gprsTelemetryPacketBuilder() {
 int main()
 {
     int start_t,end_t,i=0,l;
+
     FILE *file;
     file = fopen("../gprs_packet.bin","w");
     uint8_t *p;
@@ -87,9 +88,10 @@ int main()
     start_t = clock();
     packet.time = time(NULL);
     printf("sizeof(struct gprs_telem_packet) = %lu\n", sizeof(gprs_telem_packet));
-    for(i=0;i<sizeof(packet);i++) {
-        printf("[%04d] %X\n", i, p[i]);
-    }
+    printf("sizeof status = %lu\n", sizeof(packet.status));
+//    for(i=0;i<sizeof(packet);i++) {
+//        printf("[%04d] %X\n", i, p[i]);
+//    }
     fwrite (&packet, sizeof(char),sizeof(packet), file );
     fclose(file);
     return 0;
