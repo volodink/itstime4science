@@ -1,11 +1,8 @@
 #include <stdio.h>
-#include <string.h>
-#include <stddef.h>
 #include <stdbool.h>
 #include <inttypes.h>
 #include <time.h>
-#include <malloc.h>
-
+#include <stdbool.h>
 #pragma pack (push,1)
 
 struct gprs_telem_packet {
@@ -42,6 +39,7 @@ typedef struct gprs_telem_packet gprs_telem_packet;
 
 gprs_telem_packet gprsTelemetryPacketBuilder() {
     gprs_telem_packet packet;
+
     packet.start[0] = 0x53;
     packet.start[1] = 0x59;
     packet.start[2] = 0x54;
@@ -67,7 +65,7 @@ gprs_telem_packet gprsTelemetryPacketBuilder() {
     packet.radiation = 14.4;
     packet.dust = 15.0;
     packet.ozone = true;
-    packet.status = "11101111111111111111111";
+    packet.status = 1;
     packet.stop[0] = 0x54;
     packet.stop[1] = 0x59;
     packet.stop[2] = 0x53;
@@ -88,10 +86,10 @@ int main()
     start_t = clock();
     packet.time = time(NULL);
     printf("sizeof(struct gprs_telem_packet) = %lu\n", sizeof(gprs_telem_packet));
-    printf("sizeof status = %lu\n", sizeof(packet.status));
-//    for(i=0;i<sizeof(packet);i++) {
-//        printf("[%04d] %X\n", i, p[i]);
-//    }
+    printf("sizeof ozone = %lu\n", sizeof(packet.ozone));
+    for(i=0;i<sizeof(packet);i++) {
+        printf("[%04d] %X\n", i, p[i]);
+    }
     fwrite (&packet, sizeof(char),sizeof(packet), file );
     fclose(file);
     return 0;

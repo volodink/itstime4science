@@ -25,21 +25,20 @@ if __name__ == '__main__':
         tcp_socket = socket(AF_INET, SOCK_STREAM)
         tcp_socket.bind(addr)
         tcp_socket.listen(1)
-        f = open('packet.bin', 'wb')
+        f = open('packet.bin', 'ab')
         while True:
+            tcp_socket.settimeout(5)
             print('wait connection...')
             conn, addr = tcp_socket.accept()
-            data = conn.recv(89)
+            data = conn.recv(93)
             print(data)
-            if data:
-                f.write(data)
-            else:
-                break
+            f.write(data)
+            f.close()
+            conn.close()
+
         loop.run_forever()
     finally:
         loop.close()
-        f.close()
-        conn.close()
         tcp_socket.close()
 
 # from socket import *

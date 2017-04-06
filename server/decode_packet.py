@@ -2,12 +2,10 @@ import struct
 f = open('packet.bin', 'rb')
 SYT=f.read(3)
 print(SYT)
-
 def clear_string(str):
     new_str = ''
     for s in str:
         return s
-
 def str_to_float(str):
     # попробуем воспользоваться самым простым методом
     try:
@@ -27,6 +25,7 @@ def read_data(file,n):
     var = []
     var = file.read(n)
     return var
+
 d = [] #time
 
 data = read_data(f, 4)#time
@@ -125,9 +124,9 @@ data = read_data(f, 1)#ozone
 print(bool(data))
 d.append(bool(data))
 
-data = read_data(f, 4)#status
-data =int.from_bytes(data, byteorder='little')
-d.append(data)
+data = read_data(f, 1)#status
+print(data)
+d.append(bool(data))
 
 f = open('formated_dates.txt', 'w')
 print(d[0:24])
