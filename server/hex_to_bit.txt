@@ -1,0 +1,10 @@
+def toBitArray(val, maxBitCount=23):
+    return ['false' for i in range(maxBitCount-len(str(bin(val))[2:]))] + \
+    list(map(lambda x: 'false' if (x == 0) else 'ok', map(int, str(bin(val))[2:])))
+
+def run():
+    print(*toBitArray(0xFF))
+    print(len(toBitArray(0xFF)))
+
+if __name__ == '__main__':
+    run()

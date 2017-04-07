@@ -1,4 +1,5 @@
 import struct
+
 f = open('packet.bin', 'rb')
 SYT=f.read(3)
 print(SYT)
@@ -25,6 +26,15 @@ def read_data(file,n):
     var = []
     var = file.read(n)
     return var
+
+def toBitArray(val, maxBitCount=23):
+    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:023b}'.format(val)))
+
+def run(number):
+    print(*toBitArray(number))
+    print(len(toBitArray(number)))
+    return toBitArray(number)
+
 
 d = [] #time
 
@@ -124,9 +134,11 @@ data = read_data(f, 1)#ozone
 print(bool(data))
 d.append(bool(data))
 
-data = read_data(f, 1)#status
-print(data)
-d.append(bool(data))
+data = read_data(f, 4)#status
+databin = int.from_bytes(data, byteorder='little')
+l = run(databin)
+d.append(l)
+
 
 f = open('formated_dates.txt', 'w')
 print(d[0:24])
