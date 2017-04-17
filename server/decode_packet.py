@@ -157,15 +157,31 @@ f = open('formated_dates.txt', 'w')
 print(d[0:24])
 for i in range(len(d)):
     f.write(str(d[i]) + '    ')
-    print(str(i)+ '-' + str(d[i]))
-print(i)
 db = MySQLdb.connect(host="localhost", user="root", passwd="s21021999s", db="packet", charset='utf8')
 cursor = db.cursor()
-cursor.execute =("""INSERT INTO gprs(numbersOfFlight, datatime, lat, lon,alt,temp1,temp1,pressure1,pressure2,bat_crg,bat_volt,bat_temp,vect_axel1,vect_axel2,ultraviolet1,ultraviolen2,infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)""",(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[8],d[9],d[10],d[11],d[12],d[13],d[14],d[15],d[16],d[17],d[18],d[19],d[20],d[21],d[22],d[23],d[24]))
-#cursor.execute("""SELECT * FROM gprs;""")
+try:
+    insert ="""INSERT INTO gprs(numbersOfFlight, datatime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
+bat_volt,bat_temp,vect_axel1,vect_axel2,ultraviolet1,ultraviolet2,infrared1,infrared2,hdop,vdop,sats,radiation,\
+dust,ozone,status) VALUES({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, '{}')""".format(d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15], d[16],\
+ d[17], d[18], d[19], d[20], d[21], d[22], d[23], ','.join(d[24]))
+
+    #insert = "i i oooo v ({},{},{})".format(10,20,30)
+    print(insert)
+    cursor.execute(insert)
+    db.commit()
+    cursor.execute("select * from gprs")
+    data = cursor.fetchall()
+    print (data)
+except MySQLdb.Error as e:
+    print ("MySQL Error [%d]: %s" % (e.args[0], e.args[1]))
+else:
+    db.close()
+
+
 # except:
 #     db.rollback()
-db.commit()
-db.close()
+
 #data =  cursor.fetchall()
 # # ГЛЯНУТЬ ЕМЕТ
+#d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15], d[16], d[17], d[18], d[19], d[20], d[21], d[22], d[23], d[24]
+#%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
