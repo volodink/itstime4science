@@ -1,13 +1,13 @@
 from socket import *
 import sys
-from dataemulator import telemetrySenderEmulator
+
 import time
 import params
 import string
 import base64
 
 Parser = params.Parser()
-gen = telemetrySenderEmulator.generateData()
+
 argv = Parser.createParser()
 ip_and_port = argv.parse_args(sys.argv[1:])
 #host = ip_and_port.ip

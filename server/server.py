@@ -25,9 +25,9 @@ if __name__ == '__main__':
         tcp_socket = socket(AF_INET, SOCK_STREAM)
         tcp_socket.bind(addr)
         tcp_socket.listen(1)
-        f = open('packet.bin', 'ab')
+        f = open('packet.bin', 'wb')
         while True:
-            tcp_socket.settimeout(5)
+
             print('wait connection...')
             conn, addr = tcp_socket.accept()
             data = conn.recv(93)

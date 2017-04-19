@@ -4,7 +4,6 @@ import MySQLdb
 
 f = open('packet.bin', 'rb')
 SYT=f.read(3)
-print(SYT)
 def packet(*args,i):
     return args[i]
 
@@ -32,11 +31,11 @@ def read_data(file,n):
     var = file.read(n)
     return var
 
-def toBitArray(val, maxBitCount=23):
+def toBitArray(val):
     return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:023b}'.format(val)))
 
 def run(number):
-    print(*toBitArray(number))
+    print(toBitArray(number))
     print(len(toBitArray(number)))
     return toBitArray(number)
 
@@ -48,9 +47,7 @@ d.append(data)
 
 data = read_data(f, 4)#time
 data =int.from_bytes(data, byteorder='little')
-print(datetime.fromtimestamp(data))
 data = datetime.fromtimestamp(data)
-print(str(data))
 data = str(data)
 d.append(data)
 
@@ -166,12 +163,12 @@ dust,ozone,status) VALUES({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, 
  d[17], d[18], d[19], d[20], d[21], d[22], d[23], ','.join(d[24]))
 
     #insert = "i i oooo v ({},{},{})".format(10,20,30)
-    print(insert)
+    #print(insert)
     cursor.execute(insert)
     db.commit()
     cursor.execute("select * from gprs")
     data = cursor.fetchall()
-    print (data)
+    #print (data)
 except MySQLdb.Error as e:
     print ("MySQL Error [%d]: %s" % (e.args[0], e.args[1]))
 else:
