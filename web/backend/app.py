@@ -21,10 +21,10 @@ app = Flask(__name__)
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
 app.config['SECRET_KEY'] = 'secret'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 's21021999s'
-app.config['MYSQL_DATABASE_DB'] = 'gprs'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = ''
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = ''
+app.config['MYSQL_DATABASE_HOST'] = ''
 socketio = SocketIO(app)
 mysql.init_app(app)
 cursor = mysql.connection.cursor()
