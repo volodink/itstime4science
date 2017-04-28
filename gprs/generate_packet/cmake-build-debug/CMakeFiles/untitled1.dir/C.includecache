@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/argo/itstime4science/gprs/generate_packet/generate_packet.c
+stdio.h
+-
+stdbool.h
+-
+inttypes.h
+-
+time.h
+-
+stdbool.h
+-
+

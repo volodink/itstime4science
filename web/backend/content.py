@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def setGalleryImg(*tuplePhoto):
 
 	return tuple((count, tuplePhoto[count]) for count in range(len(tuplePhoto))) 

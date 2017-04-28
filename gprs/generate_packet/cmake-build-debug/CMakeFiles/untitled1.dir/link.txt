@@ -1,0 +1,1 @@
+/usr/bin/cc  -g   CMakeFiles/untitled1.dir/generate_packet.c.o  -o untitled1 

@@ -301,7 +301,7 @@
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Pressure 2</span><br>
                                     <span id="pressure2">0.000</span>					                
 					            </li>
-<li>
+						    <li>
 		                    <span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Battery charge</span><br>
 				    <span id="bat_crg">0.000</span> %
 					            </li>
@@ -362,64 +362,42 @@
                                     <span id="ozone">Unknown</span>					                
 					            </li>
 
-				    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-				    <script type="text/javascript" charset="utf-8">
-				    	var socket = io.connect('http://' + document.domain + ':' + location.port);
-				    	socket.on('connect', function() {
-                				socket.emit('connected');
-            				});
-					socket.on('data', function(numberOfFlight,datatime, lat, lon, alt, temp1, temp2, pressure1, pressure2, bat_crg, bat_volt, bat_temp, vect_axel1, vect_axel2, ultraviolet1, ultraviolet2, infrared1, infrared2, hdop, vdop, sats, radiation, dust, ozone) {
-						$('numberOfFlight').text(data.numberOfFlight)
-						$('datatime').text(data.datatime)
-						$('lat').text(data.lat)
-						$('lon').text(data.lon)
-						$('alt').text(data.alt)
-						$('temp1').text(data.temp1)
-						$('temp2').text(data.temp2)
-						$('pressure1').text(data.pressure1)
-						$('pressure2').text(data.pressure2)
-						$('bat_crg').text(data.bat_crg)
-						$('bat_volt').text(data.bat_volt)
-						$('bat_temp').text(data.bat_temp)
-						$('vect_axel1').text(data.vect_axel1)
-						$('vect_axel2').text(data.vect_axel2)
-						$('infrared1').text(data.infrared1)
-						$('infrared2').text(data.infrared2)
-						$('bat_crg').text(data.bat_crg)
-						$('hdop').text(data.hdop)
-						$('vdop').text(data.vdop)
-						$('sats').text(data.sats)
-						$('radiation').text(data.radiation)
-						$('dust').text(data.dust)
-						$('ozone').text(data.ozone)
-					});
-
-					socket.on('status', function(datatime, lat, lon, alt, temp1, temp2, pressure1, pressure2, bat_crg, bat_volt, bat_temp, vect_axel1, vect_axel2, ultraviolet1, ultraviolet2, infrared1, infrared2, hdop, vdop, sats, radiation, dust, ozone) {
-						$('datatime').text(status.datatime)
-						$('lat').text(status.lat)
-						$('lon').text(status.lon)
-						$('alt').text(status.alt)
-						$('temp1').text(status.temp1)
-						$('temp2').text(status.temp2)
-						$('pressure1').text(status.pressure1)
-						$('pressure2').text(status.pressure2)
-						$('bat_crg').text(status.bat_crg)
-						$('bat_volt').text(status.bat_volt)
-						$('bat_temp').text(status.bat_temp)
-						$('vect_axel1').text(status.vect_axel1)
-						$('vect_axel2').text(status.vect_axel2)
-						$('infrared1').text(status.infrared1)
-						$('infrared2').text(status.infrared2)
-						$('bat_crg').text(status.bat_crg)
-						$('hdop').text(status.hdop)
-						$('vdop').text(status.vdop)
-						$('sats').text(status.sats)
-						$('radiation').text(status.radiation)
-						$('dust').text(status.dust)
-						$('ozone').text(status.ozone)
-					});
-
-				    </script>
+					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+					<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+					<script type="text/javascript" charset="utf-8">
+						$(document).ready(function () {
+						    var url = 'http://' + document.domain + ':' + location.port;
+						    var socket = io.connect(url + "/mcc");
+						    	socket.on('connect', function() {
+								socket.emit('connected');
+			    				});
+							socket.on('json_data', function(msg) {
+								$('numberOfFlight').text(data.numberOfFlight)
+								$('datatime').text(data.datatime)
+								$('lat').text(data.lat)
+								$('lon').text(data.lon)
+								$('alt').text(data.alt)
+								$('temp1').text(data.temp1)
+								$('temp2').text(data.temp2)
+								$('pressure1').text(data.pressure1)
+								$('pressure2').text(data.pressure2)
+								$('bat_crg').text(data.bat_crg)
+								$('bat_volt').text(data.bat_volt)
+								$('bat_temp').text(data.bat_temp)
+								$('vect_axel1').text(data.vect_axel1)
+								$('vect_axel2').text(data.vect_axel2)
+								$('ultraviolet1').text(data.ultraviolet1)
+								$('ultraviolet2').text(data.ultraviolet2)
+								$('infrared1').text(data.infrared1)
+								$('infrared2').text(data.infrared2)	
+								$('hdop').text(data.hdop)
+								$('vdop').text(data.vdop)
+								$('sats').text(data.sats)
+								$('radiation').text(data.radiation)
+								$('dust').text(data.dust)
+								$('ozone').text(data.ozone)
+							});
+						    </script>
 					        </ul>
 					    </div>
 					</div>
