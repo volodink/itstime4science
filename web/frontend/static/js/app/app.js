@@ -2,10 +2,11 @@ var markers = [];
 var map;
 console.log(123)
     <script type="text/javascript" charset="utf-8">
-	  $(document).ready(function () {
-var url = 'http://' + document.domain + ':' + location.port;
-var socket = io.connect(url + "/mcc");
-console.log(234)
+	    $(document).ready(function () {
+		var url = 'http://' + document.domain + ':' + location.port;
+		var socket = io.connect(url + "/mcc");
+		console.log(234)
+
 socket.on('data', function (msg) {
   var numberOfFlight = msg['numberOfFlight'];
   var datatime = msg['datatime'];
@@ -166,7 +167,7 @@ var count = 0;
 function startAll() {
   printData(arr, 500);
 }
-});W
+});
 printData(arr, 500);
 }
 
