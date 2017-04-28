@@ -18,8 +18,12 @@ struct gprs_telem_packet {
     uint8_t bat_crg;
     float bat_volt;
     float bat_temp;
-    float vect_axel1;
-    float vect_axel2;
+    float vect_axel1x;
+    float vect_axel1y;
+    float vect_axel1z;
+    float vect_axel2x;
+    float vect_axel2y;
+    float vect_axel2z;
     float ultraviolet1;
     float ultraviolet2;
     float infrared1;
@@ -43,29 +47,33 @@ gprs_telem_packet gprsTelemetryPacketBuilder() {
     packet.start[0] = 0x53;
     packet.start[1] = 0x59;
     packet.start[2] = 0x54;
-    packet.lat = 10.123;
-    packet.lon = 110.0;
-    packet.alt = 20.9;
-    packet.temp1 = 10.123;
+    packet.lat = 1111.123;
+    packet.lon = 130.0;
+    packet.alt = 213.9;
+    packet.temp1 = 18.123;
     packet.temp2 = 10.123;
     packet.pressure1 = 10.123;
-    packet.pressure2 = 10.123;
-    packet.bat_crg = 99;
+    packet.pressure2 = 0.123;
+    packet.bat_crg = 9;
     packet.bat_volt = 11.2;
     packet.bat_temp = 20.5;
-    packet.vect_axel1 = 4.0;
-    packet.vect_axel2 = 5.0;
+    packet.vect_axel1x = 441.0;
+    packet.vect_axel1y = -10.0;
+    packet.vect_axel1z = 5.0;
+    packet.vect_axel2x = 64.0;
+    packet.vect_axel2y = 0.0;
+    packet.vect_axel2z = 1.0;
     packet.ultraviolet1 = 10.1;
-    packet.ultraviolet2 = 32.2;
+    packet.ultraviolet2 = 332.2;
     packet.infrared1 = 53.0;
     packet.infrared2 = 42.0;
     packet.hdop = 12.3;
-    packet.vdop = 12.3;
-    packet.sats = 14;
-    packet.radiation = 14.4;
-    packet.dust = 15.0;
+    packet.vdop = 12234.3;
+    packet.sats = 123;
+    packet.radiation = 1.4;
+    packet.dust = 154.0;
     packet.ozone = true;
-    packet.status = 1;
+    packet.status = 2;
     packet.stop[0] = 0x54;
     packet.stop[1] = 0x59;
     packet.stop[2] = 0x53;
@@ -86,10 +94,9 @@ int main()
     start_t = clock();
     packet.time = time(NULL);
     printf("sizeof(struct gprs_telem_packet) = %lu\n", sizeof(gprs_telem_packet));
-    printf("sizeof ozone = %lu\n", sizeof(packet.ozone));
-    for(i=0;i<sizeof(packet);i++) {
-        printf("[%04d] %X\n", i, p[i]);
-    }
+//    for(i=0;i<sizeof(packet);i++) {
+//        printf("[%04d] %X\n", i, p[i]);
+//    }
     fwrite (&packet, sizeof(char),sizeof(packet), file );
     fclose(file);
     return 0;

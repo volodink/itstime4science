@@ -6,10 +6,11 @@ services:
     ports:
       - "${DEV_IP}:80:80"
     depends_on:
-      - "web_dev"
+      - "web_dev1"
+      - "web_dev2"
     networks:
       - dev.itstime4science.ru
-  web_dev:
+  web_dev1:
     build: web
     volumes:
       - ./web:/code
@@ -17,7 +18,14 @@ services:
       - DEV=1
     networks:
       - dev.itstime4science.ru
-
+  web_dev2:
+    build: web
+    volumes:
+      - ./web:/code
+    environment:
+      - DEV=1
+    networks:
+      - dev.itstime4science.ru
 networks:
   dev.itstime4science.ru:
     
