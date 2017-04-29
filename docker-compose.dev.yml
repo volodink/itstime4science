@@ -15,6 +15,11 @@ services:
       - ./web:/code
     environment:
       - DEV=1
+      - MYSQL_DATABASE_HOST=${MYSQL_DATABASE_HOST}
+      - MYSQL_DATABASE_PORT=${MYSQL_DATABASE_PORT}
+      - MYSQL_DATABASE_USER=${MYSQL_DATABASE_USER}
+      - MYSQL_DATABASE_PASSWORD=${MYSQL_DATABASE_PASSWORD}
+      - MYSQL_DATABASE_DB=${MYSQL_DATABASE_DB}
     networks:
       - dev.itstime4science.ru
 networks:
