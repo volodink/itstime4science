@@ -1,4 +1,3 @@
-import config
 import json
 from flask import Flask
 from flask.ext.mysql import MySQL

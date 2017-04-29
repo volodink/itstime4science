@@ -4,19 +4,20 @@ import sys
 import os
 import parsing
 import content
+import math
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 
+app = Flask(__name__)		
+app.template_folder = '../frontend/templates/'		
+app.static_folder = "../frontend/static/"
 
-app = config.app_config()
-socketio=config.my_socket()
+socketio = SocketIO(app)
+
 mysql = MySQL(app)
-
 
 is_dev = int(os.getenv("DEV", "0"))
 sys.path.append(str(os.path.abspath(sys.argv[0])))
-
-
 
 data = content.getContent()
 
@@ -41,10 +42,14 @@ def connected():
     json_data = parsing.getData()
     socketio.emit('json_data', {'json_data': json_data}, namespace='/mcc')
 
-
-
 if __name__ == "__main__":
+    app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
+    app.config['MYSQL_DATABASE_PORT'] = int(os.getenv("MYSQL_DATABASE_PORT", "0"))
+    app.config['MYSQL_DATABASE_USER'] = os.getenv("MYSQL_DATABASE_USER", "0")
+    app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv("MYSQL_DATABASE_PASSWORD", "0")
+    app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
     mysql.init_app(app)
+    
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
