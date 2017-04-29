@@ -39,7 +39,7 @@ def mcc():
 
 @socketio.on('connected',namespace='/mcc')
 def connected():
-    json_data = parsing.getData()
+    json_data = parsing.getData(mysql)
     socketio.emit('json_data', {'json_data': json_data}, namespace='/mcc')
 
 if __name__ == "__main__":

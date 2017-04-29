@@ -1,28 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>itstime4science | МКЦ</title>
-	<!-- Title icon -->
-	<link rel="shortcut icon" href="{{ url_for('static', filename='img/title_icon.ico') }}" type="image/x-icon">
-
-    <!-- Bootstrap Core CSS -->
-    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="{{ url_for('static', filename='css/clean-blog.min.css') }}"  rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/style.css') }}"  rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-
-</head>
 
 <style>
 	html, body {
@@ -221,43 +198,8 @@
 </style>
 
 <body>
-<form action ="#" id="packet_form">
-	<input
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/mcc"><i class="fa fa-plane" aria-hidden="true"></i>
- МКЦ</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Главная</a></li>
-            <li><a href="/copter">Коптер</a></li>
-            <li><a href="/satellite">Студенческая лига</a></li>
-            <li><a href="/mcc">МКЦ</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-        
-    <div class="container-fluid">
-        <div class="row content_container">
-            <div class="col-xs-12 col-md-2 col-sm-12" style="margin-top:10px; ">
-            	<div class="container-fluid menu" >
-            	    <div class="row">
-                        <input id="follow" type="checkbox" name="follow" value="a4"> <span class = "lable">Слежение за меткой</span><br>
-                        <button class="gen_report" LANGUAGE="Javascript" onclick="alert('Coming soon')">
-                            Сгенерировать отчет
-                        </button>
-					</div>
-				</div>
-            </div>
+
+
             <div class="col-xs-12 col-sm-12 col-md-10 data_container">
             	 <div class="container-fluid">
 
@@ -265,9 +207,9 @@
 					<div class="row title_row">
 					    <div class="col-lg-12 param_bg_color">
 					        <ul class="param_data">
-					            <li>
+    <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Number of flight</span><br>
-                                    <span id="numberOfFlight">0.000</span>					                
+                                    <span id="numberOfFlight">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-clock-o" aria-hidden="true"></i> Timestamp</span><br>
@@ -279,7 +221,7 @@
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Longitude</span><br>
-                                    <span id="lon">0.000</span>					                
+                                    <span id="lon">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Altitude</span><br>
@@ -287,19 +229,19 @@
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Temperature 1</span><br>
-                                    <span id="temp1">0.000</span>					                
+                                    <span id="temp1">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Temperature 2</span><br>
-                                    <span id="temp2">0.000</span>					                
+                                    <span id="temp2">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Pressure 1</span><br>
-                                    <span id="pressure1">0.000</span>					                
+                                    <span id="pressure1">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Pressure 2</span><br>
-                                    <span id="pressure2">0.000</span>					                
+                                    <span id="pressure2">0.000</span>
 					            </li>
 						    <li>
 		                    <span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Battery charge</span><br>
@@ -307,167 +249,169 @@
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Battery voltage</span><br>
-                                    <span id="bat_volt">0.000</span>					                
+                                    <span id="bat_volt">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Battery temperature</span><br>
-                                    <span id="bat_temp">0.000</span>					                
+                                    <span id="bat_temp">0.000</span>
 					            </li>
 					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 1</span><br>
-                                    <span id="vect_axel1">0.000</span>					                
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 1 x</span><br>
+                                    <span id="vect_axel1x">0.000</span>
+					            </li>
+                                <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 1 y</span><br>
+                                    <span id="vect_axel1y">0.000</span>
+					            </li>
+                                <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 1 z</span><br>
+                                    <span id="vect_axel1z">0.000</span>
+					            </li>
+                                <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 2 x</span><br>
+                                    <span id="vect_axel2x">0.000</span>
+					            </li>
+                                <li>
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 2 y</span><br>
+                                    <span id="vect_axel2y">0.000</span>
 					            </li>
 					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 2</span><br>
-                                    <span id="vect_axel2">0.000</span>					                
+                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Vector accelerometer 2z</span><br>
+                                    <span id="vect_axel2z">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Ultraviolet 1</span><br>
-                                    <span id="ultraviolet1">0.000</span>					                
+                                    <span id="ultraviolet1">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Ultraviolet 2</span><br>
-                                    <span id="ultraviolet2">0.000</span>					                
+                                    <span id="ultraviolet2">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Infrared 1</span><br>
-                                    <span id="infrared1">0.000</span>					                
+                                    <span id="infrared1">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Infrared 2</span><br>
-                                    <span id="infrared2">0.000</span>					                
+                                    <span id="infrared2">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> HDOP</span><br>
-                                    <span id="hdop">0.000</span>					                
+                                    <span id="hdop">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> VDOP</span><br>
-                                    <span id="vdop">0.000</span>					                
+                                    <span id="vdop">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> SATS</span><br>
-                                    <span id="sats">0</span>					                
+                                    <span id="sats">0</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Radiation</span><br>
-                                    <span id="radiation">Unknown</span>					                
+                                    <span id="radiation">Unknown</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Dust</span><br>
-                                    <span id="dust">0.000</span>					                
+                                    <span id="dust">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Ozone</span><br>
-                                    <span id="ozone">Unknown</span>					                
+                                    <span id="ozone">Unknown</span>
 					            </li>
-
-					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
-					<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
-					<script type="text/javascript" charset="utf-8">
-						$(document).ready(function () {
-						    var url = 'http://' + document.domain + ':' + location.port;
-						    var socket = io.connect(url + "/mcc");
-						    	socket.on('connect', function() {
-								socket.emit('connected');
-			    				});
-							socket.on('json_data', function(msg) {
-								$('numberOfFlight').text(data.numberOfFlight)
-								$('datatime').text(data.datatime)
-								$('lat').text(data.lat)
-								$('lon').text(data.lon)
-								$('alt').text(data.alt)
-								$('temp1').text(data.temp1)
-								$('temp2').text(data.temp2)
-								$('pressure1').text(data.pressure1)
-								$('pressure2').text(data.pressure2)
-								$('bat_crg').text(data.bat_crg)
-								$('bat_volt').text(data.bat_volt)
-								$('bat_temp').text(data.bat_temp)
-								$('vect_axel1').text(data.vect_axel1)
-								$('vect_axel2').text(data.vect_axel2)
-								$('ultraviolet1').text(data.ultraviolet1)
-								$('ultraviolet2').text(data.ultraviolet2)
-								$('infrared1').text(data.infrared1)
-								$('infrared2').text(data.infrared2)	
-								$('hdop').text(data.hdop)
-								$('vdop').text(data.vdop)
-								$('sats').text(data.sats)
-								$('radiation').text(data.radiation)
-								$('dust').text(data.dust)
-								$('ozone').text(data.ozone)
-							});
-						    </script>
 					        </ul>
 					    </div>
 					</div>
+                     <!-- Google Maps -->
 
-					<!-- Google Maps -->
-					
 					<div class="row">
                         <div class="col-lg-12 map">
                             <div id="map"></div>
                         </div>
-					</div>	
-				</div>		
-            </div>
-        </div>
-    </div>
-
-	<!-- Modal -->
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-	        <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="text-align: center;">МКЦ</h4>
-                </div>
-                <div class="modal-body">
-                    Добро пожаловать в мобильный командный центр!
-                    Данная страница еще находится в разработке и лишь является демонстационным вариантом 
-                    который показывает что то...
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                    <button id="startDemo" type="button" class="btn btn-primary" data-dismiss="modal">Запуск демо</button>
-                </div>
-            </div>
-        </div>
-	</div>
-
-	<!-- Footer -->
-   
+					</div>
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 " style="text-align: center;">
-                    <a href="#" class="arr_up"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size:45px; color:#fff"></i>
-</a>
+                    <a href="#" class="arr_up"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size:45px; color:#fff"></i> </a>
                     <p class="copyright text-muted"style="color:#fff">Copyright &copy; ВВиВС 2017</p>
                 </div>
             </div>
         </div>
     </footer>
+		</div>		
+            </div>
+        </div>
+    </div>
+
 
 	<!-- jQuery -->
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+                        <script>
+                        var markers = [];
+                        var map;
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+                        function initMap() {
+                          var myLatLng = {lat:  53.22544088, lng: 45.00208070};
 
-    <!-- Contact Form JavaScript -->
-    <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
+                            map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 11,
+                            center: myLatLng
+                        });
+                        }</script>
+            <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap"> </script>
+     <!--<script type="text/JavaScript" src="http://maps.google.com/maps/apis/
+js?sensor=true"></script> -->
+  					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+					<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+					<script type="text/javascript" charset="utf-8">
 
-    <!-- Theme JavaScript -->
-    <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
+                        $(document).ready(function () {
+                                console.log(2);
+                                var url = 'http://' + document.domain + ':' + location.port;
+                                var socket = io.connect(url + "/mc");
+                                console.log(3);
+                                    var socket = io.connect(url + "/mcc");
+                                    socket.on('packet', function (msg) {
+                                        var json_packet = msg['json_data'];
+                                        var json = JSON.parse(json_packet);
+                                        json.forEach(function (item, i, json) {
+                                            j = json[i];
+                                            $('#numberOfFlight').html(j.numberOfFlight);
+                                            $('#datatime').html(j.datatime);
+                                            $('#lat').html(j.lat);
+                                            $('#lon').html(j.lon);
+                                            $('#alt').html(j.alt);
+                                            $('#temp1').html(j.temp1);
+                                            $('#temp2').html(j.temp2);
+                                            $('#pressure1').html(j.pressure1);
+                                            $('#pressure2').html(j.pressure2);
+                                            $('#bat_crg').html(j.bat_crg);
+                                            $('#bat_volt').html(j.bat_volt);
+                                            $('#bat_temp').html(j.bat_temp);
+                                            $('#vect_axel1x').html(j.vect_axel1x);
+                                            $('#vect_axel1y').html(j.vect_axel1y);
+                                            $('#vect_axel1z').html(j.vect_axel1z);
+                                            $('#vect_axel2x').html(j.vect_axel2x);
+                                            $('#vect_axel2y').html(j.vect_axel2y);
+                                            $('#vect_axel2z').html(j.vect_axel2z);
+                                            $('#ultraviolet1').html(j.ultraviolet1);
+                                            $('#ultraviolet2').html(j.ultraviolet2);
+                                            $('#infrared1').html(j.infrared1);
+                                            $('#infrared2').html(j.infrared2);
+                                            $('#hdop').html(j.hdop);
+                                            $('#vdop').html(j.vdop);
+                                            $('#sats').html(j.sats);
+                                            $('#radiation').html(j.radiation);
+                                            $('#dust').html(j.dust);
+                                            $('#ozone').html(j.ozone);
+                                        });
 
-	<script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap">
-    </script>
-    <!-- <script type="text/JavaScript" src="http://maps.google.com/maps/apis/
-js?sensor=true"></script>  -->
-	<script src= {{ url_for('static', filename='js/app/app.js') }}></script>
+
+                        })
+			});
+</script>
+
 </body>
 </html>
