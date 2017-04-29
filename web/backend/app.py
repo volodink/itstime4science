@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask.ext.mysql import MySQL
 import sys
 import os
-import config
 import parsing
 import content
 from flask_socketio import SocketIO
