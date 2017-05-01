@@ -10,8 +10,8 @@ def getData(mysql):
     for element in data:
         e = dict()
         e['id'] = element[0]
-        e['flight_id'] = element[1]
-        e['timestamp'] = str(element[2])
+        e['numberOfFlight'] = element[1]
+        e['datatime'] = str(element[2])
         e['lat'] = element[3]
         e['lon'] = element[4]
         e['alt'] = element[5]
