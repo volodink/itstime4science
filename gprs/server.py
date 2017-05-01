@@ -17,7 +17,6 @@ tcp_socket.bind(addr)
 tcp_socket.listen(10)
 loop = True
 while loop:
-    data = None
     print('wait connection...')
     conn, addr = tcp_socket.accept()
     while loop:
@@ -27,6 +26,6 @@ while loop:
         print(data)
         f.write(str(data))
         f.close()
-
+print('Connection is close')
 conn.close()
 tcp_socket.close()
