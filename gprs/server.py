@@ -2,6 +2,7 @@ from socket import *
 from modules import decode_packet
 import sys
 from modules import params
+import socket
 
 Parser = params.Parser()
 argv = Parser.createParser()
@@ -15,9 +16,10 @@ print(host,port)
 tcp_socket = socket(AF_INET, SOCK_STREAM)
 tcp_socket.bind(addr)
 tcp_socket.listen(10)
+my_host = socket.gethostname()
 loop = True
 while loop:
-    print('wait connection...')
+    print('wait connection to '+ str(my_host))
     conn, addr = tcp_socket.accept()
     while loop:
         f = open('logs/gprs.log', 'a+')
