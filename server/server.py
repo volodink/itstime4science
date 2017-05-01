@@ -1,7 +1,7 @@
 from socket import *
-import params
+from modules import decode_packet
 import sys
-import decode_packet
+from modules import params
 
 Parser = params.Parser()
 argv = Parser.createParser()
