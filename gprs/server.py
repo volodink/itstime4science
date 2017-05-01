@@ -1,5 +1,5 @@
 from socket import *
-from modules import decode_packet
+#from modules import decode_packet
 import sys
 from modules import params
 
@@ -21,10 +21,10 @@ while True:
     print('wait connection...')
     conn, addr = tcp_socket.accept()
     data = conn.recv(109)
-    decode_packet.insert(data)
+    #decode_packet.insert(data)
     print(data)
     if data:
-        f.write(data)
+        f.write(str(data))
     else:
         break
 
@@ -73,4 +73,3 @@ tcp_socket.close()
 #     finally:
 #         loop.close()
 #         tcp_socket.close()
-
