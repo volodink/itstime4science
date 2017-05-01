@@ -4,4 +4,4 @@ MAINTAINER Konstantin Volodin volodin.konstantin@gmail.com
 ADD . /code
 WORKDIR /code
 
-CMD ["python3", "client.py"]
+CMD ["python3", "server.py"]
