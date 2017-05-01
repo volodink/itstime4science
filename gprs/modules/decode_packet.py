@@ -1,6 +1,6 @@
 from datetime import datetime
 import struct
-from flask.ext.mysql import MySQL
+import MySQL
 import os
 
 
