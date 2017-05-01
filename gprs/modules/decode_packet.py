@@ -142,7 +142,7 @@ def insert(packet):
     l = run(databin)
     d.append(l)
 
-    f = open('formated_dates.txt', 'w')
+    f = open('formated_dates.txt', 'w+')
     print(d[28])
     print(len(d))
     for i in range(len(d)):
