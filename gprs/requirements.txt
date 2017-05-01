@@ -1,6 +1,7 @@
 flask
 flask-socketio
 flask-mysql
+mysql
 eventlet
 gevent
 gevent-websocket
