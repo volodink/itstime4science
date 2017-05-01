@@ -9,7 +9,7 @@ ip_and_port = argv.parse_args(sys.argv[1:])
 #host = ip_and_port.ip
 #port = int(ip_and_port.port)
 host = "0.0.0.0"
-port = 5300
+port = 5100
 addr = (host, port)
 print(host,port)
 tcp_socket = socket(AF_INET, SOCK_STREAM)
