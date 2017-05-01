@@ -1,6 +1,7 @@
 from datetime import datetime
 import struct
-import MySQL
+import pymysql
+
 import os
 
 
@@ -149,7 +150,7 @@ def insert(packet):
             f.write(str(d[i]) + '    ')
         f.close()
 
-        db = MySQLdb.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"), port=int(os.getenv("MYSQL_DATABASE_PORT", "0")), user=os.getenv("MYSQL_DATABASE_USER", "0"), passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"), charset='utf8')
+        db =pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"), port=int(os.getenv("MYSQL_DATABASE_PORT", "0")), user=os.getenv("MYSQL_DATABASE_USER", "0"), passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"), charset='utf8')
         cursor = db.cursor()
 
         insert ="""INSERT INTO gprs(numbersOfFlight, datatime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
