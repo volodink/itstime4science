@@ -25,11 +25,8 @@ while loop:
         data = conn.recv(109)
         decode_packet.insert(data)
         print(data)
-        if data:
-            f.write(str(data))
-            f.close()
-        else:
-            f.close()
-            break
+        f.write(str(data))
+        f.close()
+
 conn.close()
 tcp_socket.close()
