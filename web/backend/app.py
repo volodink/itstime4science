@@ -51,4 +51,7 @@ def ws_conn():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-socketio.run(app,host="0.0.0.0", debug=True)
+    if is_dev == 1:
+        socketio.run(app, host='0.0.0.0', debug=True)
+    else:
+        socketio.run(app, host='0.0.0.0',)
