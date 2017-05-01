@@ -368,11 +368,8 @@ js?sensor=true"></script> -->
 					<script type="text/javascript" charset="utf-8">
 
                         $(document).ready(function () {
-                                console.log(2);
-                                var url = 'http://' + document.domain + ':' + location.port;
-                                var socket = io.connect(url + "/mc");
-                                console.log(3);
-                                    var socket = io.connect(url + "/mcc");
+    				    var url = 'http://' + document.domain + ':' + location.port;
+				    var socket = io.connect(url + "/mcc");
                                     socket.on('packet', function (msg) {
                                         var json_packet = msg['json_data'];
                                         var json = JSON.parse(json_packet);
@@ -406,11 +403,9 @@ js?sensor=true"></script> -->
                                             $('#radiation').html(j.radiation);
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
-                                        });
-
-
+                                        })
                         })
-			});
+});
 </script>
 
 </body>
