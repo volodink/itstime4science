@@ -15,7 +15,7 @@ print(host,port)
 tcp_socket = socket(AF_INET, SOCK_STREAM)
 tcp_socket.bind(addr)
 tcp_socket.listen(1)
-f = open('packet.bin', 'wb')
+f = open('packet.txt', 'a+')
 while True:
     # tcp_socket.settimeout(5)
     print('wait connection...')
