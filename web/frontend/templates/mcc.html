@@ -409,19 +409,21 @@ js?sensor=true"></script> -->
                                             console.log(position);
                                             addMarker(position, map);
                                         })
-                                        function addMarker(location, map) {
-
-                                                if($("#follow").prop('checked'))
-                                                     map.setCenter(location);
-                                                var marker = new google.maps.Marker({
-                                                position: location,
-                                                map: map,
-                                                icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
-                                              });
-                                            }
+                                        
                         })
 });
 </script>
+<script>
+	function addMarker(location, map) {
 
+        if($("#follow").prop('checked'))
+             map.setCenter(location);
+        var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
+      });
+    }
+</script>
 </body>
 </html>
