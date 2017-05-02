@@ -369,7 +369,7 @@ js?sensor=true"></script> -->
 
                         $(document).ready(function () {
     				    var url = 'http://' + document.domain + ':' + location.port;
-				    var socket = io.connect(url + "/mcc");
+				        var socket = io.connect(url + "/mcc");
                                     socket.on('packet', function (msg) {
                                         var json_packet = msg['json_data'];
                                         var json = JSON.parse(json_packet);
@@ -403,7 +403,19 @@ js?sensor=true"></script> -->
                                             $('#radiation').html(j.radiation);
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
+                                            var position = {lat: Number(j.lat), lng: Number(j.lon)};
+                                            addMarker(position, map);
                                         })
+                                        function addMarker(location, map) {
+
+                                                if($("#follow").prop('checked'))
+                                                     map.setCenter(location);
+                                                var marker = new google.maps.Marker({
+                                                position: location,
+                                                map: map,
+                                                icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
+                                              });
+                                            }
                         })
 });
 </script>
