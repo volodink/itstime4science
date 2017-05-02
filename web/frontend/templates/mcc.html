@@ -341,7 +341,7 @@
                         
             <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap"> </script>
-<script>
+<script>console.log(initmap);
 	var markers = [];
         var map;
 
@@ -359,7 +359,7 @@
 		  });
 		marker.setMap(map);
 		}
-        }
+        
 </script>
      <!--<script type="text/JavaScript" src="http://maps.google.com/maps/apis/
 js?sensor=true"></script> -->
@@ -403,13 +403,14 @@ js?sensor=true"></script> -->
                                             $('#radiation').html(j.radiation);
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
-
+					    console.log(sockets);
                                             var position = {lat: 53.1, lng: 45.12};
 				            var marker = new google.maps.Marker({
 				            position: location,
-					    map: map,
-					    icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
+						map: map,
+						icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
                                         })
+				})
                                         
                         })
 });
@@ -421,24 +422,6 @@ js?sensor=true"></script> -->
 			<div id="map"></div>
 		</div>
 	</div> 
-<script>
 
-        var markers = [];
-        var map;
-
-        function initMap() {
-		var myLatLng = {lat:  53.22544088, lng: 45.00208070};
-		map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 11,
-			center: myLatLng
-		});
-		var marker = new google.maps.Marker({
-		    position: myLatLng,
-		    map: map,
-		  });
-		}
-        
-    }
-</script>
 </body>
 </html>
