@@ -347,20 +347,29 @@
 
 	<!-- jQuery -->
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-                        <script>
-                        var markers = [];
-                        var map;
-
-                        function initMap() {
-                          var myLatLng = {lat:  53.22544088, lng: 45.00208070};
-
-                            map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 11,
-                            center: myLatLng
-                        });
-                        }</script>
+                        
             <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap"> </script>
+<script>
+	var markers = [];
+        var map;
+
+        function initMap() {
+		var myLatLng = {lat:  53.22544088, lng: 45.00208070};
+
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 11,
+			center: myLatLng
+		});
+
+		var marker = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map,
+		  });
+		marker.setMap(map);
+		}
+        }
+</script>
      <!--<script type="text/JavaScript" src="http://maps.google.com/maps/apis/
 js?sensor=true"></script> -->
   					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
@@ -404,20 +413,38 @@ js?sensor=true"></script> -->
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
 
-                                            var position = {lat:  53.22544088, lng: 45.00208070};
-                                            alert(position);
-                                            console.log(position);
+                                            var position = {lat: Number(j.lat), lng: Number(j.lon)};
                                             addMarker(position, map);
                                         })
                                         
                         })
 });
 </script>
-<script>
-	function addMarker(location, map) {
+<!-- Google Maps -->
 
-        if($("#follow").prop('checked'))
-             map.setCenter(location);
+	<div class="row">
+		<div class="col-lg-12 map">
+			<div id="map"></div>
+		</div>
+	</div> 
+<script>
+
+        var markers = [];
+        var map;
+
+        function initMap() {
+		var myLatLng = {lat:  53.22544088, lng: 45.00208070};
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 11,
+			center: myLatLng
+		});
+		var marker = new google.maps.Marker({
+		    position: myLatLng,
+		    map: map,
+		  });
+		}
+        
+	function addMarker(location, map) {
         var marker = new google.maps.Marker({
         position: location,
         map: map,
