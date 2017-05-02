@@ -329,16 +329,7 @@
                             <div id="map"></div>
                         </div>
 					</div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 " style="text-align: center;">
-                    <a href="#" class="arr_up"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size:45px; color:#fff"></i> </a>
-                    <p class="copyright text-muted"style="color:#fff">Copyright &copy; ВВиВС 2017</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
 		</div>		
             </div>
         </div>
@@ -413,8 +404,11 @@ js?sensor=true"></script> -->
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
 
-                                            var position = {lat: Number(j.lat), lng: Number(j.lon)};
-                                            addMarker(position, map);
+                                            var position = {lat: 53.1, lng: 45.12};
+				            var marker = new google.maps.Marker({
+				            position: location,
+					    map: map,
+					    icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
                                         })
                                         
                         })
@@ -444,12 +438,6 @@ js?sensor=true"></script> -->
 		  });
 		}
         
-	function addMarker(location, map) {
-        var marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
-      });
     }
 </script>
 </body>
