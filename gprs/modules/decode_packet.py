@@ -27,20 +27,20 @@ def insert(packet):
     try:
         f = open('logs/formated_gprs.log', 'a+')
         i=0
-        data=packet[1:4]
+        data=packet[0:3]
         d = []
 
         data = 10001 #numberOfFlightmysql
         d.append(data)
 
-        data=packet[4:8] #time
+        data=packet[3:7] #time
         data =int.from_bytes(data, byteorder='little')
         data = datetime.fromtimestamp(data)
         data = str(data)
         d.append(data)
 
 
-        data=packet[8:12] #lat
+        data=packet[7:12] #lat
         data = struct.unpack('f',data)
         d.append (clear_string(data))
 

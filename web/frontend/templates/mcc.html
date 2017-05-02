@@ -403,7 +403,10 @@ js?sensor=true"></script> -->
                                             $('#radiation').html(j.radiation);
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
+
                                             var position = {lat: Number(j.lat), lng: Number(j.lon)};
+                                            alert(position);
+                                            console.log(position);
                                             addMarker(position, map);
                                         })
                                         function addMarker(location, map) {
