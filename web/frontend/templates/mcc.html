@@ -405,12 +405,13 @@ js?sensor=true"></script> -->
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
 					    console.log("sockets is ok");
-                                            var position = {lat: Number(j.lat), lng: Number(j.lon)};
+                                            var position = {lat: j.lat, lng: j.lon};
 				            var marker = new google.maps.Marker({
 				            position: location,
 						map: map,
 						icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
                                        	    });
+    					    marker.setMap(map);
 					    console.log("add marker is ok")
 					})
 				})
