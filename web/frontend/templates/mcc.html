@@ -368,7 +368,7 @@ js?sensor=true"></script> -->
 					<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
 					<script type="text/javascript" charset="utf-8">
 
-                        $(document).ready(function () {
+                        	$(document).ready(function () {
     				    var url = 'http://' + document.domain + ':' + location.port;
 				        var socket = io.connect(url + "/mcc");
                                     socket.on('packet', function (msg) {
@@ -415,7 +415,8 @@ js?sensor=true"></script> -->
 				})
                                         
 
-})					    function addMarker(location, map){
+});
+					    function addMarker(location, map){
 					    console.log("add marker is ok")
 				            var marker = new google.maps.Marker({
 				            position: location,
