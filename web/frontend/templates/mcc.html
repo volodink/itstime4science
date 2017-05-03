@@ -405,7 +405,7 @@ js?sensor=true"></script> -->
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
 					    console.log("sockets is ok");
-                                            var position = {lat: 53.1, lng: 45.12};
+                                            var position = {lat: Number(j.lat), lng: Number(j.lon)};
 				            var marker = new google.maps.Marker({
 				            position: location,
 						map: map,
