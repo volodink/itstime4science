@@ -347,7 +347,7 @@
         var map;
 
         function initMap() {
-		var myLatLng = {lat:  53.22544088, lng: 45.00208070};
+		var myLatLng = {lat: 53.22544088, lng: 45.00208070};
 
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 11,
@@ -376,6 +376,8 @@ js?sensor=true"></script> -->
                                         var json = JSON.parse(json_packet);
                                         json.forEach(function (item, i, json) {
                                             j = json[i];
+					    lat = j.lat;
+					    lon = j.lon;
                                             $('#numberOfFlight').html(j.numberOfFlight);
                                             $('#datatime').html(j.datatime);
                                             $('#lat').html(j.lat);
@@ -404,21 +406,26 @@ js?sensor=true"></script> -->
                                             $('#radiation').html(j.radiation);
                                             $('#dust').html(j.dust);
                                             $('#ozone').html(j.ozone);
+    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+					    console.log(position);
 					    console.log("sockets is ok");
-                                            var position = {lat: j.lat, lng: j.lon};
+					    addMarker(position,map);
+                                            
+					})
+				})
+                                        
+
+})					    function addMarker(location, map){
+					    console.log("add marker is ok")
 				            var marker = new google.maps.Marker({
 				            position: location,
 						map: map,
 						icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
                                        	    });
-    					    marker.setMap(map);
-					    console.log("add marker is ok")
-					})
-				})
-                                        
+    					    marker.setMap(map)}
 
-});
-</script>
+				    
+ </script>
 <!-- Google Maps -->
 
 	<div class="row">
