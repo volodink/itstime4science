@@ -44,10 +44,16 @@ def satellite():
 def mcc():
     return render_template('mcc.html', is_dev=is_dev)
 
-@socketio.on('connect', namespace='/mcc')
+@socketio.on('сonnect', namespace='/mcc')
 def ws_conn():
     json_data = parsing.getData(mysql)
-    socketio.emit('packet', {'json_data': json_data}, namespace='/mcc')
+    emit('packet', {'json_data': json_data}, namespace='/mcc')
+    
+@socketio.on('my_event', namespace='/mcc')
+def message():
+    json_data = parsing.getData(mysql)
+    emit('packet', {'json_data': json_data}, namespace='/mcc')
+
 
 if __name__ == '__main__':
     mysql.init_app(app)

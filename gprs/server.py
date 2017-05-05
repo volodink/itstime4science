@@ -9,10 +9,10 @@ while True:
     conn, addr = tcp_socket.accept()
     while True:
         f = open('logs/gprs.log', 'a+')
-        data = conn.recv(1091)
+        data = conn.recv(109)
         if data:
             decode_packet.insert(data)
-            print(data)
+            print('Исходные данные:' + str(data))
             f.write(str(data))
             f.close()
         if not data:

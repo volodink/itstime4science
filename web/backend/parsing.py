@@ -3,9 +3,9 @@ from flask import Flask
 from flask.ext.mysql import MySQL
 def getData(mysql):
     cur = mysql.connect().cursor()
-    cur.execute('''select * from gprs''')
+    cur.execute('''select * from gprs ORDER BY id DESC LIMIT 1''')
     data = list(cur.fetchall())
-
+    mysql.connect().commit
     r = []
     for element in data:
         e = dict()
@@ -62,5 +62,5 @@ def getData(mysql):
         e['status']['radiation'] = s[18]
         e['status']['ozone'] = s[19]
         r.append(e)
-
+        print(r)
         return json.dumps(r)
