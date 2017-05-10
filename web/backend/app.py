@@ -4,7 +4,6 @@ import sys
 import os
 import parsing
 import content
-import math
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
@@ -44,15 +43,16 @@ def satellite():
 def mcc():
     return render_template('mcc.html', is_dev=is_dev)
 
-@socketio.on('сonnect', namespace='/mcc')
-def ws_conn():
-    json_data = parsing.getData(mysql)
-    emit('packet', {'json_data': json_data}, namespace='/mcc')
-    
 @socketio.on('my_event', namespace='/mcc')
 def message():
     json_data = parsing.getData(mysql)
     emit('packet', {'json_data': json_data}, namespace='/mcc')
+
+@socketio.on('last_dots', namespace='/mcc')
+def msg():
+    i=10
+    json_data = parsing.last_dots(mysql,i)
+    emit('lastMarkers', {'json_data': json_data}, namespace='/mcc')
 
 
 if __name__ == '__main__':

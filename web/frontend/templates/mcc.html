@@ -207,13 +207,17 @@
 					<div class="row title_row">
 					    <div class="col-lg-12 param_bg_color">
 					        <ul class="param_data">
-    <li>
+    						    <li>
+                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i>ID</span><br>
+                                    <span id="id">0</span>
+					            </li>
+					            <li>
                                     <span><i class="fa fa-area-chart" aria-hidden="true"></i> Number of flight</span><br>
                                     <span id="numberOfFlight">0.000</span>
 					            </li>
 					            <li>
                                     <span><i class="fa fa-clock-o" aria-hidden="true"></i> Timestamp</span><br>
-                                    <span id="datatime">0.000</span> s
+                                    <span id="datatime">0.000</span>
 					            </li>
 					            <li>
 			            <span><i class="fa fa-area-chart" aria-hidden="true"></i> Latitude</span><br>
@@ -370,24 +374,38 @@ js?sensor=true"></script> -->
 
                         	$(document).ready(function () {
     				    var url = 'http://' + document.domain + ':' + location.port;
-				        var socket = io.connect(url + "/mcc");
-					console.log(1);
+				    var socket = io.connect(url + "/mcc");
+
+
+				    console.log("TEST");
+				    socket.emit('last_dots');	
+				    console.log("TEST2");
 				    socket.on('connect', function() {
-					console.log(2);
-					socket.emit('my_event');
-					console.log(3);
+					socket.emit('last_dots');
 				    });
-					console.log(4);
+                                    socket.on('lastMarkers', function (msg) {
+						console.log('TEST3');
+		                                var json_packet = msg['json_data'];
+		                                var json = JSON.parse(json_packet);
+						console.log(json);
+		                                json.forEach(function (item, i, json) {
+		                                    j = json[i];
+						    lat = j.lat;
+						    lon = j.lon;
+	    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+						    console.log(position);
+						    addMarker(position,map,lat,lon); 
+					})
+		        	    })
+				    socket.emit('my_event');
                                     socket.on('packet', function (msg) {
-					setTimeout(function(){ 
-					    
-						console.log(5);
 		                                var json_packet = msg['json_data'];
 		                                var json = JSON.parse(json_packet);
 		                                json.forEach(function (item, i, json) {
 		                                    j = json[i];
 						    lat = j.lat;
 						    lon = j.lon;
+		                                    $('#id').html(j.id);
 		                                    $('#numberOfFlight').html(j.numberOfFlight);
 		                                    $('#datatime').html(j.datatime);
 		                                    $('#lat').html(j.lat);
@@ -419,43 +437,30 @@ js?sensor=true"></script> -->
 	    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 						    console.log(position);
 						    console.log("sockets is ok");
-
-						    addMarker(position,map);
-						    
-						    socket.emit('my_event');
-					}, 2000);  
+						    addMarker(position,map,lat,lon); 
+						sleep(5000);
+				   		socket.emit('my_event');	
 					})
+					
 				})
-                                        
+					                                         
 
 });
-					function addMarker(location, map){
+					function addMarker(location, map,lat,lon){
 						console.log("add marker is ok")
 						var marker = new google.maps.Marker({
 						position: location,
 						map: map,
 						icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
 						});
-
-
-						if (!!markers[10]){
-						    //alert(markers);
-						    el = markers.shift();
-						    var firstMarker = markers[markers.length - 10];
-						    firstMarker.setMap(null)
-						    markers.push(marker);
-						    console.log(markers);
-						    var lastMarker = markers[markers.length - 1];
-						    lastMarker.setMap(map)
-						}
-						else{
-						markers.push(marker);
-						//alert(markers);
-						console.log(markers);
-						marker.setMap(map)
-						};
+						marker.setMap(map);
+					};
+					function sleep(ms) {
+					ms += new Date().getTime();
+					while (new Date() < ms){}
+					} 
 					    
-    					    	marker.setMap(map)}
+
 				    
  </script>
 <!-- Google Maps -->

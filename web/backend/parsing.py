@@ -3,7 +3,7 @@ from flask import Flask
 from flask.ext.mysql import MySQL
 def getData(mysql):
     cur = mysql.connect().cursor()
-    cur.execute('''select * from gprs ORDER BY id DESC LIMIT 1''')
+    cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
     data = list(cur.fetchall())
     mysql.connect().commit
     r = []
@@ -62,5 +62,23 @@ def getData(mysql):
         e['status']['radiation'] = s[18]
         e['status']['ozone'] = s[19]
         r.append(e)
-        print(r)
+
         return json.dumps(r)
+
+def last_dots(mysql,i):
+    cur = mysql.connect().cursor()
+    r = []
+    while i>0: 
+        cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT %s, 1",i)
+        #cur.execute("select * from gprs ORDER BY id DESC LIMIT 10,1")
+        data = list(cur.fetchall())
+        mysql.connect().commit
+        i=i-1
+        for element in data:
+            e = dict()
+            e['lat'] = element[0]
+            e['lon'] = element[1]
+            r.append(e)
+
+    print(r)
+    return json.dumps(r)
