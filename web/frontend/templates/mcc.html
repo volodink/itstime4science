@@ -378,7 +378,6 @@ js?sensor=true"></script> -->
 
 
 				    console.log("TEST");
-				    socket.emit('last_dots');	
 				    console.log("TEST2");
 				    socket.on('connect', function() {
 					socket.emit('last_dots');
@@ -387,18 +386,19 @@ js?sensor=true"></script> -->
 						console.log('TEST3');
 		                                var json_packet = msg['json_data'];
 		                                var json = JSON.parse(json_packet);
-						console.log(json);
 		                                json.forEach(function (item, i, json) {
 		                                    j = json[i];
 						    lat = j.lat;
 						    lon = j.lon;
 	    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-						    console.log(position);
 						    addMarker(position,map,lat,lon); 
-					})
+						})
 		        	    })
+				    console.log('TEST4');
 				    socket.emit('my_event');
                                     socket.on('packet', function (msg) {
+						console.log('TEST5');
+						setTimeout(function() {
 		                                var json_packet = msg['json_data'];
 		                                var json = JSON.parse(json_packet);
 		                                json.forEach(function (item, i, json) {
@@ -436,10 +436,12 @@ js?sensor=true"></script> -->
 		                                    $('#ozone').html(j.ozone);
 	    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 						    console.log(position);
-						    console.log("sockets is ok");
-						    addMarker(position,map,lat,lon); 
-						sleep(5000);
-				   		socket.emit('my_event');	
+						    addMarker(position,map,lat,lon);
+						    //socket.emit('my_event'); 
+						    console.log(j.id)
+						//sleep(5000);
+						}, 5000)
+					    //socket.emit('my_event');
 					})
 					
 				})
@@ -455,10 +457,12 @@ js?sensor=true"></script> -->
 						});
 						marker.setMap(map);
 					};
-					function sleep(ms) {
+					/*function sleep(ms) {
 					ms += new Date().getTime();
 					while (new Date() < ms){}
-					} 
+					}*/
+
+
 					    
 
 				    
