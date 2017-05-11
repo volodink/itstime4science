@@ -437,7 +437,7 @@ js?sensor=true"></script> -->
 	    					    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 						    console.log(position);
 						    addMarker(position,map,lat,lon);
-						    //socket.emit('my_event'); 
+						    socket.emit('my_event'); 
 						    console.log(j.id)
 						//sleep(5000);
 						}, 5000)
