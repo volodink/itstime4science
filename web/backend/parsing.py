@@ -79,6 +79,4 @@ def last_dots(mysql,i):
             e['lat'] = element[0]
             e['lon'] = element[1]
             r.append(e)
-
-    print(r)
     return json.dumps(r)

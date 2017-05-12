@@ -19,14 +19,15 @@ app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
 
 
-socketio = SocketIO(app)
 
+socketio = SocketIO(app)
 mysql = MySQL(app)
 
 is_dev = int(os.getenv("DEV", "0"))
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 
 data = content.getContent()
+
 @app.route("/")
 def main():
     return render_template('index.html', is_dev=is_dev, data = data["main"], main = True)
@@ -44,9 +45,14 @@ def mcc():
     return render_template('mcc.html', is_dev=is_dev)
 
 @socketio.on('my_event', namespace='/mcc')
-def message():
-    json_data = parsing.getData(mysql)
-    emit('packet', {'json_data': json_data}, namespace='/mcc')
+def message(message):
+        json_data = parsing.getData(mysql)
+        mas = json.loads(json_data)
+        if message['data'] != mas[0]['id']:
+            emit('packet', {'json_data': json_data}, namespace='/mcc')
+        else:
+            emit('packet', {'json_data': 0}, namespace='/mcc')
+
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
