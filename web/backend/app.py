@@ -4,6 +4,8 @@ import sys
 import os
 import parsing
 import content
+import urllib.request
+
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
@@ -52,6 +54,12 @@ def message(message):
             emit('packet', {'json_data': json_data}, namespace='/mcc')
         else:
             emit('packet', {'json_data': 0}, namespace='/mcc')
+
+@socketio.on('my_event2', namespace='/mcc')
+def message():
+    needeble_erl='https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=APIKEY&format=json'
+    response = urllib.request.urlopen(needeble_erl)
+
 
 
 @socketio.on('last_dots', namespace='/mcc')
