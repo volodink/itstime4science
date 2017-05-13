@@ -148,6 +148,7 @@ def insert(packet):
         print(len(d))
         for i in range(len(d)):
             f.write(str(d[i]) + '    ')
+        f.write('\n')
         f.close()
 
         db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),

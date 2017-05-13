@@ -13,7 +13,7 @@ while True:
         if data:
             decode_packet.insert(data)
             print('Исходные данные:' + str(data))
-            f.write(str(data))
+            f.write(str(data) + '\n')
             f.close()
         if not data:
             break
