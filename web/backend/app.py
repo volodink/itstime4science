@@ -20,8 +20,6 @@ app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
 
-
-
 socketio = SocketIO(app)
 mysql = MySQL(app)
 
@@ -59,8 +57,6 @@ def message(message):
 def message():
     needeble_erl='https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=APIKEY&format=json'
     response = urllib.request.urlopen(needeble_erl)
-
-
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
