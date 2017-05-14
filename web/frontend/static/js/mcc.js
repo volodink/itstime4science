@@ -4,6 +4,13 @@ var socket = io.connect(url + "/mcc");
 	socket.on('connect', function() {
 		socket.emit('last_dots');
 	});
+
+
+
+socket.on('packet', function (msg) {
+	receive(msg);
+		});
+
 socket.on('lastMarkers', function (msg) {
 		var json_packet = msg['json_data'];
 		var json = JSON.parse(json_packet);
