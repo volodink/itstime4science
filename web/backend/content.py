@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 def setGalleryImg(*tuplePhoto):
-
 	return tuple((count, tuplePhoto[count]) for count in range(len(tuplePhoto))) 
 
 def setTemaData(*tupleData):
-
 	return dict({"name":tupleData})
 
 
 
 def getContent():
-
 	volodink = {"name": "Константин Володин",
 				"link_to_photo": "https://pp.vk.me/c638023/v638023262/1bc35/KO9Y64lP6io.jpg",
 				"job_title": "Научный руководитель",
@@ -233,9 +230,39 @@ def getContent():
 			"copter": copter,
 			"satellite": satellite}
 
-if __name__ == "__main__":
-	
-	lal = getContent()
+panel_tags = [
+	('ID', 'id'),
+	('Номер полёта', 'numberOfFlight'),
+	('Время и дата', 'datatime'),
+	('Ширина,°', 'lat'),
+	('Долгота,°', 'lon'),
+	('Высота, метры', 'alt'),
+	('Заряд аккумулятора, %', 'bat_crg'),
+	('Напряжение аккумулятора, Вольт', 'bat_volt'),
+	('Температура аккумулятора, °С', 'bat_temp'),
+	('Датчик температуры №1, °С', 'temp1'),
+	('Датчик температуры №2, °С', 'temp2'),
+	('Датчик давления №1, Па', 'pressure1'),
+	('Датчик давления №2, Па', 'pressure2'),
+	('Вектор акселерометра 1 по x, м/с^2', 'vect_axel1x'),
+	('Вектор акселерометра 1 по y, м/с^2', 'vect_axel1y'),
+	('Вектор акселерометра 1 по z, м/с^2', 'vect_axel1z'),
+	('Вектор акселерометра 2 по x, м/с^2', 'vect_axel2x'),
+	('Вектор акселерометра 2 по y, м/с^2', 'vect_axel2y'),
+	('Вектор акселерометра 2 по z, м/с^2', 'vect_axel2z'),
+	('Датчик ультрафилета №1, люкс', 'ultraviolet1'),
+	('Датчик ультрафилета №2, люкс', 'ultraviolet2'),
+	('Датчик инфракрасного излучения №1, люкс', 'infrared1'),
+	('Датчик инфракрасного излучения №2, люкс', 'infrared2'),
+	('Cнижение точности в горизонтальной плоскости(HDOP)', 'hdop'),
+	('Cнижение точности в вертикальной плоскости(VDOP)', 'vdop'),
+	('Количество спутников', 'sats'),
+	('Радиация, Ренген', 'radiation'),
+	('Датчик пыли, мг/м^3', 'dust'),
+	('Датчик озона', 'ozone')
+]
 
+if __name__ == "__main__":
+	lal = getContent()
 	for i in lal["main"]["gallery"]:
 		print(i)

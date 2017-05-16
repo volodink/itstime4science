@@ -1,371 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<style>
-	html, body {
-		padding: 0;
-		margin: 0;
-		background-color: #F7F7F7;
-	}
-	
-	.title_row {
-		margin-top: 10px;
-		height: auto;
-        
-	}		
-
-	.param_block {
-		word-wrap: break-word;
-		font-family: sans-serif;
-		text-align: center;
-		height: 60px;
-	}
-
-	.param_block:hover {
-		color: #0B0BCD;
-	}
-
-	#map {
-		height: 450px;
-        border-radius: 5px;
-
-	}
-
-	.map {
-        padding: 0;
-		padding-top: 10px;
-		padding-bottom: 15px;
-        margin: 0;
-	}
-
-	i.fa {
-		font-size: 11px;
-	}
-
-	.cent-col {
-		border-left: 1px solid #000;
-		border-right: 1px solid #000;
-	}
-
-	.button {
-        width: 100%;
-        margin: 10px 0px 10px 0px;
-        text-align: center;
-/*        min-height: 100vh;*/
-	}
-	
-	.lable {
-		font-family: Roboto;
-		color: #fff;
-		font-size: 14px;
-	}
-	
-
-	 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-	   border: none;
-	    
-	}
-
-
-	.navbar-inverse {
-	    background-color: #0176D6;
-	   border: none;
-	}
-
-	.navbar-inverse .navbar-nav>li>a {
-	    color: #fff;
-	    font-weight: bold;
-	    background-color: #0176D6;
-	    border-color: #0176D6;
-/*	    text-transform: uppercase;*/
-	    font-family: Roboto;
-	    font-size: 16px;
-        
-	}
-
-	.navbar-inverse .navbar-nav>li>a:hover {
-/*	    color: #dedede;*/
-        background-color: #056bbe;
-	}
-
-	.navbar-inverse .navbar-brand {
-	    color: #1e5f95;
-	    font-size: 23px;
-	    font-weight: bold;
-	    font-family: Roboto;
-	}
-    
-    .navbar-inverse .navbar-brand:active {
-        color: #1e5f95;
-    }
-    
-    .navbar-inverse .navbar-brand:visited {
-        color: #1e5f95;
-    }
-
-	.navbar-inverse .navbar-brand:hover {
-	    color: #22547e;
-	}
-
-	.content_container {
-	    margin-top: 50px;
-	}
-
-	.menu {
-	    height: auto;
-	    background-color: #222;
-        padding-top: 10px;
-        text-align: center;
-        padding-bottom: 15px;
-        border-radius: 5px;
-/*        margin-ri: -7.5px;*/
-	}
-    footer {
-        background-color: #222; 
-        border-top: 6px solid #0176D6;
-    }
-    
-    .data_container {
-/*        margin-left: 7.5px;   */
-    }
-    ul.param_data {
-        margin: 0; /* Обнуляем значение отступов */
-        padding: 4px; /* Значение полей */
-        width: 100%;
-        text-align: center;
-   }
-    ul.param_data li {
-        display: inline-block;
-/*        margin-right: 5px; */
-        padding: 5px; 
-/*
-        border-right: 1px solid #000;
-        border-left: 1px solid #000;
-*/
-        margin: 0 25px 0 25px;
-        text-align: center;
-        font-family: Roboto;
-        font-size: 11px;
-    }
-    .gen_report {
-        background-color: #0176D6;
-        border: none;
-        border-radius: 3px;
-        color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        text-align: center;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #1e5f95;
-    }
-    
-    .param_bg_color {
-        background-color: #eaeaea;
-        border-radius: 5px;
-    }
-    ul.footer_link {
-        text-align: center;
-    }
-
-    ul.footer_link li{
-        color: #fff;
-        display: inline-block;
-        margin: 10px;
-        margin-top: 0;
-        
-    }
-    ul.footer_link li a {
-        color: #fff;
-
-    }
-    
-    ul.footer_link li a:hover {
-        color: #0176D6;
-        text-decoration: none;
-        
-    }
-    a.up {
-        font-size: 30px;
-        text-align: center;
-    }
-    
-    body {
-        -webkit-tap-highlight-color: #333; !important
-    }
-    
-    
-</style>
-
+<head>
+    <meta charset="UTF-8">
+    <title>МКЦ | Мобильный командный центр</title>
+    <!-- Title icon -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/title_icon.ico') }}" type="image/x-icon">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mcc.css') }}">
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+</head>
 <body>
-
-
-            <div class="col-xs-12 col-sm-12 col-md-10 data_container">
-            	 <div class="container-fluid">
-
-	            	<!-- Data panel -->
-					<div class="row title_row">
-					    <div class="col-lg-12 param_bg_color">
-					        <ul class="param_data">
-    						    <li>
-                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i>ID</span><br>
-                                    <span id="id">0</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Номер полёта</span><br>
-                                    <span id="numberOfFlight">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i> Время отправки данных</span><br>
-                                    <span id="datatime">0.000</span>
-					            </li>
-					            <li>
-			            <span><i class="fa fa-area-chart" aria-hidden="true"></i> Широта</span><br>
-				    <span id="lat">0.000</span>°
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Долгота</span><br>
-                                    <span id="lon">0.000</span>°
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Высота</span><br>
-				    <span id="alt">0.000</span> м
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик температуры №1</span><br>
-                                    <span id="temp1">0.000</span>°С
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик температуры №2</span><br>
-                                    <span id="temp2">0.000</span>°С
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик давления №1</span><br>
-                                    <span id="pressure1">0.000</span> Па
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик давления №2</span><br>
-                                    <span id="pressure2">0.000</span> Па
-					            </li>
-						    <li>
-		                    <span><i class="fa fa-battery-three-quarters fa-rotate-270" aria-hidden="true"></i> Заряд аккумулятора</span><br>
-				    <span id="bat_crg">0.000</span> %
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Напряжение аккумулятора</span><br>
-                                    <span id="bat_volt">0.000</span>В
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Температура аккумулятора</span><br>
-                                    <span id="bat_temp">0.000</span>°С
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 1 по x</span><br>
-                                    <span id="vect_axel1x">0.000</span>м/с²
-					            </li>
-                                <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 1 по y</span><br>
-                                    <span id="vect_axel1y">0.000</span>м/с²
-					            </li>
-                                <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 1 по z</span><br>
-                                    <span id="vect_axel1z">0.000</span>м/с²
-					            </li>
-                                <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 2 по x</span><br>
-                                    <span id="vect_axel2x">0.000</span>м/с²
-					            </li>
-                                <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 2 по y</span><br>
-                                    <span id="vect_axel2y">0.000</span>м/с²
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Вектор акселерометра 2 по z</span><br>
-                                    <span id="vect_axel2z">0.000</span>м/с²
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик ультрафиолета №1</span><br>
-                                    <span id="ultraviolet1">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик ультрафиолета №2</span><br>
-                                    <span id="ultraviolet2">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчи инфракрасного излучения №1</span><br>
-                                    <span id="infrared1">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчи инфракрасного излучения №2</span><br>
-                                    <span id="infrared2">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> HDOP(снижение точности в горизонтальной плоскости)</span><br>
-                                    <span id="hdop">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> VDOP(снижение точности в вертикальной плоскости)</span><br>
-                                    <span id="vdop">0.000</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Количество спутников</span><br>
-                                    <span id="sats">0</span>
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик наличия радиации</span><br>
-                                    <span id="radiation">Unknown</span> Рентген
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик наличия пыли</span><br>
-                                    <span id="dust">0.000</span> мг/м³
-					            </li>
-					            <li>
-                                    <span><i class="fa fa-area-chart" aria-hidden="true"></i> Датчик наличия озона</span><br>
-                                    <span id="ozone">Unknown</span>
-					            </li>
-					        </ul>
-					    </div>
-					</div>
-                     <!-- Google Maps -->
-
-					<div class="row">
-                        <div class="col-lg-12 map">
-                            <div id="map"></div>
-                        </div>
-					</div>
-    
-		</div>		
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo">
+                <a href="/mcc">
+                    <i class="fa fa-plane" aria-hidden="true"></i> МКЦ
+                </a>
             </div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="/mcc">МКЦ</a></li>
+                    <li><a href="/satellite">Студенческая лига</a></li>
+                    <li><a href="/copter">Коптер</a></li>
+                    <li><a href="/">Главная</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul class="param_data">
+                <li id="param_title">
+                    Телеметрия
+                </li>
+                {% for text, id in panel_tags %}
+                <li>
+                    <div>{{ text }}</div>
+                    <div class="round"></div>
+                    <div id="{{ id }}">0</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="content">
+            <div id="menu">
+                <button onclick="">Сгенерировать отчет</button>
+                <form class="check_form">
+                    <div>
+                        <label><input type="checkbox" class="check_panel"/> Раскрыть список</label>
+                    </div>
+                </form>
+                <form class="check_form">
+                    <div>
+                        <label><input type="checkbox" class=""/>    Слежение за меткой</label>
+                    </div>
+                </form>
+            </div>
+            <div id="map"></div>
         </div>
     </div>
 
-
 	<!-- jQuery -->
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-                        
-            <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap"> </script>
-<script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZbYExNkap4x9t4yHIdojKU2tUwWe4n0&callback=initMap">
+    </script>
+{#    <script src="{{ url_for('static', filename='vendor/ios_checkbox/iosCheckbox.js') }}"></script>#}
+    <script src="{{ url_for('static', filename='js/mcc_panel.js') }}"></script>
 
-	var markers = [];
-        var map;
-
-        function initMap() {
-		var myLatLng = {lat: 53.22544088, lng: 45.00208070};
-
-		map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 11,
-			center: myLatLng
-		});
-
-		var marker = new google.maps.Marker({
-		    position: myLatLng,
-		    map: map,
-		  });
-		//marker.setMap(map);
-		}
-        
-</script>
+    <script>
+        console.log("initmap");
+        var markers = [];
+            var map;
+            function initMap() {
+            var myLatLng = {lat: 53.22544088, lng: 45.00208070};
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+              });
+            //marker.setMap(map);
+            }
+    </script>
      <!--<script type="text/JavaScript" src="http://maps.google.com/maps/apis/
 js?sensor=true"></script> -->
   					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
