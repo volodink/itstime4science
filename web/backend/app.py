@@ -7,6 +7,7 @@ import content
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
+import urllib.request
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
@@ -46,7 +47,7 @@ def satellite():
 
 @app.route("/mcc")
 def mcc():
-    return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags)
+    return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
 
 
 @socketio.on('my_event', namespace='/mcc')
@@ -58,13 +59,24 @@ def message(message):
         else:
             emit('packet', {'json_data': 0}, namespace='/mcc')
 
-#@socketio.on('my_event2', namespace='/mcc')
-#def message():
-#    needeble_erl='https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=APIKEY&format=json'
-#    response = urllib.request.urlopen(needeble_erl)
+@socketio.on('my_event2', namespace='/mcc')
+def message():
+    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    emit('aprs', {'response': response}, namespace='/mcc')
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
+    #количество последних маркеров, которые будут показываться при загрузке страницы
     i=10
     json_data = parsing.last_dots(mysql,i)
     emit('lastMarkers', {'json_data': json_data}, namespace='/mcc')

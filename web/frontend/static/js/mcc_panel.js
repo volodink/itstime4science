@@ -67,6 +67,7 @@ $(".check_panel").change(function(){
             visiblePanel(list[i]);
         }
     }
+ console.log($("#aprs" ).prop("checked"));
 });
 
 $('document').ready(function () {
@@ -78,3 +79,15 @@ $('document').ready(function () {
     // and find and change size duplicated panels
     findDuplicateParameters();
 });
+
+
+function change_color(name, status) {
+    var rou = document.getElementById('s'+name);
+    console.log(rou);
+    if(status=="ok") {
+	rou.classList.add('green_color');
+    } 
+	else {
+	rou.classList.add('red_color');
+    }
+}

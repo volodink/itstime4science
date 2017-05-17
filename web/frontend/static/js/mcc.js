@@ -14,9 +14,16 @@ socket.on('lastMarkers', function (msg) {
 			lon = j.lon;
 			var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			addMarker(position,map,lat,lon); 
+		console.log("Последние 10 точек");
 	})
 })
 socket.emit('my_event',{data: 0});
+socket.emit('my_event2');
+	socket.on('aprs', function (msg) {
+		alert(msg['response']);
+	});
+
+
 i =0 
 socket.on('packet', function (msg) {
 		if (i==0){
@@ -67,6 +74,12 @@ function receive(msg){
                     $('#radiation').html(j.radiation);
                     $('#dust').html(j.dust);
                     $('#ozone').html(j.ozone);
+		    var mas = ['datatime','lat','temp1','temp2','pressure1','pressure2','bat_crg','bat_volt','bat_temp','vect_axel1x','vect_axel2x','ultraviolet1',
+		'ultraviolet2','infrared1','infrared2','hdop','vdop','sats','radiation','dust','ozone'];
+	
+		    for(var i = 0; i < mas.length; i++) {
+		        change_color(mas[i], j.status[mas[i]])
+                    }
 		    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 		    addMarker(position,map,lat,lon);
 		    console.log("Данные есть, омномном");

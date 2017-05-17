@@ -32,10 +32,10 @@
                 <li id="param_title">
                     Телеметрия
                 </li>
-                {% for text, id, infoWindow in panel_tags %}
+                {% for text, id, infoWindow, sid in panel_tags %}
                 <li>
                     <div><abbr title="{{ infoWindow }}">{{ text }}</abbr></div>
-                    <div class="round"></div>
+                    	<div id="{{ 's' + id }}"class="round"></div>
                     <div id="{{ id }}">0</div>
                 </li>
                 {% endfor %}
@@ -51,11 +51,22 @@
                 </form>
                 <form class="check_form">
                     <div>
-                        <label><input type="checkbox" class=""/>    Слежение за меткой</label>
+                        <label><input type="checkbox" class=""/>Слежение за меткой</label>
                     </div>
                 </form>
             </div>
             <div id="map"></div>
+		
+	<div id="menu">
+                <form class="check_form">
+                    <div>
+	                {% for text,id in communication_channel_panel %}
+                        <label><input id="{{ id }}" type="radio" name="имя" class="check_channel_panel"/> {{ text }}</label> 
+               		{% endfor %}
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 

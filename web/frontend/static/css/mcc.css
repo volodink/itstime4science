@@ -1,4 +1,4 @@
- body {
+	 body {
      margin: 0;
      padding: 0;
      position: relative;
@@ -221,23 +221,20 @@ label {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: #00E86C;
-    /*background: -moz-radial-gradient(center, ellipse cover, rgba(0,232,108,1) 0%, rgba(0,232,108,0.74) 26%, rgba(255,255,255,0) 100%); !* FF3.6-15 *!*/
-    /*background: -webkit-radial-gradient(center, ellipse cover, rgba(0,232,108,1) 0%,rgba(0,232,108,0.74) 26%,rgba(255,255,255,0) 100%); !* Chrome10-25,Safari5.1-6 *!*/
-    /*background: radial-gradient(ellipse at center, rgba(0,232,108,1) 0%,rgba(0,232,108,0.74) 26%,rgba(255,255,255,0) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e86c', endColorstr='#00ffffff',GradientType=1 );*/
+    background-color: transparent;
     z-index: 9999;
     border-radius: 50%;
     float: right;
     margin-left: 223px;
     margin-top: -18px;
 }
-.redRound {
+
+.red_color {
     background-color: #ff211e;
-    /*background: -moz-radial-gradient(center, ellipse cover, rgba(255,33,30,1) 0%, rgba(255,33,30,0.74) 26%, rgba(255,255,255,0) 100%); !* FF3.6-15 *!*/
-    /*background: -webkit-radial-gradient(center, ellipse cover, rgba(255,33,30,1) 0%,rgba(255,33,30,0.74) 26%,rgba(255,255,255,0) 100%); !* Chrome10-25,Safari5.1-6 *!*/
-    /*background: radial-gradient(ellipse at center, rgba(255,33,30,1) 0%,rgba(255,33,30,0.74) 26%,rgba(255,255,255,0) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff211e', endColorstr='#00ffffff',GradientType=1 );*/
+}
+
+.green_color {
+    background-color: #00E86C;
 }
 
 .minPanel {
