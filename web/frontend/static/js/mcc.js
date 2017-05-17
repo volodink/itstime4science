@@ -22,7 +22,6 @@ socket.on('packet', function (msg) {
 	if (i==0){
 		receive(msg);
 		i=1;
-		alert(i);
 	}
 	else{
 		setTimeout(function(){
