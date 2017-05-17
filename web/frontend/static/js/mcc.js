@@ -19,15 +19,10 @@ socket.on('lastMarkers', function (msg) {
 socket.emit('my_event',{data: 0});
 i =0 
 socket.on('packet', function (msg) {
-	if (i==0){
-		receive(msg);
-		i=1;
-	}
-	else{
 		setTimeout(function(){
 	  		receive(msg);
 		}, 5000);
-	}
+	
 });
 function receive(msg){
 	if (msg['json_data'] != 0){
