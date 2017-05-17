@@ -1,7 +1,6 @@
 from datetime import datetime
 import struct
 import pymysql
-
 import os
 
 
@@ -15,15 +14,18 @@ def read_data(file,n):
     var = file.read(n)
     return var
 
+
 def toBitArray(val):
     return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:020b}'.format(val)))
+
 
 def run(number):
     print(toBitArray(number))
     print(len(toBitArray(number)))
     return toBitArray(number)
-def insert(packet):
 
+
+def insert(packet):
     try:
         f = open('logs/formated_gprs.log', 'a+')
         i = 0
@@ -156,8 +158,11 @@ def insert(packet):
                              user=os.getenv("MYSQL_DATABASE_USER", "0"),
                              passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
                              charset='utf8')
+        
         cursor = db.cursor()
+        
         print('Принятый пакет:' + str(d))
+        
         insert = """INSERT INTO gprs(numbersOfFlight, datatime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
                 bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
                 infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES({},'{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, \
@@ -172,9 +177,12 @@ def insert(packet):
                                                                                                    d[25], d[26], d[27],
                                                                                                    ','.join(d[28]))
         cursor.execute(insert)
+        
         db.commit()
-        cursor.execute("select * from gprs")
-        data = cursor.fetchall()
+        
+        #cursor.execute("select * from gprs")
+        
+        #data = cursor.fetchall()
         f.close()
     except struct.error:
         print("Пакет не полный. Записан его исходный вариант")
