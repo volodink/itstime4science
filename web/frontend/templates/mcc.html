@@ -32,9 +32,9 @@
                 <li id="param_title">
                     Телеметрия
                 </li>
-                {% for text, id in panel_tags %}
+                {% for text, id, infoWindow in panel_tags %}
                 <li>
-                    <div>{{ text }}</div>
+                    <div><abbr title="{{ infoWindow }}">{{ text }}</abbr></div>
                     <div class="round"></div>
                     <div id="{{ id }}">0</div>
                 </li>
