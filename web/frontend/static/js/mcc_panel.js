@@ -67,7 +67,6 @@ $(".check_panel").change(function(){
             visiblePanel(list[i]);
         }
     }
- console.log($("#aprs" ).prop("checked"));
 });
 
 $('document').ready(function () {
