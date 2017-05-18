@@ -17,7 +17,7 @@ socket.on('lastMarkers', function (msg) {
 		console.log("Последние 10 точек");
 	})
 })
-//socket.emit('my_event',{data: 0});
+socket.emit('my_event',{data: 0});
 /*socket.emit('my_event2');
 	socket.on('aprs', function (msg) {
 		alert(msg['response']);
