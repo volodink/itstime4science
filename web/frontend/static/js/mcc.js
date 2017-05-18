@@ -18,10 +18,10 @@ socket.on('lastMarkers', function (msg) {
 	})
 })
 socket.emit('my_event',{data: 0});
-socket.emit('my_event2');
+/*socket.emit('my_event2');
 	socket.on('aprs', function (msg) {
 		alert(msg['response']);
-	});
+	});*/
 
 
 i =0 
