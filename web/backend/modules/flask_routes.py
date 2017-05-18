@@ -1,8 +1,5 @@
 from flask import render_template
 
-from web.backend.app import app, is_dev, data
-
-
 @app.route("/")
 def main():
     return render_template('index.html', is_dev=is_dev, data = data["main"], main = True)
