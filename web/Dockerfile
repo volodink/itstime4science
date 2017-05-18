@@ -7,4 +7,4 @@ RUN pip install -r /requirements.txt
 ADD . /code
 WORKDIR /code
 
-CMD ["python3", "backend/app.py"]
+CMD ["python3", "-u", "backend/app.py"]
