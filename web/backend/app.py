@@ -59,20 +59,11 @@ def message(message):
         else:
             emit('packet', {'json_data': 0}, namespace='/mcc')
 
-@socketio.on('my_event2', namespace='/mcc')
-def message():
-    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    print(response.read())
-    emit('aprs', {'response': response}, namespace='/mcc')
+#@socketio.on('my_event2', namespace='/mcc')
+#def message():
+#    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
+#    print(response.read())
+#    emit('aprs', {'response': response}, namespace='/mcc')
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
