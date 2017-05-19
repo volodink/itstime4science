@@ -1,18 +1,15 @@
-import os
-import os
-import sys
-import urllib.request
-
 from flask import Flask, render_template
 from flask.ext.mysql import MySQL
-from flask_socketio import SocketIO
-from flask_socketio import emit
-
-import content
+import sys
+import os
 import parsing
+import content
+from flask_socketio import SocketIO
+from flask_socketio import send, emit
+import json
+import urllib.request
 
 app = Flask(__name__)
-
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
 app.config['MYSQL_DATABASE_PORT'] = int(os.getenv("MYSQL_DATABASE_PORT", "0"))
 app.config['MYSQL_DATABASE_USER'] = os.getenv("MYSQL_DATABASE_USER", "0")
@@ -62,17 +59,26 @@ def message(message):
         else:
             emit('packet', {'json_data': 0}, namespace='/mcc')
 
-
 @socketio.on('my_event2', namespace='/mcc')
 def message():
-    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=API_KEY&format=json')
-    emit('aprs', {'response': response.read()}, namespace='/mcc')
+    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    print(response.read())
+    emit('aprs', {'response': response}, namespace='/mcc')
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
     #количество последних маркеров, которые будут показываться при загрузке страницы
-    i = 10
-    json_data = parsing.last_dots(mysql, i)
+    i=10
+    json_data = parsing.last_dots(mysql,i)
     emit('lastMarkers', {'json_data': json_data}, namespace='/mcc')
 
 
