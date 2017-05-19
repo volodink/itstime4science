@@ -61,7 +61,7 @@
                 <form class="check_form">
                     <div>
 	                {% for text,id in communication_channel_panel %}
-                        <label><input id="{{ id }}" type="radio" name="имя" class="check_channel_panel"/> {{ text }}</label> 
+                        <label><input id="{{ id }}" type="checkbox" name="имя" class="check_channel_panel"/> {{ text }}</label> 
                		{% endfor %}
                     </div>
                 </form>

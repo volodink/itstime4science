@@ -18,6 +18,7 @@ socket.on('lastMarkers', function (msg) {
 	})
 })
 socket.emit('my_event',{data: 0});
+
 /*socket.emit('my_event2');
 	socket.on('aprs', function (msg) {
 		alert(msg['response']);
@@ -27,12 +28,13 @@ socket.emit('my_event',{data: 0});
 i =0 
 socket.on('packet', function (msg) {
 		if (i==0){
-		receive(msg);
+		var markers = [];
+		receive(msg,markers);
 		i=1;
 	}
 	else{
 		setTimeout(function(){
-	  		receive(msg);
+	  		receive(msg,markers);
 		}, 5000);
 }
 	
@@ -99,13 +101,37 @@ function addMarker(location, map,lat,lon){
 	icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
 	});
 	marker.setMap(map);
+	if (!!markers[9]){
+		el = markers.shift();
+		el.setMap(null)
+		markers.push(marker);
+		console.log(markers);
+		var lastMarker = markers[markers.length - 1];
+		lastMarker.setMap(map)
+		console.log("10 маркеров");
+		}
+	else{	console.log("Маркеров меньше 10");
+		markers.push(marker);
+		console.log(markers);
+		marker.setMap(map)
+		};
+	marker.setMap(map);
+	/*if (!!markers[10]){
+
+	el = markers.shift();
+	var firstMarker = markers[markers.length - 10];
+	firstMarker.setMap(null)
+	markers.push(marker);
+	console.log(markers);
+	var lastMarker = markers[markers.length - 1];
+	lastMarker.setMap(map)
+	}
+	else{
+	markers.push(marker);
+	//alert(markers);
+	console.log(markers);
+	marker.setMap(map)
+	};
+	marker.setMap(map);*/
 };
-
-/*function sleep(ms) {
-ms += new Date().getTime();
-while (new Date() < ms){}
-}*/
-
-
-    
 
