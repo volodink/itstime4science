@@ -82,7 +82,6 @@ $('document').ready(function () {
 
 function change_color(name, status) {
     var rou = document.getElementById('s'+name);
-    console.log(rou);
     if(status=="ok") {
 	rou.classList.add('green_color');
     } 
