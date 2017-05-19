@@ -89,3 +89,38 @@ function change_color(name, status) {
 	rou.classList.add('red_color');
     }
 }
+function change_data(type){
+	if(type=='aprs'){
+		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
+		    for(let i = 0; i < list.length; i++) {
+			if(i ==0 || i==1 || i==9 || i==13 || i==14 || i==15) {
+			    visiblePanel(list[i]);
+		    	}
+			else {
+		    	hidePanel(list[i]);
+			}
+		}
+	}
+	if(type=='gprs'){
+		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
+			for(let i = 0; i < list.length; i++) {
+				if(i<9)  {
+				    visiblePanel(list[i]);
+    				}
+			else {
+		    	hidePanel(list[i]);
+			}
+		}
+	}
+	if(type=='tel'){
+		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
+		    for(let i = 0; i < list.length; i++) {
+			if(i <6 || i==11) {
+			    visiblePanel(list[i]);
+			}
+			else {
+		    	hidePanel(list[i]);
+			}
+		}
+	}
+}

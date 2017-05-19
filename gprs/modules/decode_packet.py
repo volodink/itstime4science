@@ -163,7 +163,7 @@ def insert(packet):
         
         print('Принятый пакет:' + str(d))
         
-        insert = """INSERT INTO gprs(numbersOfFlight, datatime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
+        insert = """INSERT INTO gprs(numberOfFlight, datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
                 bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
                 infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES({},'{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, \
                 {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {}, '{}')""".format(d[0], d[1], d[2],

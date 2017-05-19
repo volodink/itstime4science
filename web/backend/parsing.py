@@ -11,7 +11,7 @@ def getData(mysql):
         e = dict()
         e['id'] = element[0]
         e['numberOfFlight'] = element[1]
-        e['datatime'] = str(element[2])
+        e['datetime'] = str(element[2])
         e['lat'] = element[3]
         e['lon'] = element[4]
         e['alt'] = element[5]
@@ -41,7 +41,7 @@ def getData(mysql):
         e['status'] = dict()
 
         s = element[29].split(',')
-        e['status']['datatime'] = s[0]
+        e['status']['datetime'] = s[0]
         e['status']['lat'] = s[1]
         e['status']['temp1'] = s[2]
         e['status']['temp2'] = s[3]
