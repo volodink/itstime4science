@@ -118,8 +118,9 @@ function GPRS(msg){
 									    $('#radiation').html(j.radiation);
 									    $('#dust').html(j.dust);
 									    $('#ozone').html(j.ozone);
-									    var mas = ['datetime','lat','temp1','temp2','pressure1','pressure2','bat_crg','bat_volt','bat_temp','vect_axel1x','vect_axel2x','ultraviolet1',
-									'ultraviolet2','infrared1','infrared2','hdop','vdop','sats','radiation','dust','ozone'];
+									    var mas = ['datetime','lat','lon','alt','temp1','temp2','pressure1','pressure2','bat_crg',
+									    'bat_volt','bat_temp','vect_axel1x','vect_axel1y','vect_axel1z','vect_axel2x','vect_axel2y','vect_axel2z',
+									    'ultraviolet1','ultraviolet2','infrared1','infrared2','hdop','vdop','sats','radiation','dust','ozone'];
 	
 												    for(var i = 0; i < mas.length; i++) {
 													change_color(mas[i], j.status[mas[i]])
