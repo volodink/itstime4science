@@ -91,35 +91,44 @@ function change_color(name, status) {
 }
 function change_data(type){
 	if(type=='aprs'){
+		if (k!=1){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
-		    for(let i = 0; i < list.length; i++) {
-			if(i ==0 || i==1 || i==9 || i==13 || i==14 || i==15) {
-			    visiblePanel(list[i]);
-		    	}
-			else {
-		    	hidePanel(list[i]);
+		    	var k=1;
+		    	for(let i = 0; i < list.length; i++) {
+				if(i ==0 || i==1 || i==9 || i==13 || i==14 || i==15) {
+				    visiblePanel(list[i]);
+			    	}
+				else {
+			    	hidePanel(list[i]);
+				}
 			}
 		}
 	}
 	if(type=='gprs'){
+		if (k!=2){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
+			var k=2;
 			for(let i = 0; i < list.length; i++) {
 				if(i<9)  {
 				    visiblePanel(list[i]);
-    				}
-			else {
-		    	hidePanel(list[i]);
+				}
+				else {
+			    	hidePanel(list[i]);
+				}
 			}
 		}
 	}
 	if(type=='tel'){
+		if (k!=3){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
-		    for(let i = 0; i < list.length; i++) {
-			if(i <6 || i==11) {
-			    visiblePanel(list[i]);
-			}
-			else {
-		    	hidePanel(list[i]);
+			var k=3;
+		    	for(let i = 0; i < list.length; i++) {
+				if(i <6 || i==11) {
+				    visiblePanel(list[i]);
+				}
+				else {
+			    	hidePanel(list[i]);
+				}
 			}
 		}
 	}

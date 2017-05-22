@@ -34,8 +34,8 @@ socket.emit('my_event2',{data: 0});
 		}
 });*/
 
-
-i =0 
+k=0;
+i =0; 
 socket.on('gprs', function (msg) {
 	if (i==0){
 		var markers = [];
@@ -50,8 +50,8 @@ socket.on('gprs', function (msg) {
 			
 });
 function APRS(msg){
-					change_data(msg['type']);
 					if (msg['json_data'] != 0){
+						change_data(msg['type'],k);
 						var json_packet = msg['json_data'];
 						var json = JSON.parse(json_packet);
 								json.forEach(function (item, i, json) {
@@ -81,8 +81,8 @@ function APRS(msg){
 					socket.emit('my_event2',{data: j.id});
 }
 function GPRS(msg){
-		change_data(msg['type']);
 					if (msg['json_data'] != 0){
+						change_data(msg['type'],k);
 						var json_packet = msg['json_data'];
 						var json = JSON.parse(json_packet);
 									json.forEach(function (item, i, json) {
