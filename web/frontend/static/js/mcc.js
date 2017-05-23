@@ -7,6 +7,7 @@ var socket = io.connect(url + "/mcc");
 
 socket.on('lastMarkers', function (msg) {
 		var json_packet = msg['json_data'];
+		console.log(json_packet);
 		var json = JSON.parse(json_packet);
 		json.forEach(function (item, i, json) {
 			j = json[i];

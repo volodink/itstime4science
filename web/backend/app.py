@@ -62,7 +62,7 @@ def message(message):
 
 #@socketio.on('my_event2', namespace='/mcc')
 #def message():
-#    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
+#    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=apikey&format=json')
 #    #print(response.read())
 #    decode_aprs(response)
 
@@ -71,9 +71,7 @@ def message(message):
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
-    #количество последних маркеров, которые будут показываться при загрузке страницы
-    i=10
-    json_data = parsing.last_dots(mysql,i)
+    json_data = parsing.last_dots(mysql)
     emit('lastMarkers', {'json_data': json_data, 'type': 'gprs'}, namespace='/mcc')
 
 

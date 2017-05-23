@@ -71,18 +71,17 @@ def getData(mysql):
 
         return json.dumps(r)
 
-def last_dots(mysql,i):
+def last_dots(mysql):
     cur = mysql.connect().cursor()
     r = []
-    while i>0: 
-        cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT %s, 1",i)
-        #cur.execute("select * from gprs ORDER BY id DESC LIMIT 10,1")
-        data = list(cur.fetchall())
-        mysql.connect().commit
-        i=i-1
-        for element in data:
-            e = dict()
-            e['lat'] = element[0]
-            e['lon'] = element[1]
-            r.append(e)
+    cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10",)
+    #cur.execute("select * from gprs ORDER BY id DESC LIMIT 10,1")
+    data = list(cur.fetchall())
+
+    mysql.connect().commit
+    for element in data:
+        e = dict()
+        e['lat'] = element[0]
+        e['lon'] = element[1]
+        r.append(e)
     return json.dumps(r)
