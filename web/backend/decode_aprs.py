@@ -16,7 +16,7 @@ def read_data(file,n):
 
 
 def toBitArray(val):
-    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:06b}'.format(val)))
+    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:39b}'.format(val)))
 
 
 def run(number):
@@ -27,15 +27,27 @@ def run(number):
 
 def insert(packet):
     json_packet = json.loads(packet)
-    datetime = json_packet['entries']
+    data = json_packet['entries']
     try:
         i = 0
         d = []
         data = 10001  # numberOfFlightmysql
         d.append(data)
+	
+        databin = data["time"]
+        d.append(databin)
+        databin = data["lat"]
+        d.append(databin)
+        databin = data["lon"]
+        d.append(databin)
+        databin = data["alt"]
+        d.append(databin)
+        databin = data["temp"]
+        d.append(databin)
+        databin = data["pressure"]
+        d.append(databin)
 
-        databin =
-        l = run(databin)# Эта штука будет творить магию с статусами модулей
+        l = run(databin['status'])# Эта штука будет творить магию с статусами модулей
         d.append(l)
         print(len(d))
         for i in range(len(d)):
@@ -53,8 +65,7 @@ def insert(packet):
         
         print('Принятый пакет:' + str(d))
         
-        insert = """INSERT INTO aprs(numberOfFlight, datetime,pressure1, lat, lon,alt,temp1,vect_axel1x,vect_axel1y,vect_axel1z,status) VALUES({},'{}', {},{}, {}, {}, {}, {}, {},\
-{}, '{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6], d[7], d[8],d[9],','.join(d[10]))
+        insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp, pressure, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6],','.join(d[7]))
         cursor.execute(insert)
         db.commit()
         f.close()

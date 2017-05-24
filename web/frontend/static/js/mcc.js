@@ -25,8 +25,8 @@ socket.on('lastMarkers', function (msg) {
 })
 socket.emit('my_event',{data: 0});
 n=0
-socket.emit('my_event2',{data: 0});
-/*socket.on('aprs', function (msg) {
+//socket.emit('my_event2',{data: 0});
+socket.on('aprs', function (msg) {
 	alert('APRS');
 	if (n==0){
 
@@ -38,7 +38,7 @@ socket.emit('my_event2',{data: 0});
 	  		APRS(msg,markers);
 			}, 300000);
 		}
-});*/
+});
 
 k=0;
 i =0; 
@@ -84,16 +84,16 @@ function APRS(msg,markers_aprs){
 				    $('#lat').html(j.lat);
 				    $('#lon').html(j.lon);
 				    $('#alt').html(j.alt);
-				    $('#vect_axel1x').html(j.vect_axel1x);
-				    $('#vect_axel1y').html(j.vect_axel1y);
-				    $('#vect_axel1z').html(j.vect_axel1z);
-				    var mas = ['datetime','lat','temp1','vect_axel1x'];
+				    $('#temp1').html(j.temp1);
+				    $('#pressure1').html(j.pressure);
+
+				    var mas = ['datetime','lat','lon','alt','temp1','pressure1'];
 					    for(var i = 0; i < mas.length; i++) {
 						change_color(mas[i], j.status[mas[i]])
 					    }
 				    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				    addMarker(position,map,lat,lon,markers_aprs,'aprs');
-				    console.log("Данные есть, омномном");
+				    console.log("Данные aпрс есть, омномном");
 			})
 	}    
 	console.log("Данных нема, хозяина");
@@ -147,7 +147,7 @@ function GPRS(msg,markers_gprs){
 									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 
 									    addMarker(position,map,lat,lon,markers_gprs,'gprs');
-									    console.log("Данные есть, омномном");
+									    console.log("Данные гпрс есть, омномном");
 									})
 					}    
 			console.log("Данных нема, хозяина");
