@@ -140,11 +140,14 @@ function GPRS(msg){
 
 function addMarker(location, map,lat,lon){
 
+	if ($("#follow").prop("checked")){
+		map.setCenter(location)};
 	var marker = new google.maps.Marker({
 	position: location,
 	map: map,
-	icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
+	icon: "../static/img/icon.ico"
 	});
+	
 	marker.setMap(map);
 	if (!!markers[9]){
 		el = markers.shift();
@@ -161,5 +164,6 @@ function addMarker(location, map,lat,lon){
 		marker.setMap(map)
 		};
 	marker.setMap(map);
+
 };
 

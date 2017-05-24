@@ -51,7 +51,7 @@
                 </form>
                 <form class="check_form">
                     <div>
-                        <label><input type="checkbox" class=""/>Слежение за меткой</label>
+ 			<input id="follow" type="checkbox" name="follow" value="a4"> <span class = "lable">Слежение за меткой</span><br>
                     </div>
                 </form>
             </div>
@@ -99,7 +99,7 @@
     </script>
      <!--<script type="text/JavaScript" src="http://maps.google.com/maps/apis/
 js?sensor=true"></script> -->
-  					<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+					<script type="text/javascript" src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
 					<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
 					<script typr="text/javascript" src="{{ url_for('static', filename='js/mcc.js') }}"></script>
 
