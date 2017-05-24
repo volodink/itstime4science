@@ -1,4 +1,8 @@
 $(document).ready(function () {
+var markers_gprs = [];
+var markers_aprs = [];
+var markers_telem = [];
+
 var url = 'http://' + document.domain + ':' + location.port;
 var socket = io.connect(url + "/mcc");
 	socket.on('connect', function() {
@@ -6,6 +10,7 @@ var socket = io.connect(url + "/mcc");
 	});
 
 socket.on('lastMarkers', function (msg) {
+
 		var json_packet = msg['json_data'];
 		console.log(json_packet);
 		var json = JSON.parse(json_packet);
@@ -14,7 +19,7 @@ socket.on('lastMarkers', function (msg) {
 			lat = j.lat;
 			lon = j.lon;
 			var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-			addMarker(position,map,lat,lon); 
+			addMarker(position,map,lat,lon,markers_gprs,'gprs'); 
 
 	})
 })
@@ -24,7 +29,7 @@ socket.emit('my_event2',{data: 0});
 /*socket.on('aprs', function (msg) {
 	alert('APRS');
 	if (n==0){
-		var markers = [];
+
 		APRS(msg,markers);
 		n=1;
 	}	
@@ -39,49 +44,62 @@ k=0;
 i =0; 
 socket.on('gprs', function (msg) {
 	if (i==0){
-		var markers = [];
-		GPRS(msg,markers);
+
+		GPRS(msg,markers_gprs);
 		i=1;
 		 }
 	else	{
 			setTimeout(function(){
-	  		GPRS(msg,markers);
+	  		GPRS(msg,markers_gprs);
 			}, 5000);
 		}	
 			
 });
-function APRS(msg){
-					if (msg['json_data'] != 0){
-						change_data(msg['type'],k);
-						var json_packet = msg['json_data'];
-						var json = JSON.parse(json_packet);
-								json.forEach(function (item, i, json) {
-									    j = json[i];
-									    lat = j.lat;
-									    lon = j.lon;
-									    $('#id').html(j.id);
-									    $('#numberOfFlight').html(j.numberOfFlight);
-									    $('#datetime').html(j.datetime);
-									    $('#temp1').html(j.temp1);
-									    $('#lat').html(j.lat);
-									    $('#lon').html(j.lon);
-									    $('#alt').html(j.alt);
-									    $('#vect_axel1x').html(j.vect_axel1x);
-									    $('#vect_axel1y').html(j.vect_axel1y);
-									    $('#vect_axel1z').html(j.vect_axel1z);
-									    var mas = ['datetime','lat','temp1','vect_axel1x'];
-										    for(var i = 0; i < mas.length; i++) {
-											change_color(mas[i], j.status[mas[i]])
-										    }
-									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-									    addMarker(position,map,lat,lon);
-									    console.log("Данные есть, омномном");
-								})
-					}    
-					console.log("Данных нема, хозяина");
-					socket.emit('my_event2',{data: j.id});
+
+console.log(document.getElementById('telem'));
+$("#telem").change(function(){
+	if($("#telem").prop("checked")){changeMarkers(map,markers_telem)}
+	else {changeMarkers(null,markers_telem)} });
+$("#gprs").change(function(){
+	if($("#gprs").prop("checked")){changeMarkers(map,markers_gprs)}
+	else  {changeMarkers(null,markers_gprs)}});
+$("#aprs").change(function(){
+	if($("#aprs").prop("checked")) {changeMarkers(map,markers_aprs)}
+	else {changeMarkers(null,markers_aprs)} });
+
+
+function APRS(msg,markers_aprs){
+	if (msg['json_data'] != 0){
+		change_data(msg['type'],k);
+		var json_packet = msg['json_data'];
+		var json = JSON.parse(json_packet);
+			json.forEach(function (item, i, json) {
+				    j = json[i];
+				    lat = j.lat;
+				    lon = j.lon;
+				    $('#id').html(j.id);
+				    $('#numberOfFlight').html(j.numberOfFlight);
+				    $('#datetime').html(j.datetime);
+				    $('#temp1').html(j.temp1);
+				    $('#lat').html(j.lat);
+				    $('#lon').html(j.lon);
+				    $('#alt').html(j.alt);
+				    $('#vect_axel1x').html(j.vect_axel1x);
+				    $('#vect_axel1y').html(j.vect_axel1y);
+				    $('#vect_axel1z').html(j.vect_axel1z);
+				    var mas = ['datetime','lat','temp1','vect_axel1x'];
+					    for(var i = 0; i < mas.length; i++) {
+						change_color(mas[i], j.status[mas[i]])
+					    }
+				    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+				    addMarker(position,map,lat,lon,markers_aprs,'aprs');
+				    console.log("Данные есть, омномном");
+			})
+	}    
+	console.log("Данных нема, хозяина");
+	socket.emit('my_event2',{data: j.id});
 }
-function GPRS(msg){
+function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
 						change_data(msg['type'],k);
 						var json_packet = msg['json_data'];
@@ -127,7 +145,8 @@ function GPRS(msg){
 													change_color(mas[i], j.status[mas[i]])
 												    }
 									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-									    addMarker(position,map,lat,lon);
+
+									    addMarker(position,map,lat,lon,markers_gprs,'gprs');
 									    console.log("Данные есть, омномном");
 									})
 					}    
@@ -137,33 +156,44 @@ function GPRS(msg){
 };
 });
 
+function changeMarkers(map,mas) {
+        for (var i = 0; i < mas.length; i++) {
+          mas[i].setMap(map);
+        }
+}
 
-function addMarker(location, map,lat,lon){
 
-	if ($("#follow").prop("checked")){
-		map.setCenter(location)};
-	var marker = new google.maps.Marker({
-	position: location,
-	map: map,
-	icon: "../static/img/icon.ico"
-	});
+
+function addMarker(location, map,lat,lon,massive,type){
+
 	
+	if ($("#follow").prop("checked")){map.setCenter(location)};
+
+	if(type == 'gprs'){
+		var marker = new google.maps.Marker({position: location,map: map,icon: "../static/img/icon.ico"});
+	}
+	if(type == 'aprs'){
+		var marker = new google.maps.Marker({position: location,map: map,icon: "../static/img/icon1.png"});
+	}
+	if(type == 'telem'){
+		var marker = new google.maps.Marker({position: location,map: map,icon: "../static/img/icon2.png"});
+	}
 	marker.setMap(map);
-	if (!!markers[9]){
-		el = markers.shift();
+	if (!!massive[9]){
+		el = massive.shift();
 		el.setMap(null)
-		markers.push(marker);
-		console.log(markers);
-		var lastMarker = markers[markers.length - 1];
+		massive.push(marker);
+		console.log(massive);
+		var lastMarker = massive[massive.length - 1];
 		lastMarker.setMap(map)
-		console.log("10 маркеров");
+
 		}
-	else{	console.log("Маркеров меньше 10");
-		markers.push(marker);
-		console.log(markers);
+	else{	
+		massive.push(marker);
+		console.log(massive);
 		marker.setMap(map)
 		};
 	marker.setMap(map);
+	
 
 };
-
