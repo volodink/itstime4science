@@ -2,6 +2,7 @@ from datetime import datetime
 import struct
 import pymysql
 import os
+import json
 
 
 def clear_string(str):
@@ -50,10 +51,7 @@ def insert(packet):
         l = run(databin['status'])# Эта штука будет творить магию с статусами модулей
         d.append(l)
         print(len(d))
-        for i in range(len(d)):
-            f.write(str(d[i]) + '    ')
-        f.write('\n')
-        f.close()
+
 
         db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
                              port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
@@ -68,7 +66,6 @@ def insert(packet):
         insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp, pressure, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6],','.join(d[7]))
         cursor.execute(insert)
         db.commit()
-        f.close()
 
     except struct.error:
         print("С апрсом чё-то не то")

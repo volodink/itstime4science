@@ -1,12 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask,request, render_template
 from flask.ext.mysql import MySQL
 import sys
 import os
-import parsing
-import content
+from modules import parsing
+from modules import reports
+from modules import content
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
+import html
 import urllib.request
 #import decode_aprs
 
@@ -49,7 +51,15 @@ def satellite():
 @app.route("/mcc")
 def mcc():
     return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
-
+#@app.route("/mcc/")
+#def mcc():
+    #datetime = html.escape(request.args.get('time',''))
+    #lat = html.escape(request.args.get('lat',''))
+    #lon = html.escape(request.args.get('lon',''))
+    #alt = html.escape(request.args.get('alt',''))
+    #temp = html.escape(request.args.get('temp',''))
+    #pressure = html.escape(request.args.get('pressure',''))
+    #status = html.escape(request.args.get('statuss',''))
 
 @socketio.on('my_event', namespace='/mcc')
 def message(message):
@@ -60,12 +70,12 @@ def message(message):
         else:
             emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
 
-@socketio.on('my_event2', namespace='/mcc')
-def message():
-    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
+#@socketio.on('my_event2', namespace='/mcc')
+#def message():
+#    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
     #print(response.read())
-    decode_aprs(response)
-    emit('aprs', {'response': response}, namespace='/mcc')
+#    decode_aprs(response)
+#    emit('aprs', {'response': response}, namespace='/mcc')
 
 
 @socketio.on('last_dots', namespace='/mcc')
@@ -73,9 +83,15 @@ def msg():
     json_data = parsing.last_dots(mysql)
     emit('lastMarkers', {'json_data': json_data, 'type': 'gprs'}, namespace='/mcc')
 
+@socketio.on('report', namespace='/mcc')
+def msg():
+    json_data = parsing.last_dots(mysql)
+    emit('lastMarkers', {'json_data': json_data, 'type': 'gprs'}, namespace='/mcc')
+
 
 if __name__ == '__main__':
     mysql.init_app(app)
+    reports.report(mysql)
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:

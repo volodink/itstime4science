@@ -1,12 +1,15 @@
 import json
 from flask import Flask
 from flask.ext.mysql import MySQL
-def getData(mysql):
+def report(mysql):
     cur = mysql.connect().cursor()
-    cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
+    cur.execute("select * from gprs WHERE numberOfFlight = 10001")
     data = list(cur.fetchall())
     mysql.connect().commit
-    r = []
+    #print(data)
+    i=0
+    r=[]
+    w =[]
     for element in data:
         e = dict()
         e['id'] = element[0]
@@ -68,20 +71,6 @@ def getData(mysql):
         e['status']['radiation'] = s[18]
         e['status']['ozone'] = s[19]
         r.append(e)
-
-        return json.dumps(r)
-
-def last_dots(mysql):
-    cur = mysql.connect().cursor()
-    r = []
-    cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10",)
-    #cur.execute("select * from gprs ORDER BY id DESC LIMIT 10,1")
-    data = list(cur.fetchall())
-
-    mysql.connect().commit
-    for element in data:
-        e = dict()
-        e['lat'] = element[0]
-        e['lon'] = element[1]
-        r.append(e)
-    return json.dumps(r)
+    w.append(json.dumps(r))
+    #print(json.dumps(w))
+    return json.dumps(w)
