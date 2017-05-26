@@ -53,35 +53,7 @@ def mcc():
     return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
 @app.route("/telemetriya",methods=['GET'])
 def telem():
-    data = dict()
-    elements_float = ['lat','lon','alt','temp1','temp2','pressure1','pressure2','bat_volt','bat_temp','vect_axel1x' \
-        , 'vect_axel1y','vect_axel1z','vect_axel2x','vect_axel2y','vect_axel2z','ultraviolet1','ultraviolet2',\
-        'infrared1','infrared2','hdop','vdop','radiation','dust']
-    elements_int = ['datetime','sats','bat_crg']
-    elements_char = ['ozone','status']
-    for el in range(len(elements_float)):
-        try:
-            data[elements_float[el]] = float(html.escape(request.args.get('{}'.format(elements_float[el]),'')))
-        except:
-            data[elements_float[el]] = 0.0
-    for el in range(len(elements_int)):
-        try:
-            data[elements_int[el]] = int(html.escape(request.args.get('{}'.format(elements_int[el]), '')))
-        except:
-            data[elements_int[el]] = 0
-    for el in range(len(elements_char)):
-        try:
-            data[elements_char[el]] = html.escape(request.args.get('{}'.format(elements_char[el]), ''))
-        except:
-            data[elements_char[el]] = 0
-
-
-    return render_template('telem.html',datetime=data['datetime'], lat=data['lat'],lon=data['lon'], alt=data['alt'],temp1=data['temp1'],\
-    temp2=data['temp2'], pressure1 = data['pressure1'], pressure2=data['pressure2'],bat_crg=data['bat_crg'],bat_volt=data['bat_volt'],\
-    bat_temp=data['bat_temp'],vect_axel1x=data['vect_axel1x'], vect_axel1y=data['vect_axel1y'],vect_axel1z=data['vect_axel1z'], \
-    vect_axel2x=data['vect_axel2x'],vect_axel2y=data['vect_axel2y'],vect_axel2z=data['vect_axel2z'],ultraviolet1=data['ultraviolet1'], \
-    ultraviolet2=data['ultraviolet2'],infrared1=data['infrared1'],infrared2=data['infrared2'],hdop=data['hdop'],vdop=data['vdop'] \
-    , radiation=data['radiation'],sats=data['sats'],dust=data['dust'],ozone=data['ozone'],status=data['status'])
+    return parsing.pasing_telem(mysql)
 
 
 @socketio.on('my_event', namespace='/mcc')
