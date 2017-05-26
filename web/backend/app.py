@@ -51,6 +51,10 @@ def satellite():
 @app.route("/mcc")
 def mcc():
     return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
+@app.route("/report")
+def report():
+    return render_template('report.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
+
 @app.route("/telemetriya",methods=['GET'])
 def telem():
     return parsing.pasing_telem(mysql)

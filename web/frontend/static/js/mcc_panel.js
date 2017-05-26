@@ -104,7 +104,7 @@ function change_data(type){
 			}
 		}
 	}
-	if(type=='gprs' or type=='telemety'){
+	if(type=='gprs' && type=='telemety'){
 		if (k!=2){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 			var k=2;
