@@ -57,7 +57,7 @@ def report():
 
 @app.route("/telemetriya",methods=['GET'])
 def telem():
-    return parsing.pasing_telem(mysql)
+    return parsing.parsing_telem(mysql)
 
 
 @socketio.on('my_event', namespace='/mcc')

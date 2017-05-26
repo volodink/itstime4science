@@ -25,54 +25,25 @@ var chart = new Chart(ctx, {
     data: {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [{
+            fill: false,
             label: "My First dataset",
             backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 0, 0)',
             data: [0, 10, 5, 2, 20, 30, 45],
+        },
+	{           
+	    fill: false,
+            label: "My First dataset",
+            backgroundColor: 'rgb(1, 1, 255)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 0, 30, 45],
         }]
     },
 
     // Configuration options go here
     options: {}
 });
-var ctx = document.getElementById('chart1').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-var ctx = document.getElementById('chart2').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
 </script>
 
 

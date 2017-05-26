@@ -87,14 +87,13 @@ def last_dots(mysql):
         e['lon'] = element[1]
         r.append(e)
     return json.dumps(r)
-def pasing_telem(mysql):
+def parsing_telem(mysql):
     data = dict()
     data['numberOfFlight']=10001
     elements_float = ['lat', 'lon', 'alt', 'temp1', 'temp2', 'pressure1', 'pressure2', 'bat_volt', 'bat_temp','vect_axel1x' \
         , 'vect_axel1y', 'vect_axel1z', 'vect_axel2x', 'vect_axel2y', 'vect_axel2z', 'ultraviolet1', 'ultraviolet2', \
                       'infrared1', 'infrared2', 'hdop', 'vdop', 'radiation', 'dust']
-    elements_int = ['datetime', 'sats', 'bat_crg']
-    elements_char = ['ozone', 'status']
+    elements_int = ['datetime', 'sats', 'bat_crg','ozone', 'status']
     for el in range(len(elements_float)):
         try:
             data[elements_float[el]] = float(html.escape(request.args.get('{}'.format(elements_float[el]), '')))
@@ -105,11 +104,6 @@ def pasing_telem(mysql):
             data[elements_int[el]] = int(html.escape(request.args.get('{}'.format(elements_int[el]), '')))
         except:
             data[elements_int[el]] = 0
-    for el in range(len(elements_char)):
-        try:
-            data[elements_char[el]] = html.escape(request.args.get('{}'.format(elements_char[el]), ''))
-        except:
-            data[elements_char[el]] = 0
     data['datetime'] = datetime.fromtimestamp(data['datetime'])
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -125,6 +119,6 @@ def pasing_telem(mysql):
     cursor.execute(insert)
     conn.commit()
     cur = mysql.connect().cursor()
-    cur.execute("select id from gprs ORDER BY id DESC LIMIT 1")
+    cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
     id = cur.fetchone()
     return render_template('telem.html', **data,    id=id[0])
