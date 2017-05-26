@@ -47,7 +47,6 @@ def insert(packet):
         d.append(databin)
         databin = data["pressure"]
         d.append(databin)
-
         l = run(databin['status'])# Эта штука будет творить магию с статусами модулей
         d.append(l)
         print(len(d))

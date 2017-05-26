@@ -10,7 +10,7 @@ var socket = io.connect(url + "/mcc");
 	});
 
 socket.on('lastMarkers', function (msg) {
-
+		console.log(msg['json_data']);
 		var json_packet = msg['json_data'];
 		console.log(json_packet);
 		var json = JSON.parse(json_packet);
