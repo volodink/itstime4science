@@ -104,7 +104,7 @@ function change_data(type){
 			}
 		}
 	}
-	if(type=='gprs'){
+	if(type=='gprs' or type=='telemety'){
 		if (k!=2){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 			var k=2;
@@ -118,18 +118,5 @@ function change_data(type){
 			}
 		}
 	}
-	if(type=='tel'){
-		if (k!=3){
-		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
-			var k=3;
-		    	for(let i = 0; i < list.length; i++) {
-				if(i <6 || i==11) {
-				    visiblePanel(list[i]);
-				}
-				else {
-			    	hidePanel(list[i]);
-				}
-			}
-		}
-	}
+	
 }
