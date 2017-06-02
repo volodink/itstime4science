@@ -3,8 +3,8 @@ from flask.ext.mysql import MySQL
 import sys
 import os
 from modules import parsing
-from modules import reports
 from modules import content
+from modules import report_json
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
@@ -21,15 +21,10 @@ app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
-
-
 socketio = SocketIO(app)
-
 mysql = MySQL(app)
-
 is_dev = int(os.getenv("DEV", "0"))
 sys.path.append(str(os.path.abspath(sys.argv[0])))
-
 data = content.getContent()
 
 
@@ -51,13 +46,26 @@ def satellite():
 @app.route("/mcc")
 def mcc():
     return render_template('mcc.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
+
 @app.route("/report")
 def report():
-    return render_template('report.html', is_dev=is_dev, panel_tags=content.panel_tags, communication_channel_panel=content.communication_channel_panel)
+    return render_template('report.html', is_dev=is_dev)
+
 
 @app.route("/telemetriya",methods=['GET'])
 def telem():
     return parsing.parsing_telem(mysql)
+
+
+
+@socketio.on('event_report', namespace='/report')
+def rep():
+    json_gprs = report_json.gprs(mysql)
+    json_aprs = report_json.aprs(mysql)
+    json_telemetry = report_json.telemetry(mysql)
+
+    emit('json_report', {'json_gprs': json_gprs,'json_aprs': json_aprs,'json_telemetry': json_telemetry}, namespace='/report')
+
 
 
 @socketio.on('my_event', namespace='/mcc')
@@ -82,15 +90,9 @@ def msg():
     json_data = parsing.last_dots(mysql)
     emit('lastMarkers', {'json_data': json_data, 'type': 'gprs'}, namespace='/mcc')
 
-@socketio.on('report', namespace='/mcc')
-def msg():
-    json_data = parsing.last_dots(mysql)
-    emit('lastMarkers', {'json_data': json_data, 'type': 'gprs'}, namespace='/mcc')
-
 
 if __name__ == '__main__':
     mysql.init_app(app)
-    reports.report(mysql)
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:

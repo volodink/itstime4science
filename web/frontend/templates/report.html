@@ -15,37 +15,63 @@
 <div class = "chart-container" style = "position: relative;  width:40vw"> <canvas id = "chart" > </canvas> </div> 
 <div class = "chart-container" style = "position: relative;  width:40vw"> <canvas id = "chart1" > </canvas> </div> 
 <div class = "chart-container" style = "position: relative;  width:40vw"> <canvas id = "chart2" > </canvas> </div> 
-<script>
-var ctx = document.getElementById('chart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            fill: false,
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 0, 0)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        },
-	{           
-	    fill: false,
-            label: "My First dataset",
-            backgroundColor: 'rgb(1, 1, 255)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 0, 30, 45],
-        }]
-    },
 
-    // Configuration options go here
-    options: {}
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+    var url = 'http://' + document.domain + ':' + location.port;
+    var socket = io.connect(url + "/report");
+    socket.emit('event_report');
+	socket.on('json_report', function (msg) {
+	console.log(msg['json_gprs']);
+	var json_gprs = msg['json_gprs'];
+	var temp1 = [];
+	var temp2 = [];
+	var datetime = [];
+	var json = JSON.parse(json_gprs);
+	var json = JSON.parse(json)
+	console.log(json[4]);
+			json.forEach(function (item, i, json) {
+			j = json[i];
+			console.log(j);
+			temp1[i]= j.temp1;
+			temp2[i] = j.temp2;
+			datetime[i]= j.datetime;})
+	var ctx = document.getElementById('chart').getContext('2d');
+	var chart = new Chart(ctx, {
+	    // The type of chart we want to create
+	    type: 'line',
+	    
+	    // The data for our dataset
+	    data: {
+		labels: datetime,
+		datasets: [{
+		    fill: false,
+		    label: "Температура с 1 датчика",
+		    backgroundColor: 'rgb(255, 99, 132)',
+		    borderColor: 'rgb(255, 0, 0)',
+		    data: temp1,
+		},
+		{           
+		    fill: false,
+		    label: "Температура с 2 датчика",
+		    backgroundColor: 'rgb(1, 1, 255)',
+		    borderColor: 'rgb(255, 0, 255)',
+		    data: temp2,
+		}]
+	    },
+
+	    // Configuration options go here
+	    options: {}
+	});
+	});
+
+
 });
-
 </script>
 
-
 </body>
-<html>
+<html> 

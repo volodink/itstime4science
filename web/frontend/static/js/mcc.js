@@ -12,7 +12,7 @@ var socket = io.connect(url + "/mcc");
 socket.on('lastMarkers', function (msg) {
 		console.log(msg['json_data']);
 		var json_packet = msg['json_data'];
-		console.log(json_packet);
+
 		var json = JSON.parse(json_packet);
 		json.forEach(function (item, i, json) {
 			j = json[i];
@@ -21,7 +21,7 @@ socket.on('lastMarkers', function (msg) {
 			var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			addMarker(position,map,lat,lon,markers_gprs,'gprs'); 
 
-	})
+		})
 })
 socket.emit('my_event',{data: 0});
 n=0
@@ -145,9 +145,9 @@ function GPRS(msg,markers_gprs){
 													change_color(mas[i], j.status[mas[i]])
 												    }
 									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-
+										
 									    addMarker(position,map,lat,lon,markers_gprs,'gprs');
-									    console.log("Данные гпрс есть, омномном");
+									    console.log("Данные есть, омномном");
 									})
 					}    
 			console.log("Данных нема, хозяина");
