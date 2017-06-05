@@ -62,7 +62,7 @@ def insert(packet):
         
         print('Принятый пакет:' + str(d))
         
-        insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp, pressure, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6],','.join(d[7]))
+        insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp1, pressure1, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6],','.join(d[7]))
         cursor.execute(insert)
         db.commit()
 

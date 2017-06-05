@@ -167,8 +167,8 @@ def aprs(mysql):
         e['lat'] = element[3]
         e['lon'] = element[4]
         e['alt'] = element[5]
-        e['temp'] = element[6]
-        e['pressure'] = element[7]
+        e['temp1'] = element[6]
+        e['pressure1'] = element[7]
         e['status'] = dict()
 
         s = element[8].split(',')
