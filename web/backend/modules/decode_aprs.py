@@ -17,7 +17,7 @@ def read_data(file,n):
 
 
 def toBitArray(val):
-    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:39b}'.format(val)))
+    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:04}'.format(val)))
 
 
 def run(number):
@@ -27,30 +27,32 @@ def run(number):
 
 
 def insert(packet):
+    packet = packet.decode('utf-8')
     json_packet = json.loads(packet)
+
     data = json_packet['entries']
+    data = data[0]
+    print(type(data))
+    print(type(int(data['time'])))
     try:
         i = 0
         d = []
-        data = 10001  # numberOfFlightmysql
-        d.append(data)
-	
-        databin = data["time"]
+        numberOfFlight = 10001  # numberOfFlightmysql
+        d.append(numberOfFlight)
+        databin = float(data['lat'])
         d.append(databin)
-        databin = data["lat"]
+        databin = float(data['lng'])
         d.append(databin)
-        databin = data["lon"]
+        databin = float(data['alt'])
         d.append(databin)
-        databin = data["alt"]
+        databin = float(data['temp'])
         d.append(databin)
-        databin = data["temp"]
+        databin = float(data['pressure'])
         d.append(databin)
-        databin = data["pressure"]
-        d.append(databin)
-        l = run(databin['status'])# Эта штука будет творить магию с статусами модулей
+        print(run(data))
+        l = run(int(databin['status']))  # Эта штука будет творить магию с статусами модулей
         d.append(l)
         print(len(d))
-
 
         db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
                              port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),

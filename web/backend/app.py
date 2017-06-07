@@ -81,7 +81,7 @@ def message(message):
 def message():
     response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
     print(response.read())
-    decode_aprs(response)
+    decode_aprs.insert(response.read())
     emit('aprs', {'response': response}, namespace='/mcc')
 
 
