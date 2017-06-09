@@ -35,117 +35,121 @@ def insert(packet):
         data = 10001  # numberOfFlightmysql
         d.append(data)
 
-        data = packet[3:7]  # time
+        data = packet[3:4]  # bat_crg
+        d.append(int.from_bytes(data, byteorder='little'))
+
+        data = packet[4:5]  # sats
+        d.append(int.from_bytes(data, byteorder='little'))
+
+        data = packet[5:9]  # time
         data = int.from_bytes(data, byteorder='little')
         data = datetime.fromtimestamp(data)
         data = str(data)
         d.append(data)
 
-        data = packet[7:11]  # lat
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[11:15]  # lon
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[15:19]  # alt
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[19:23]  # temp1
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[23:27]  # temp2
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[27:31]  # pressure1
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[31:35]  # pressure2
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[35:36]  # bat_crg
-        d.append(int.from_bytes(data, byteorder='little'))
-
-        data = packet[36:40]  # bat_volt
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[40:44]  # bat_temp
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[44:48]  # vect_axel1x
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[48:52]  # vect_axel1y
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[52:56]  # vect_axel1z
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[56:60]  # vect_axel2x
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[60:64]  # vect_axel2y
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[64:68]  # vect_axel2z
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[68:72]  # ultraviolet1
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[72:76]  # ultraviolet2
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[76:80]  # infrared1
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[80:84]  # infrared2
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[84:88]  # hdop
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[88:92]  # vdop
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[92:93]  # sats
-        d.append(int.from_bytes(data, byteorder='little'))
-
-        data = packet[93:97]  # radiation
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[97:101]  # dust
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[101:105]  # ozone
-        d.append(bool(data))
-
-        data = packet[105:109]  # status
+        data = packet[9:13]  # status
         databin = int.from_bytes(data, byteorder='little')
         l = run(databin)
         d.append(l)
+
+        data = packet[13:17]  # lat
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[17:21]  # lon
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[21:25]  # alt
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[25:29]  # temp1
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[29:33]  # temp2
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[33:37]  # pressure1
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[37:41]  # pressure2
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[41:45]  # bat_volt
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[45:49]  # bat_temp
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[49:53]  # vect_axel1x
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[53:57]  # vect_axel1y
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[57:61]  # vect_axel1z
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[61:65]  # vect_axel2x
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[65:69]  # vect_axel2y
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[69:73]  # vect_axel2z
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[73:77]  # ultraviolet1
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[77:81]  # ultraviolet2
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[81:85]  # infrared1
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[85:89]  # infrared2
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[89:93]  # hdop
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[93:97]  # vdop
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+
+        data = packet[97:101]  # radiation
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[101:105]  # dust
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+        data = packet[105:109]  # ozone
+        data = struct.unpack('f', data)
+        d.append(clear_string(data))
+
+
         print(d[28])
         print(len(d))
         for i in range(len(d)):
