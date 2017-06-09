@@ -25,7 +25,7 @@ socket.on('lastMarkers', function (msg) {
 })
 socket.emit('my_event',{data: 0});
 n=0
-socket.emit('my_event2',{data: 0});
+/*socket.emit('my_event2',{data: 0});
 socket.on('aprs', function (msg) {
 	alert('APRS');
 	if (n==0){
@@ -39,7 +39,7 @@ socket.on('aprs', function (msg) {
 			}, 300000);
 		}
 });
-
+*/
 k=0;
 i =0; 
 socket.on('gprs', function (msg) {
