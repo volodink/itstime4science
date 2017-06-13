@@ -27,13 +27,8 @@
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function () {
     var url = 'http://' + document.domain + ':' + location.port;
-    console.log(123);
     var socket = io.connect(url + "/report");
-    console.log(123);
-
     socket.emit('event_report');
-    console.log(123);
-
 	socket.on('json_report', function (msg) {    console.log(123);
 
 		//console.log(msg['json_gprs']);
@@ -45,16 +40,17 @@ $(document).ready(function () {
 		var gprs_datetime = [];var gprs_temp1 = [];var gprs_temp2 = [];var gprs_pressure1 = [];var gprs_pressure2 = [];var gprs_bat_crg = [];var gprs_bat_volt = [];var gprs_bat_temp = [];var gprs_vect_axel1x = [];var gprs_vect_axel1y = [];var gprs_vect_axel1z = [];var gprs_vect_axel2x = [];var gprs_vect_axel2y = [];var gprs_vect_axel2z = [];var gprs_ultraviolet1 = [];var gprs_ultraviolet2 = [];var gprs_infrared1 = [];var gprs_infrared2 = [];var gprs_hdop = [];var gprs_vdop = [];var gprs_sats = [];var gprs_radiation = [];var gprs_dust = [];var gprs_ozone = [];
 		var aprs_datetime = [];var aprs_temp1 = [];var aprs_pressure1 = [];
 		var telemetry_datetime = [];var telemetry_temp1 = [];var telemetry_temp2 = [];var telemetry_pressure1 = [];var telemetry_pressure2 = [];var telemetry_bat_crg = [];var telemetry_bat_volt = [];var telemetry_bat_temp = [];var telemetry_vect_axel1x = [];var telemetry_vect_axel1y = [];var telemetry_vect_axel1z = [];var telemetry_vect_axel2x = [];var telemetry_vect_axel2y = [];var telemetry_vect_axel2z = [];var telemetry_ultraviolet1 = [];var telemetry_ultraviolet2 = [];var telemetry_infrared1 = [];var telemetry_infrared2 = [];var telemetry_hdop = [];var telemetry_vdop = [];var telemetry_sats = [];var telemetry_radiation = [];var telemetry_dust = [];var telemetry_ozone = [];
-
+		
 		json = parsing_json(json_gprs)
 		json.forEach(function (item, i, json) {
 			j = json[i];
 			gprs_temp1[i] = j.temp1;
 			gprs_pressure1[i] = j.pressure1;
 			gprs_datetime[i]= j.datetime;
-			gprs_datetime[i]=j.datetime;
+
 		})
-		console.log('gprs');
+
+
 		json = parsing_json(json_aprs)
 		json.forEach(function (item, i, json) {
 			j = json[i];
@@ -62,7 +58,7 @@ $(document).ready(function () {
 			aprs_pressure1[i] = j.pressure1;
 			aprs_datetime[i]= j.datetime;
 		})
-		console.log(json_telemetry);
+
 		json = parsing_json(json_telemetry)
 		json.forEach(function (item, i, json) {
 			j = json[i];
@@ -71,12 +67,14 @@ $(document).ready(function () {
 			telemetry_datetime[i]= j.datetime;
 		})
 
-		gprs_datetime.forEach(function (item, i, datetime) {
-			buf = replace_datetime(datetime, gprs_datetime,buf,i)
+		var list = [gprs_temp1,gprs_pressure1,gprs_datetime,aprs_temp1,aprs_pressure1,aprs_datetime,telemetry_temp1,telemetry_pressure1,telemetry_datetime]
 
-			})
-
-		console.log();
+		list.forEach(function (item, i, list) {
+			list[i]=parsMas(item);
+		})
+		console.log(list[0]);
+		gprs_temp1 = list[0];gprs_pressure1 = list[1];gprs_datetime = list[2];aprs_temp1 = list[3];aprs_pressure1 = list[4];aprs_datetime = list[5];telemetry_temp1 = list[6];telemetry_pressure1 = list[7];telemetry_datetime = list[8];
+		
 		var ctx = document.getElementById('chart').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
@@ -154,6 +152,24 @@ $(document).ready(function () {
 		    options: {}
 		});
 	});
+	function parsMas(mas_input){
+		var len = mas_input.length;
+		var mas_out = [];
+		if (mas_input.length >50){
+			console.log('длина больше 50');
+			var step = parseInt(len / 50);
+			var now = 0;
+			var i = 0;
+			//U can set counts of dots here
+			while (i < 50){
+
+				mas_out[i]= mas_input[now]
+				now = now + step;
+				i = i+1;
+			}
+		}
+		return mas_out;
+	};
 	function parsing_json(json_data) {
 			var json = JSON.parse(json_data);
 			var json = JSON.parse(json);
@@ -169,4 +185,4 @@ $(document).ready(function () {
 </script>
 
 </body>
-<html> 
+<html>
