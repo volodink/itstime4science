@@ -27,10 +27,16 @@
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function () {
     var url = 'http://' + document.domain + ':' + location.port;
+    console.log(123);
     var socket = io.connect(url + "/report");
+    console.log(123);
+
     socket.emit('event_report');
-	socket.on('json_report', function (msg) {
-		console.log(msg['json_gprs']);
+    console.log(123);
+
+	socket.on('json_report', function (msg) {    console.log(123);
+
+		//console.log(msg['json_gprs']);
 		var json_gprs = msg['json_gprs'];
 		var json_aprs = msg['json_aprs'];
 		var json_telemetry = msg['json_telemetry'];
@@ -46,16 +52,16 @@ $(document).ready(function () {
 			gprs_temp1[i] = j.temp1;
 			gprs_pressure1[i] = j.pressure1;
 			gprs_datetime[i]= j.datetime;
-			datetime[i]=j.datetime;
+			gprs_datetime[i]=j.datetime;
 		})
 		console.log('gprs');
-		/*json = parsing_json(json_aprs)
+		json = parsing_json(json_aprs)
 		json.forEach(function (item, i, json) {
 			j = json[i];
 			aprs_temp1[i] = j.temp1;
 			aprs_pressure1[i] = j.pressure1;
 			aprs_datetime[i]= j.datetime;
-		})*/
+		})
 		console.log(json_telemetry);
 		json = parsing_json(json_telemetry)
 		json.forEach(function (item, i, json) {
@@ -69,12 +75,12 @@ $(document).ready(function () {
 			buf = replace_datetime(datetime, gprs_datetime,buf,i)
 
 			})
-		
+
 		console.log();
 		var ctx = document.getElementById('chart').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-		    data:  {labels: datetime,
+		    data:  {labels: gprs_datetime,
 			    datasets: [{fill: false,
 			    label: "Температура по данным гпрс",
 			    backgroundColor: 'rgb(255, 135, 0)',
@@ -87,7 +93,7 @@ $(document).ready(function () {
 		var ctx = document.getElementById('chart1').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-	    	    data:  {labels: datetime,
+	    	    data:  {labels: aprs_datetime,
 			    datasets: [{
 			    fill: false,
 			    label: "Температура по данным апрс",
@@ -100,7 +106,7 @@ $(document).ready(function () {
 		var ctx = document.getElementById('chart2').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-	    	    data:  {labels: datetime,
+	    	    data:  {labels: telemetry_datetime,
 	    		    datasets: [{fill: false,
 			    label: "Температура по данным телеметрии",
 			    backgroundColor: 'rgb(0, 200, 0)',
@@ -112,7 +118,7 @@ $(document).ready(function () {
 		var ctx = document.getElementById('chart3').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-		    data:  {labels: datetime,
+		    data:  {labels: gprs_datetime,
 			    datasets: [{fill: false,
 			    label: "Температура по данным гпрс",
 			    backgroundColor: 'rgb(255, 135, 0)',
@@ -125,7 +131,7 @@ $(document).ready(function () {
 		var ctx = document.getElementById('chart4').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-	    	    data:  {labels: datetime,
+	    	    data:  {labels: aprs_datetime,
 			    datasets: [{
 			    fill: false,
 			    label: "Температура по данным апрс",
@@ -138,7 +144,7 @@ $(document).ready(function () {
 		var ctx = document.getElementById('chart5').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',
-	    	    data:  {labels: datetime,
+	    	    data:  {labels: telemetry_datetime,
 	    		    datasets: [{fill: false,
 			    label: "Температура по данным телеметрии",
 			    backgroundColor: 'rgb(0, 200, 0)',
@@ -148,7 +154,7 @@ $(document).ready(function () {
 		    options: {}
 		});
 	});
-	function parsing_json(json_data) {	
+	function parsing_json(json_data) {
 			var json = JSON.parse(json_data);
 			var json = JSON.parse(json);
 			return json;

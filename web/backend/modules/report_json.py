@@ -173,12 +173,12 @@ def aprs(mysql):
 
         s = element[8].split(',')
         e['status']['datetime'] = s[0]
-        e['status']['lat'] = s[1]
-        e['status']['lon'] = s[1]
-        e['status']['alt'] = s[1]
-        e['status']['temp'] = s[2]
-        e['status']['pressure'] = s[3]
-        e['status']['modul'] = s[4]
+        #e['status']['lat'] = s[1]
+        #e['status']['lon'] = s[1]
+        #e['status']['alt'] = s[1]
+        #e['status']['temp'] = s[2]
+        #e['status']['pressure'] = s[3]
+        #e['status']['modul'] = s[4]
         r.append(e)
     w.append(json.dumps(r))
     #print(json.dumps(w))
