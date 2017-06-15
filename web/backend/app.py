@@ -8,7 +8,7 @@ from modules import report_json
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
-import html
+import aprslib
 import urllib.request
 from modules import decode_aprs
 
@@ -79,9 +79,7 @@ def message(message):
 
 #@socketio.on('my_event2', namespace='/mcc')
 #def message():
-#    response = urllib.request.urlopen('https://api.aprs.fi/api/get?name=UB4FEU-11&what=loc&apikey=96108.wFh6EKTmYPxnt&format=json')
-#    print(response.read())
-#    decode_aprs.insert(response.read())
+
 #    emit('aprs', {'response': response}, namespace='/mcc')
 
 

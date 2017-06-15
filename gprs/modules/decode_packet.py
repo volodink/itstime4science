@@ -156,37 +156,42 @@ def insert(packet):
             f.write(str(d[i]) + '    ')
         f.write('\n')
         f.close()
+        try:
+            db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
+                                 port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
+                                 user=os.getenv("MYSQL_DATABASE_USER", "0"),
+                                 passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
+                                 charset='utf8')
 
-        db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
-                             port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
-                             user=os.getenv("MYSQL_DATABASE_USER", "0"),
-                             passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
-                             charset='utf8')
-        
-        cursor = db.cursor()
-        
-        print('Принятый пакет:' + str(d))
-        
-        insert = """INSERT INTO gprs(numberOfFlight, bat_crg,sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-                bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
-                infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, {}, '{}', '{}', {}, {}, {}, {}, {}, {}, \
-                {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {}, {})""".format(d[0], d[1], d[2],
-                                                                                                   d[3], ','.join(d[4]), d[5],
-                                                                                                   d[6], d[7], d[8], d[9],
-                                                                                                   d[10], d[11], d[12],
-                                                                                                   d[13], d[14], d[15],
-                                                                                                   d[16], d[17], d[18],
-                                                                                                   d[19], d[20], d[21],
-                                                                                                   d[22], d[23],d[24],
-                                                                                                   d[25], d[26], d[27],
-                                                                                                   d[28])
-        cursor.execute(insert)
-        
-        db.commit()
-        
-        #cursor.execute("select * from gprs")
-        
-        #data = cursor.fetchall()
-        f.close()
+            cursor = db.cursor()
+
+            print('Принятый пакет:' + str(d))
+
+            insert = """INSERT INTO gprs(numberOfFlight, bat_crg,sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+                    bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
+                    infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, {}, '{}', '{}', {}, {}, {}, {}, {}, {}, \
+                    {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {}, {})""".format(d[0], d[1], d[2],
+                                                                                                       d[3], ','.join(d[4]), d[5],
+                                                                                                       d[6], d[7], d[8], d[9],
+                                                                                                       d[10], d[11], d[12],
+                                                                                                       d[13], d[14], d[15],
+                                                                                                       d[16], d[17], d[18],
+                                                                                                       d[19], d[20], d[21],
+                                                                                                       d[22], d[23],d[24],
+                                                                                                       d[25], d[26], d[27],
+                                                                                                       d[28])
+            cursor.execute(insert)
+
+            db.commit()
+
+            #cursor.execute("select * from gprs")
+
+            #data = cursor.fetchall()
+            f.close()
+            print('Попытка сохранения данных gprs в бд завершилась успешно')
+
+        except:
+            print('Попытка сохранения данных gprs в бд провалилась')
+
     except struct.error:
-        print("Пакет не полный. Записан его исходный вариант")
+        print("Пакет не полный. Записан его исходный вариант в логи")
