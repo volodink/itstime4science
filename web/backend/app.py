@@ -10,7 +10,7 @@ from flask_socketio import send, emit
 import json
 import aprslib
 import urllib.request
-from modules import decode_aprs
+#from modules import decode_aprs
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")

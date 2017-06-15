@@ -4,3 +4,4 @@ flask-mysql
 eventlet
 gevent
 gevent-websocket
+aprslib
