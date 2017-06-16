@@ -56,7 +56,9 @@ def report():
 def telem():
     return parsing.parsing_telem(mysql)
 
-
+#@socketio.on('create_report', namespace='/report')
+#def report_create():
+    #create_report.create(mysql)
 
 @socketio.on('event_report', namespace='/report')
 def rep():

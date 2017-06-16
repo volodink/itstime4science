@@ -6,9 +6,11 @@ services:
     ports:
       - "${DEV_IP}:80:80"
       - "${DEV_IP}:5100:5100"
+      - "${DEV_IP}:5200:5200"
     depends_on:
       - "web_dev1"
       - "gprs_dev1"
+      - "aprs_dev1"
     networks:
       - dev.itstime4science.ru
   web_dev1:
@@ -28,6 +30,20 @@ services:
     build: gprs
     volumes:
       - ./gprs:/code
+      - ${GPRS_LOGS}:/code/logs
+    environment:
+      - DEV=1
+      - MYSQL_DATABASE_HOST
+      - MYSQL_DATABASE_PORT
+      - MYSQL_DATABASE_USER
+      - MYSQL_DATABASE_PASSWORD
+      - MYSQL_DATABASE_DB
+    networks:
+      - dev.itstime4science.ru
+  aprs_dev1:
+    build: aprs
+    volumes:
+      - ./aprs:/code
       - ${GPRS_LOGS}:/code/logs
     environment:
       - DEV=1

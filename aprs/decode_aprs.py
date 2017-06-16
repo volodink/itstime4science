@@ -18,7 +18,11 @@ def run(number):
 
 def callback(packet):
     packet = packet.decode('utf-8')
-    if ('# aprsc' or '# javAPRSSrvr') not in packet:
+    if '# aprsc' in packet:
+        print('Отчёт: ' + packet)
+    elif '# javAPRSSrvr' in packet:
+        print('Отчёт: ' + packet)
+    elif 'UB4FEU-11>' in packet:
         print('Данные апрс: ' + packet)
         d=[]
         if "UB4FEU-11>UB4FEU,R4FBA-1*,WIDE1*,WIDE2-2,qAR,RA4FHE-1:T#" in packet:
@@ -53,5 +57,5 @@ def callback(packet):
 
         except:
             print('Попытка сохранения данных aprs в бд провалилась')
-    else:
-        print('Отчёт: ' + packet) 	
+    else: pass
+         	
