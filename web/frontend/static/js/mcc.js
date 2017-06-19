@@ -92,7 +92,6 @@ $("#aprs").change(function(){
 function APRS(msg,markers_aprs){
     console.log(msg['json_data'])
 	if (msg['json_data'] != 0){
-		change_data(msg['type'],k);
 		var json_packet = msg['json_data'];
 		var json = JSON.parse(json_packet);
 			json.forEach(function (item, i, json) {
@@ -116,6 +115,8 @@ function APRS(msg,markers_aprs){
 				    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				    addMarker(position,map,lat,lon,markers_aprs,'aprs');
 				    console.log("Данные aпрс есть, омномном");
+                    change_data(msg['type'],k);
+
 			})
 	}    
 	console.log("Данных апрс нема, хозяина");
@@ -123,7 +124,8 @@ function APRS(msg,markers_aprs){
 }
 function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
-						change_data(msg['type'],k);
+                        change_data(msg['type'],k);
+
 						var json_packet = msg['json_data'];
 						var json = JSON.parse(json_packet);
 									json.forEach(function (item, i, json) {
@@ -169,7 +171,8 @@ function GPRS(msg,markers_gprs){
 									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
 									    addMarker(position,map,lat,lon,markers_gprs,'gprs');
-									    console.log("Данные есть, омномном");
+									    console.log("Данные гпрс есть, омномном");
+
 									})
 					}    
 			console.log("Данных гпрс нема, хозяина");

@@ -5,3 +5,4 @@ eventlet
 gevent
 gevent-websocket
 aprslib
+matplotlib
