@@ -3,7 +3,7 @@ from flask import Flask,request,render_template
 import html
 from datetime import datetime
 from flask.ext.mysql import MySQL
-def getData(mysql):
+def pars_gprs(mysql):
     cur = mysql.connect().cursor()
     cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
     data = list(cur.fetchall())
@@ -72,12 +72,65 @@ def getData(mysql):
         r.append(e)
 
         return json.dumps(r)
+def pars_aprs(mysql):
+    cur = mysql.connect().cursor()
+    cur.execute("select * from aprs ORDER BY id DESC LIMIT 1")
+    data = list(cur.fetchall())
+    mysql.connect().commit
+    r = []
+    for element in data:
+        e = dict()
+        e['id'] = element[0]
+        e['numberOfFlight'] = element[1]
+        e['datetime'] = str(element[2])
+        e['lat'] = element[3]
+        e['lon'] = element[4]
+        e['alt'] = element[5]
+        e['temp1'] = element[6]
+        e['pressure1'] = element[7]
+        e['status'] = dict()
 
-def last_dots(mysql):
+        s = element[8].split(',') #ВОТ ТУТ УТОЧНИТЬ ПОРЯДОК СТАТУСА
+        e['status']['lat'] = s[0]
+        e['status']['lon'] = s[0]
+        e['status']['alt'] = s[0]
+        e['status']['temp1'] = s[1]
+        e['status']['pressure1'] = s[2]
+        e['status']['modul'] = s[3]
+        r.append(e)
+
+        return json.dumps(r)
+def last_gprs_dots(mysql):
     cur = mysql.connect().cursor()
     r = []
     cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10",)
-    #cur.execute("select * from gprs ORDER BY id DESC LIMIT 10,1")
+    data = list(cur.fetchall())
+
+    mysql.connect().commit
+    for element in data:
+        e = dict()
+        e['lat'] = element[0]
+        e['lon'] = element[1]
+        r.append(e)
+    return json.dumps(r)
+
+def last_aprs_dots(mysql):
+    cur = mysql.connect().cursor()
+    r = []
+    cur.execute("select lat,lon from aprs ORDER BY id DESC LIMIT 10",)
+    data = list(cur.fetchall())
+
+    mysql.connect().commit
+    for element in data:
+        e = dict()
+        e['lat'] = element[0]
+        e['lon'] = element[1]
+        r.append(e)
+    return json.dumps(r)
+def last_telemetry_dots(mysql):
+    cur = mysql.connect().cursor()
+    r = []
+    cur.execute("select lat,lon from telemetry ORDER BY id DESC LIMIT 10",)
     data = list(cur.fetchall())
 
     mysql.connect().commit

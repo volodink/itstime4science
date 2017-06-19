@@ -259,9 +259,10 @@ panel_tags = [
 	('Количество спутников', 'sats','','ssats'),
 	('Радиация', 'radiation','ренген/час','sradiation'),
 	('Датчик пыли', 'dust','мг/м^3','sdust'),
-	('Датчик озона', 'ozone','','sozone')
+	('Датчик озона', 'ozone','','sozone'),
+	('Модуль научной миссии','modul','','smodul')
 ]
-communication_channel_panel=[('Телеметрия','telem'),('GPRS','gprs'),('APRS','aprs')]
+communication_channel_panel=[('Телеметрия','telemetry'),('GPRS','gprs'),('APRS','aprs')]
 if __name__ == "__main__":
 	lal = getContent()
 	for i in lal["main"]["gallery"]:

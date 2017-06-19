@@ -82,6 +82,7 @@ $('document').ready(function () {
 
 function change_color(name, status) {
     var rou = document.getElementById('s'+name);
+    console.log(rou + status)
     if(status=="ok") {
 	rou.classList.add('green_color');
     } 
@@ -95,7 +96,7 @@ function change_data(type){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 		    	var k=1;
 		    	for(let i = 0; i < list.length; i++) {
-				if(i ==0 || i==1 || i==9 || i==13 || i==14 || i==15) {
+				if(i ==0 || i==1 || i==9 || i==13 || i==14 || i==15 || i == 29) {
 				    visiblePanel(list[i]);
 			    	}
 				else {
