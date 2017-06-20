@@ -21,28 +21,27 @@ def pars_gprs(mysql):
         e['temp2'] = element[7]
         e['pressure1'] = element[8]
         e['pressure2'] = element[9]
-        e['bat_crg'] = element[10]
-        e['bat_volt'] = element[11]
-        e['bat_temp'] = element[12]
-        e['vect_axel1x'] = element[13]
-        e['vect_axel1y'] = element[14]
-        e['vect_axel1z'] = element[15]
-        e['vect_axel2x'] = element[16]
-        e['vect_axel2y'] = element[17]
-        e['vect_axel2z'] = element[18]
-        e['ultraviolet1'] = element[19]
-        e['ultraviolet2'] = element[20]
-        e['infrared1'] = element[21]
-        e['infrared2'] = element[22]
-        e['hdop'] = element[23]
-        e['vdop'] = element[24]
-        e['sats'] = element[25]
-        e['radiation'] = element[26]
-        e['dust'] = element[27]
-        e['ozone'] = element[28]
+        e['bat_volt'] = element[10]
+        e['bat_temp'] = element[11]
+        e['vect_axel1x'] = element[12]
+        e['vect_axel1y'] = element[13]
+        e['vect_axel1z'] = element[14]
+        e['vect_axel2x'] = element[15]
+        e['vect_axel2y'] = element[16]
+        e['vect_axel2z'] = element[17]
+        e['ultraviolet1'] = element[18]
+        e['ultraviolet2'] = element[19]
+        e['infrared1'] = element[20]
+        e['infrared2'] = element[21]
+        e['hdop'] = element[22]
+        e['vdop'] = element[23]
+        e['sats'] = element[24]
+        e['radiation'] = element[25]
+        e['dust'] = element[26]
+        e['ozone'] = element[27]
         e['status'] = dict()
 
-        s = element[29].split(',')
+        s = element[28].split(',')
         e['status']['datetime'] = s[0]
         e['status']['lat'] = s[1]
         e['status']['lon'] = s[1]
@@ -51,24 +50,23 @@ def pars_gprs(mysql):
         e['status']['temp2'] = s[3]
         e['status']['pressure1'] = s[4]
         e['status']['pressure2'] = s[5]
-        e['status']['bat_crg'] = s[6]
-        e['status']['bat_volt'] = s[7]
-        e['status']['bat_temp'] = s[8]
-        e['status']['vect_axel1x'] = s[9]
-        e['status']['vect_axel1y'] = s[9]
-        e['status']['vect_axel1z'] = s[9]
-        e['status']['vect_axel2x'] = s[10]
-        e['status']['vect_axel2y'] = s[10]
-        e['status']['vect_axel2z'] = s[10]
-        e['status']['ultraviolet1'] = s[11]
-        e['status']['ultraviolet2'] = s[12]
-        e['status']['infrared1'] = s[13]
-        e['status']['infrared2'] = s[14]
-        e['status']['hdop'] = s[15]
-        e['status']['vdop'] = s[16]
-        e['status']['sats'] = s[17]
-        e['status']['radiation'] = s[18]
-        e['status']['ozone'] = s[19]
+        e['status']['bat_volt'] = s[6]
+        e['status']['bat_temp'] = s[7]
+        e['status']['vect_axel1x'] = s[8]
+        e['status']['vect_axel1y'] = s[8]
+        e['status']['vect_axel1z'] = s[8]
+        e['status']['vect_axel2x'] = s[9]
+        e['status']['vect_axel2y'] = s[9]
+        e['status']['vect_axel2z'] = s[9]
+        e['status']['ultraviolet1'] = s[10]
+        e['status']['ultraviolet2'] = s[11]
+        e['status']['infrared1'] = s[12]
+        e['status']['infrared2'] = s[13]
+        e['status']['hdop'] = s[14]
+        e['status']['vdop'] = s[15]
+        e['status']['sats'] = s[16]
+        e['status']['radiation'] = s[17]
+        e['status']['ozone'] = s[18]
         r.append(e)
 
         return json.dumps(r)
@@ -146,7 +144,7 @@ def parsing_telem(mysql):
     elements_float = ['lat', 'lon', 'alt', 'temp1', 'temp2', 'pressure1', 'pressure2', 'bat_volt', 'bat_temp','vect_axel1x' \
         , 'vect_axel1y', 'vect_axel1z', 'vect_axel2x', 'vect_axel2y', 'vect_axel2z', 'ultraviolet1', 'ultraviolet2', \
                       'infrared1', 'infrared2', 'hdop', 'vdop', 'radiation', 'dust']
-    elements_int = ['datetime', 'sats', 'bat_crg','ozone', 'status']
+    elements_int = ['datetime', 'sats','ozone', 'status']
     for el in range(len(elements_float)):
         try:
             data[elements_float[el]] = float(html.escape(request.args.get('{}'.format(elements_float[el]), '')))
@@ -160,11 +158,11 @@ def parsing_telem(mysql):
     data['datetime'] = datetime.fromtimestamp(data['datetime'])
     conn = mysql.connect()
     cursor = conn.cursor()
-    insert = "INSERT INTO telemetry(numberOfFlight, datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,bat_crg,\
+    insert = "INSERT INTO telemetry(numberOfFlight, datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
                     bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
-                    infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES({},'{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+                    infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES({},'{}', {}, {}, {},  {}, {}, {}, {}, {}, \
                     {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {}, '{}')".format(data['numberOfFlight'],data['datetime'], data['lat'], \
-                    data['lon'], data['alt'],data['temp1'], data['temp2'], data['pressure1'], data['pressure2'], data['bat_crg'],\
+                    data['lon'], data['alt'],data['temp1'], data['temp2'], data['pressure1'], data['pressure2'], \
                     data['bat_volt'], data['bat_temp'], data['vect_axel1x'], data['vect_axel1y'], data['vect_axel1z'], data['vect_axel2x'], \
                     data['vect_axel2y'], data['vect_axel2z'], data['ultraviolet1'], data['ultraviolet2'], data['infrared1'], \
                     data['infrared2'], data['hdop'], data['vdop'], data['radiation'], data['sats'], data['dust'], data['ozone'],\

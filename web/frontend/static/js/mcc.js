@@ -142,7 +142,6 @@ function GPRS(msg,markers_gprs){
 									    $('#temp2').html(j.temp2);
 									    $('#pressure1').html(j.pressure1);
 									    $('#pressure2').html(j.pressure2);
-									    $('#bat_crg').html(j.bat_crg);
 									    $('#bat_volt').html(j.bat_volt);
 									    $('#bat_temp').html(j.bat_temp);
 									    $('#vect_axel1x').html(j.vect_axel1x);
@@ -161,7 +160,7 @@ function GPRS(msg,markers_gprs){
 									    $('#radiation').html(j.radiation);
 									    $('#dust').html(j.dust);
 									    $('#ozone').html(j.ozone);
-									    var mas = ['datetime','lat','lon','alt','temp1','temp2','pressure1','pressure2','bat_crg',
+									    var mas = ['datetime','lat','lon','alt','temp1','temp2','pressure1','pressure2',
 									    'bat_volt','bat_temp','vect_axel1x','vect_axel1y','vect_axel1z','vect_axel2x','vect_axel2y','vect_axel2z',
 									    'ultraviolet1','ultraviolet2','infrared1','infrared2','hdop','vdop','sats','radiation','dust','ozone'];
 	
