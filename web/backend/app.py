@@ -11,7 +11,7 @@ import json
 import aprslib
 import urllib.request
 from modules import create_report
-
+from modules import archivator
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
 app.config['MYSQL_DATABASE_PORT'] = int(os.getenv("MYSQL_DATABASE_PORT", "0"))
@@ -57,9 +57,10 @@ def report():
 def telem():
     return parsing.parsing_telem(mysql)
 
-#@socketio.on('create_report', namespace='/report')
-#def report_create():
-    #create_report.create(mysql)
+# @socketio.on('create_report', namespace='/report')
+# def report_create():
+#     create_report.getData(mysql)
+#     archivator.img_zip()
 
 @socketio.on('event_report', namespace='/report')
 def rep():
