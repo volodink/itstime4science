@@ -6,7 +6,7 @@ import decode_aprs
 
 
 
-AIS = aprslib.IS("UB4FEU", passwd="22451", port=14580)
+AIS = aprslib.IS("NOCALL", port=14580)
 AIS.set_filter("b/UB4FEU-11")
 AIS.connect()
 AIS.consumer(decode_aprs.callback, raw=True)

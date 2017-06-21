@@ -19,6 +19,8 @@ app.config['MYSQL_DATABASE_USER'] = os.getenv("MYSQL_DATABASE_USER", "0")
 app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv("MYSQL_DATABASE_PASSWORD", "0")
 app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 
+
+
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
 socketio = SocketIO(app)
@@ -26,7 +28,6 @@ mysql = MySQL(app)
 is_dev = int(os.getenv("DEV", "0"))
 sys.path.append(str(os.path.abspath(sys.argv[0])))
 data = content.getContent()
-
 
 @app.route("/")
 def main():
@@ -99,6 +100,7 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
+
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
