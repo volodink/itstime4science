@@ -10,7 +10,7 @@ from flask_socketio import send, emit
 import json
 import aprslib
 import urllib.request
-#from modules import decode_aprs
+from modules import create_report
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
@@ -100,7 +100,7 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-
+    #create_report.getData(mysql) #генерация картинок, пока без архива
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
