@@ -26,6 +26,7 @@ app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
 
+
 socketio = SocketIO(app)
 mysql = MySQL(app)
 is_dev = int(os.getenv("DEV", "0"))
@@ -64,14 +65,9 @@ def telem():
 def download(filename):
     create_report.getData(mysql)
     archivator.img_zip()
-    print(filename)
-    print(os.getcwd())
-    return send_from_directory('/modules/', filename)
 
-# @socketio.on('create_report', namespace='/report')
-# def report_create():
-#     create_report.getData(mysql)
-#     archivator.img_zip()
+    return send_from_directory('modules/', filename)
+
 
 @socketio.on('event_report', namespace='/report')
 def rep():
