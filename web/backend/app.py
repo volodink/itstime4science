@@ -1,4 +1,4 @@
-from flask import Flask,request, render_template
+from flask import Flask,request, render_template, send_from_directory
 from flask.ext.mysql import MySQL
 import sys
 import os
@@ -12,6 +12,8 @@ import aprslib
 import urllib.request
 from modules import create_report
 from modules import archivator
+from subprocess import Popen, PIPE
+
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_HOST'] = os.getenv("MYSQL_DATABASE_HOST", "0")
 app.config['MYSQL_DATABASE_PORT'] = int(os.getenv("MYSQL_DATABASE_PORT", "0"))
@@ -23,6 +25,7 @@ app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 
 app.template_folder = '../frontend/templates/'
 app.static_folder = "../frontend/static/"
+
 socketio = SocketIO(app)
 mysql = MySQL(app)
 is_dev = int(os.getenv("DEV", "0"))
@@ -56,6 +59,14 @@ def report():
 @app.route("/telemetriya",methods=['GET'])
 def telem():
     return parsing.parsing_telem(mysql)
+
+@app.route('/<path:filename>')
+def download(filename):
+    create_report.getData(mysql)
+    archivator.img_zip()
+    print(filename)
+    print(os.getcwd())
+    return send_from_directory('/modules/', filename)
 
 # @socketio.on('create_report', namespace='/report')
 # def report_create():
@@ -101,7 +112,6 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-    #create_report.getData(mysql) #генерация картинок, пока без архива
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:

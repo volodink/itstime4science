@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as ax3d
 from math import sqrt
@@ -91,7 +93,7 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("modules/img/{}.png".format(name), fmt='png')
+    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
 def risovalka_for_2(data1, title1, data2, title2, name, characteristic):
@@ -117,7 +119,7 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic):
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("modules/img/{}.png".format(name), fmt='png')
+    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2):
     simple_moving_average_axelerometrs(gx1, gy1, gz1)
@@ -139,7 +141,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     ax.plot(gx1, gy1, gz1, color='green')
     ax.scatter(gx1[0], gy1[0], gz1[0])
     ax.scatter(gx1[length_list - 1], gy1[length_list - 1], gz1[length_list - 1], color='red')
-    plt.savefig("modules/img/trajectory.png", fmt='png')
+    plt.savefig("backend/modules/img/trajectory.png", fmt='png')
 
     fig1 = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(311)
@@ -197,7 +199,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("modules/img/XYZprojectionFirstAxel.png", fmt='png')
+    plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
 
     fig1 = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(321)
@@ -255,7 +257,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("modules/img/XYZprojectionSecondAxel.png", fmt='png')
+    plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
 
 def execute_from_db3(n,m,gprs,aprs,telemetry):
     data1 = []

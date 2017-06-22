@@ -22,7 +22,7 @@
 <div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart5" > </canvas> </div> 
 </div>
   <form>
-    <p><input onclick="report ()" type="button" value=" Сгенерировать отчёт "></p>
+    <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
   </form>
 <script type="text/javascript">
     function report() {
