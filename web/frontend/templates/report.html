@@ -22,16 +22,20 @@
 <div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart5" > </canvas> </div> 
 </div>
   <form>
-    <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
+<input type="button" value="Подготовить отчёт" name="отчёт" OnClick="report();">
+ <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
   </form>
 <script type="text/javascript">
     function report() {
-	alert('Coming soon');
-/*        $(document).ready(function () {
             var url = 'http://' + document.domain + ':' + location.port;
             var socket = io.connect(url + "/report");
+
             socket.emit('create_report');
-        });*/
+            alert('Отчёт ща будет(нет)!')
+            socket.on('report', function (msg) {
+    		    var answer = msg['answer'];
+                alert(answer)
+            });
     }
 </script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
@@ -41,12 +45,12 @@ $(document).ready(function () {
     var url = 'http://' + document.domain + ':' + location.port;
     var socket = io.connect(url + "/report");
     socket.emit('event_report');
-	socket.on('json_report', function (msg) {    console.log(123);
-
+	socket.on('json_report', function (msg) {
 		//console.log(msg['json_gprs']);
 		var json_gprs = msg['json_gprs'];
 		var json_aprs = msg['json_aprs'];
 		var json_telemetry = msg['json_telemetry'];
+
 		var datetime =[];
 		var buf = [];
 		var gprs_datetime = [];var gprs_temp1 = [];var gprs_temp2 = [];var gprs_pressure1 = [];var gprs_pressure2 = [];var gprs_bat_crg = [];var gprs_bat_volt = [];var gprs_bat_temp = [];var gprs_vect_axel1x = [];var gprs_vect_axel1y = [];var gprs_vect_axel1z = [];var gprs_vect_axel2x = [];var gprs_vect_axel2y = [];var gprs_vect_axel2z = [];var gprs_ultraviolet1 = [];var gprs_ultraviolet2 = [];var gprs_infrared1 = [];var gprs_infrared2 = [];var gprs_hdop = [];var gprs_vdop = [];var gprs_sats = [];var gprs_radiation = [];var gprs_dust = [];var gprs_ozone = [];
@@ -57,11 +61,12 @@ $(document).ready(function () {
 		json.forEach(function (item, i, json) {
 			j = json[i];
 			gprs_temp1[i] = j.temp1;
+
 			gprs_pressure1[i] = j.pressure1;
 			gprs_datetime[i]= j.datetime;
 
 		})
-
+        console.log(gprs_temp1)
 
 		json = parsing_json(json_aprs)
 		json.forEach(function (item, i, json) {
@@ -80,11 +85,12 @@ $(document).ready(function () {
 		})
 
 		var list = [gprs_temp1,gprs_pressure1,gprs_datetime,aprs_temp1,aprs_pressure1,aprs_datetime,telemetry_temp1,telemetry_pressure1,telemetry_datetime]
-
+        console.log(list)
 		list.forEach(function (item, i, list) {
 			list[i]=parsMas(item);
 		})
-		console.log(list[0]);
+        console.log(gprs_temp1)
+
 		gprs_temp1 = list[0];gprs_pressure1 = list[1];gprs_datetime = list[2];aprs_temp1 = list[3];aprs_pressure1 = list[4];aprs_datetime = list[5];telemetry_temp1 = list[6];telemetry_pressure1 = list[7];telemetry_datetime = list[8];
 		
 		var ctx = document.getElementById('chart').getContext('2d');
@@ -168,19 +174,22 @@ $(document).ready(function () {
 		var len = mas_input.length;
 		var mas_out = [];
 		if (mas_input.length >50){
-			console.log('длина больше 50');
-			var step = parseInt(len / 50);
-			var now = 0;
-			var i = 0;
-			//U can set counts of dots here
-			while (i < 50){
+			    console.log('длина больше 50');
+			    var step = parseInt(len / 50);
+			    var now = 0;
+			    var i = 0;
+			    //U can set counts of dots here
+			    while (i < 50)
+                    {
 
-				mas_out[i]= mas_input[now]
-				now = now + step;
-				i = i+1;
-			}
-		}
-		return mas_out;
+				        mas_out[i]= mas_input[now]
+				        now = now + step;
+				        i = i+1;
+			        }
+		return mas_out;		
+        }
+        else{
+		return mas_input;}
 	};
 	function parsing_json(json_data) {
 			var json = JSON.parse(json_data);
