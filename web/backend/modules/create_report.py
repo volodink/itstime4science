@@ -7,6 +7,7 @@ from math import sqrt
 import itertools
 from time import strftime,strptime
 from threading import Thread
+import numpy as np
 
 
 def integration(*axis, N=1):
@@ -24,59 +25,68 @@ def integration(*axis, N=1):
 
 def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data ):
     fig = plt.figure()  # графики
+
+    gprs = np.arange(0, len(data1))
+    aprs = np.arange(0, len(data2))
+    telemetry = np.arange(0, len(data3))
+
     plt.subplot(311)
-    plt.plot( data1)
+    plt.plot(gprs, data1)
     plt.title('{}'.format(title1))  # IR
-    plt.xticks(fontsize='10')
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
     plt.subplot(312)
-    plt.plot( data2)
+    plt.plot(aprs, data2)
     plt.title('{}'.format(title2))
-    plt.xticks(fontsize='10')
+    plt.xticks(aprs, aprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
     plt.subplot(313)
-    plt.plot( data3)
+    plt.plot(telemetry, data3)
     plt.title('{}'.format(title3))
-    plt.xticks(fontsize='10')
+    plt.xticks(telemetry, telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
     plt.tight_layout()
-    #plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
+    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
 def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data ):
     fig = plt.figure()  # графики
+
+    gprs = np.arange(0, len(data1))
+    telemetry = np.arange(0, len(data2))
+
     plt.subplot(211)
-    plt.plot( data1)
+    plt.plot(gprs, data1)
     plt.title('{}'.format(title1))  # IR
-    plt.xticks(fontsize='10')
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
     plt.subplot(212)
-    plt.plot( data2)
+    plt.plot(telemetry, data2)
     plt.title('{}'.format(title2))
-    plt.xticks(fontsize='10')
+    plt.xticks(telemetry, telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
     plt.tight_layout()
-    #plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
+    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
 def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2, gprs_data,telemetry_data ):
@@ -86,122 +96,128 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     tx2, ty2, tz2 = integration(tx2, ty2, tz2, N=2)
     length_list = len(gx1)
 
+    gprs = np.arange(0, len(gx1))
+    telemetry = np.arange(0, len(tx1))
 
     fig = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(321)
-    plt.plot(gprs_data, gx1)
+    plt.plot(gprs, gx1)
     plt.title('Акселерометр(x)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
+    
     plt.subplot(323)
-    plt.plot(gprs_data, gy1)
+    plt.plot(gprs, gy1)
     plt.title('Акселерометр(y)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
+    
+
 
     plt.subplot(325)
-    plt.plot(gprs_data, gz1)
+    plt.plot(gprs, gz1)
     plt.title('Акселерометр(z)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(322)
-    plt.plot(telemetry_data, tx1)
+    plt.plot(telemetry, tx1)
     plt.title('Акселерометр(x)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(324)
-    plt.plot(telemetry_data, ty1)
+    plt.plot(telemetry, ty1)
     plt.title('Акселерометр(y)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(326)
-    plt.plot(telemetry_data,tz1)
+    plt.plot(telemetry,tz1)
     plt.title('Акселерометр(z)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.tight_layout()
-    #plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
+    plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
 
     fig = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(321)
-    plt.plot(str(gprs_data), gx2)
+    plt.plot(gprs, gx2)
     plt.title('Акселерометр(x)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(323)
-    plt.plot(str(gprs_data), gy2)
+    plt.plot(gprs, gy2)
     plt.title('Акселерометр(y)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(325)
-    plt.plot(str(gprs_data), gz2)
+    plt.plot(gprs, gz2)
     plt.title('Акселерометр(z)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(322)
-    plt.plot(str(telemetry_data), tx2)
+    plt.plot(telemetry, tx2)
     plt.title('Акселерометр(x)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(324)
-    plt.plot(str(telemetry_data), ty2)
+    plt.plot(telemetry, ty2)
     plt.title('Акселерометр(y)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
     plt.subplot(326)
-    plt.plot(str(telemetry_data),tz2)
+    plt.plot(telemetry,tz2)
     plt.title('Акселерометр(z)')
-    plt.xticks(fontsize='6',rotation= 60)
+    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
     plt.xlabel('Дата и время')
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
+
     plt.tight_layout()
-    #plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
+    plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
 
 
 def execute_from_db3(n, m, gprs, aprs, telemetry):
@@ -306,7 +322,10 @@ def getData(mysql):
 
     gprs_data,aprs_data,telemetry_data  = execute_from_db3(2, 2, gprs, aprs, telemetry)
 
-    hour_min_sec(gprs_data)
+    gprs_data = hour_min_sec(gprs_data)
+    aprs_data = hour_min_sec(aprs_data)
+    telemetry_data = hour_min_sec(telemetry_data)
+
 
 
     parsing_datas3(6,6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,

@@ -61,15 +61,15 @@ def report():
 def telem():
     return parsing.parsing_telem(mysql)
 
-@app.route('/<path:filename>')
+@app.route('/rep/<path:filename>')
 def download(filename):
     return send_from_directory('modules/', filename)
 
-@socketio.on('create_rep', namespace='/report')
+@app.route('/rep')
 def create():
     create_report.getData(mysql)
     archivator.img_zip()
-    emit('reportik', {'answer': 'Готово!'}, namespace='/report')
+    return render_template('download.html', is_dev=is_dev, report='''{{ url_for('download', filename='report.zip') }}''')
 
 @socketio.on('event_report', namespace='/report')
 def rep():
@@ -110,8 +110,7 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-    create_report.getData(mysql)
-    archivator.img_zip()
+
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
