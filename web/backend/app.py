@@ -69,7 +69,7 @@ def download(filename):
 def create():
     create_report.getData(mysql)
     archivator.img_zip()
-    return render_template('download.html', is_dev=is_dev, report='''{{ url_for('download', filename='report.zip') }}''')
+    return render_template('download.html', is_dev=is_dev)
 
 @socketio.on('event_report', namespace='/report')
 def rep():

@@ -22,6 +22,17 @@ def integration(*axis, N=1):
 
     return list(axis)
 
+def calculating_the_distance(func_data_x, func_data_y, func_data_z):  # функция, рассчитывающая длину тракетории
+    track = 0.0  # длина траектории перемещения
+    length = 0.0  # расстояние между двумя соседними точками
+
+    for i in range(len(func_data_x) - 2):  # вычисление длины траектории перемещения
+        vector_x = func_data_x[i + 1] - func_data_x[i]
+        vector_y = func_data_y[i + 1] - func_data_y[i]
+        vector_z = func_data_z[i + 1] - func_data_z[i]
+        length = sqrt(vector_x * vector_x + vector_y * vector_y + vector_z * vector_z)
+        track = track + length
+    return track
 
 def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data ):
     fig = plt.figure()  # графики
@@ -95,6 +106,13 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     tx1, ty1, tz1 = integration(tx1, ty1, tz1, N=2)
     tx2, ty2, tz2 = integration(tx2, ty2, tz2, N=2)
     length_list = len(gx1)
+
+    fig = plt.figure()  # график траектории перемещения
+    ax = ax3d.Axes3D(fig)
+    ax.plot(gx1, gy1, gz1, color='green')
+    ax.scatter(gx1[0], gy1[0], gz1[0])
+    ax.scatter(gx1[length_list - 1], gy1[length_list - 1], gz1[length_list - 1], color='red')
+    plt.savefig("backend/modules/img/trajectory.png", fmt='png')
 
     gprs = np.arange(0, len(gx1))
     telemetry = np.arange(0, len(tx1))
@@ -292,7 +310,7 @@ def hour_min_sec(tme):
     print(type(tme))
     for i in range(len(tme)):
         t = strptime(str(tme[i]), '%Y-%m-%d %H:%M:%S')
-        mas.append(strftime('%b %H:%M:%S',t))
+        mas.append(strftime('%m-%d %H:%M',t))
     print(mas)
     return mas
 
@@ -326,7 +344,7 @@ def getData(mysql):
     aprs_data = hour_min_sec(aprs_data)
     telemetry_data = hour_min_sec(telemetry_data)
 
-
+    matplotlib.rcParams['figure.figsize'] = (10,7)
 
     parsing_datas3(6,6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
                    'Температура 1 по telemetry', 'temp1', 'Температура,°C',gprs_data,aprs_data,telemetry_data)
