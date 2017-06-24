@@ -5,21 +5,8 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as ax3d
 from math import sqrt
 import itertools
-import time
+from time import strftime,strptime
 from threading import Thread
-
-def simple_moving_average(mas_input):  # прореживание значений
-    length = len(mas_input)
-    mas_out = []
-    if length > 30:
-        step = int(length / 30)
-        now = 0
-        i = 0
-        for i in range(30):
-            mas_out.append(mas_input[now])
-            now = now + step
-        return mas_out
-    else: return mas_input
 
 
 def integration(*axis, N=1):
@@ -27,28 +14,6 @@ def integration(*axis, N=1):
         axis = map(lambda x: list(itertools.accumulate(x)), axis)
 
     return list(axis)
-
-
-def simple_moving_average_axelerometrs(func_data_x, func_data_y, func_data_z):  # прореживание значений
-    xlength = len(func_data_x)
-    ylength = len(func_data_y)
-    zlength = len(func_data_z)
-    x = []
-    y = []
-    z = []
-    if xlength > 30:
-        step = int(xlength / 30)
-        now = 0
-        for i in range(30):
-            x.append(func_data_x[now])
-            y.append(func_data_y[now])
-            z.append(func_data_z[now])
-            now = now + step
-        return x, y, z
-    else: return func_data_x, func_data_y, func_data_z
-
-
-
 
 def integration(*axis, N=1):
     for _ in range(N):
@@ -58,9 +23,6 @@ def integration(*axis, N=1):
 
 
 def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data ):
-    data1 = simple_moving_average(data1)
-    data2 = simple_moving_average(data2)
-    data3 = simple_moving_average(data3)
     fig = plt.figure()  # графики
     plt.subplot(311)
     plt.plot( data1)
@@ -90,12 +52,10 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
+    #plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
 def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data ):
-    data1 = simple_moving_average(data1)
-    data2 = simple_moving_average(data2)
     fig = plt.figure()  # графики
     plt.subplot(211)
     plt.plot( data1)
@@ -116,26 +76,20 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_dat
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
+    #plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
 def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2, gprs_data,telemetry_data ):
-    gx1, gy1, gz1 = simple_moving_average_axelerometrs(gx1, gy1, gz1)
-    tx1, ty1, tz1 = simple_moving_average_axelerometrs(tx1, ty1, tz1)
-    gx2, gy2, gz2 = simple_moving_average_axelerometrs(gx2, gy2, gz2)
-    tx2, ty2, tz2 = simple_moving_average_axelerometrs(tx2, ty2, tz2)
-    print(gx1,gy1,gz1)
     gx1, gy1, gz1 = integration(gx1, gy1, gz1, N=2)
     gx2, gy2, gz2 = integration(gx2, gy2, gz2, N=2)
     tx1, ty1, tz1 = integration(tx1, ty1, tz1, N=2)
     tx2, ty2, tz2 = integration(tx2, ty2, tz2, N=2)
     length_list = len(gx1)
-    print(gx1,gy1,gz1)
 
 
     fig = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(321)
-    plt.plot(str(gprs_data), gx1)
+    plt.plot(gprs_data, gx1)
     plt.title('Акселерометр(x)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -144,7 +98,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.subplot(323)
-    plt.plot(str(gprs_data), gy1)
+    plt.plot(gprs_data, gy1)
     plt.title('Акселерометр(y)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -153,7 +107,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.subplot(325)
-    plt.plot(str(gprs_data), gz1)
+    plt.plot(gprs_data, gz1)
     plt.title('Акселерометр(z)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -162,7 +116,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.subplot(322)
-    plt.plot(str(telemetry_data), tx1)
+    plt.plot(telemetry_data, tx1)
     plt.title('Акселерометр(x)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -171,7 +125,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.subplot(324)
-    plt.plot(str(telemetry_data), ty1)
+    plt.plot(telemetry_data, ty1)
     plt.title('Акселерометр(y)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -180,7 +134,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.subplot(326)
-    plt.plot( str(telemetry_data),tz1)
+    plt.plot(telemetry_data,tz1)
     plt.title('Акселерометр(z)')
     plt.xticks(fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
@@ -189,7 +143,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
+    #plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
 
     fig = plt.figure()  # графики изменения проекций ускорения по 3 осям
     plt.subplot(321)
@@ -247,7 +201,7 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
+    #plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
 
 
 def execute_from_db3(n, m, gprs, aprs, telemetry):
@@ -317,35 +271,43 @@ def parsing_axels(data1, data2, gprs_data,telemetry_data ):
     risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2, gprs_data,telemetry_data)
 
 
-# def hour_min_sec(tme):
-#     tme = tme[0]
-#     print("Incoming date = ", tme, tme.strftime("%H:%M:%S"))
-#     return tme.strftime("%H:%M:%S")
+def hour_min_sec(tme):
+    mas =[]
+    print(type(tme))
+    for i in range(len(tme)):
+        t = strptime(str(tme[i]), '%Y-%m-%d %H:%M:%S')
+        mas.append(strftime('%b %H:%M:%S',t))
+    print(mas)
+    return mas
 
 
 def getData(mysql):
     cur = mysql.connect().cursor()
-    cur.execute("select * from gprs WHERE numberOfFlight = 10001")
+    l = cur.execute("select count(*) from gprs where numberOfFlight=10001")
+    if l > 40:
+        cur.execute("select * from gprs where id % (floor((select count(*) from gprs where numberOfFlight=10001)/4)) = 0")
+    else: cur.execute("select * from gprs where numberOfFlight=10001")
     gprs = list(cur.fetchall())
-
     mysql.connect().commit
     cur = mysql.connect().cursor()
-    cur.execute("select * from aprs WHERE numberOfFlight = 10001")
+    l = cur.execute("select count(*) from aprs where numberOfFlight=10001")
+    if l > 40:
+        cur.execute("select * from aprs where id % (floor((select count(*) from aprs where numberOfFlight=10001)/4)) = 0")
+    else: cur.execute("select * from aprs where numberOfFlight=10001")
     aprs = list(cur.fetchall())
     mysql.connect().commit
     cur = mysql.connect().cursor()
-    cur.execute("select * from telemetry WHERE numberOfFlight = 10001")
+    l = cur.execute("select count(*) from telemetry where numberOfFlight=10001")
+    if l > 40:
+        cur.execute("select * from telemetry where id % (floor((select count(*) from telemetry where numberOfFlight=10001)/4)) = 0")
+    else: cur.execute("select * from telemetry where numberOfFlight=10001")
     telemetry = list(cur.fetchall())
     mysql.connect().commit
 
     gprs_data,aprs_data,telemetry_data  = execute_from_db3(2, 2, gprs, aprs, telemetry)
-    gprs_data = simple_moving_average(gprs_data)
-    for i in range(len(gprs_data)):
-        gprs_data[i] = str(gprs_data[i])
-        gprs_data[i] = str(gprs_data[i][-8:])
-        print(gprs_data[i])
-    aprs_data = simple_moving_average(aprs_data)
-    telemetry_data = simple_moving_average(telemetry_data)
+
+    hour_min_sec(gprs_data)
+
 
     parsing_datas3(6,6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
                    'Температура 1 по telemetry', 'temp1', 'Температура,°C',gprs_data,aprs_data,telemetry_data)

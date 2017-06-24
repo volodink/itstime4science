@@ -65,11 +65,11 @@ def telem():
 def download(filename):
     return send_from_directory('modules/', filename)
 
-@socketio.on('create_report', namespace='/report')
-def create_rep():
+@socketio.on('create_rep', namespace='/report')
+def create():
     create_report.getData(mysql)
     archivator.img_zip()
-    emit('report', {'answer': 'Готово!'}, namespace='/report')
+    emit('reportik', {'answer': 'Готово!'}, namespace='/report')
 
 @socketio.on('event_report', namespace='/report')
 def rep():
@@ -110,7 +110,8 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-
+    create_report.getData(mysql)
+    archivator.img_zip()
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
