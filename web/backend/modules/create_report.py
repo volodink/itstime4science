@@ -359,8 +359,6 @@ def getData(mysql):
     parsing_datas2(10,gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry', 'bat_volt',
                     'Напряжение аккумулятора,Вольт',gprs_data,telemetry_data)
 
-    parsing_datas2(11,gprs, 'Температура аккумулятора по gprs', telemetry, 'Температура аккумулятора по telemetry', 'bat_temp',
-                    'Температура аккумулятора,°C',gprs_data,telemetry_data)
     parsing_axels(gprs,telemetry,gprs_data,telemetry_data)
 
     parsing_datas2(18,gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)

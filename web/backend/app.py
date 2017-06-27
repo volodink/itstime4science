@@ -57,9 +57,9 @@ def report():
     return render_template('report.html', is_dev=is_dev)
 
 
-@app.route("/telemetriya",methods=['GET'])
-def telem():
-    return parsing.parsing_telem(mysql)
+#@app.route("/telemetriya",methods=['GET'])
+#def telem():
+#    return parsing.parsing_telem(mysql)
 
 @app.route('/rep/<path:filename>')
 def download(filename):

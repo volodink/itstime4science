@@ -6,7 +6,7 @@
  * Store number of panel to hide
  * @type {number}
  */
-const NUMBER_VISIBLE_PANEL = 10;
+const NUMBER_VISIBLE_PANEL = 9;
 
 /*
  * This function hide panel
@@ -95,7 +95,7 @@ function change_data(type){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 		    	var k=1;
 		    	for(let i = 0; i < list.length; i++) {
-				if(i ==0 || i==1 || i==2 || i==3 || i ==4 || i == 5 || i==8 || i == 10|| i==12 || i==13 || i==14 || i == 28) {
+				if(i ==0 || i==1 || i==2 || i==3 || i ==4 || i == 5 || i==7 || i == 9|| i==11 || i==12 || i==13 || i == 24) {
 				    visiblePanel(list[i]);
 			    	}
 				else {
@@ -109,7 +109,7 @@ function change_data(type){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 			var k=2;
 			for(let i = 0; i < list.length; i++) {
-				if(i<8)  {
+				if(i<7)  {
 				    visiblePanel(list[i]);
 				}
 				else {
