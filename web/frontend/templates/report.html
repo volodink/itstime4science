@@ -9,19 +9,61 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mcc.css') }}">
 
 </head>
-<body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-<div >
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart" > </canvas> </div> 
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart1" > </canvas> </div> 
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart2" > </canvas> </div> 
+<div>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart1" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart2" > </canvas> </span>
 </div>
-<div >
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart3" > </canvas> </div> 
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart4" > </canvas> </div> 
-<div class = "chart-container" style = "float: left; position: relative;  width:32vw"> <canvas id = "chart5" > </canvas> </div> 
+<div>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart3" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block;position: relative;  width:32vw"> <canvas id = "chart4" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart5" > </canvas> </span>
 </div>
-
+<div>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart6" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart7" > </canvas> </span>
+</div>
+    <div>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart8" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart9" > </canvas> </span>
+</div>
+<div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart10" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart11" > </canvas> </span>
+</div>
+<div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart12" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart13" > </canvas> </span>
+</div>
+<div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart14" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart15" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart16" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart17" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart18" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart19" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart20" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart21" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart22" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart23" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart24" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart25" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart26" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart27" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart28" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart29" > </canvas> </span>
+</div><div>
+    <span class = "chart-container" style = "display: inline-block;  position: relative;  width:32vw"> <canvas id = "chart30" > </canvas> </span>
+    <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart31" > </canvas> </span>
+</div>
  <a href="{{ url_for('create') }}">Подготовить отчёт</a>
 
  <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
@@ -29,175 +71,7 @@
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
-
-
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function () {
-    var url = 'http://' + document.domain + ':' + location.port;
-    var socket = io.connect(url + "/report");
-
-    socket.emit('event_report');
-	socket.on('json_report', function (msg) {
-		//console.log(msg['json_gprs']);
-		var json_gprs = msg['json_gprs'];
-		var json_aprs = msg['json_aprs'];
-		var json_telemetry = msg['json_telemetry'];
-
-		var datetime =[];
-		var buf = [];
-		var gprs_datetime = [];var gprs_temp1 = [];var gprs_temp2 = [];var gprs_pressure1 = [];var gprs_pressure2 = [];var gprs_bat_crg = [];var gprs_bat_volt = [];var gprs_bat_temp = [];var gprs_vect_axel1x = [];var gprs_vect_axel1y = [];var gprs_vect_axel1z = [];var gprs_vect_axel2x = [];var gprs_vect_axel2y = [];var gprs_vect_axel2z = [];var gprs_ultraviolet1 = [];var gprs_ultraviolet2 = [];var gprs_infrared1 = [];var gprs_infrared2 = [];var gprs_hdop = [];var gprs_vdop = [];var gprs_sats = [];var gprs_radiation = [];var gprs_dust = [];var gprs_ozone = [];
-		var aprs_datetime = [];var aprs_temp1 = [];var aprs_pressure1 = [];
-		var telemetry_datetime = [];var telemetry_temp1 = [];var telemetry_temp2 = [];var telemetry_pressure1 = [];var telemetry_pressure2 = [];var telemetry_bat_crg = [];var telemetry_bat_volt = [];var telemetry_bat_temp = [];var telemetry_vect_axel1x = [];var telemetry_vect_axel1y = [];var telemetry_vect_axel1z = [];var telemetry_vect_axel2x = [];var telemetry_vect_axel2y = [];var telemetry_vect_axel2z = [];var telemetry_ultraviolet1 = [];var telemetry_ultraviolet2 = [];var telemetry_infrared1 = [];var telemetry_infrared2 = [];var telemetry_hdop = [];var telemetry_vdop = [];var telemetry_sats = [];var telemetry_radiation = [];var telemetry_dust = [];var telemetry_ozone = [];
-		
-		json = parsing_json(json_gprs)
-		json.forEach(function (item, i, json) {
-			j = json[i];
-			gprs_temp1[i] = j.temp1;
-
-			gprs_pressure1[i] = j.pressure1;
-			gprs_datetime[i]= j.datetime;
-
-		})
-        console.log(gprs_temp1)
-
-		json = parsing_json(json_aprs)
-		json.forEach(function (item, i, json) {
-			j = json[i];
-			aprs_temp1[i] = j.temp1;
-			aprs_pressure1[i] = j.pressure1;
-			aprs_datetime[i]= j.datetime;
-		})
-
-		json = parsing_json(json_telemetry)
-		json.forEach(function (item, i, json) {
-			j = json[i];
-			telemetry_temp1[i] = j.temp1;
-			telemetry_pressure1[i] = j.pressure1;
-			telemetry_datetime[i]= j.datetime;
-		})
-
-		var list = [gprs_temp1,gprs_pressure1,gprs_datetime,aprs_temp1,aprs_pressure1,aprs_datetime,telemetry_temp1,telemetry_pressure1,telemetry_datetime]
-        console.log(list)
-		list.forEach(function (item, i, list) {
-			list[i]=parsMas(item);
-		})
-        console.log(gprs_temp1)
-
-		gprs_temp1 = list[0];gprs_pressure1 = list[1];gprs_datetime = list[2];aprs_temp1 = list[3];aprs_pressure1 = list[4];aprs_datetime = list[5];telemetry_temp1 = list[6];telemetry_pressure1 = list[7];telemetry_datetime = list[8];
-		
-		var ctx = document.getElementById('chart').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-		    data:  {labels: gprs_datetime,
-			    datasets: [{fill: false,
-			    label: "Температура по данным гпрс",
-			    backgroundColor: 'rgb(255, 135, 0)',
-			    borderColor: 'rgb(255, 0, 0)',
-			    data: gprs_temp1,}]
-		    },
-
-		    options: {}
-		});
-		var ctx = document.getElementById('chart1').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-	    	    data:  {labels: aprs_datetime,
-			    datasets: [{
-			    fill: false,
-			    label: "Температура по данным апрс",
-			    backgroundColor: 'rgb(0, 150, 255)',
-			    borderColor: 'rgb(0, 0, 255)',
-			    data: aprs_temp1,}]
-		    },
-		    options: {}
-		});
-		var ctx = document.getElementById('chart2').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-	    	    data:  {labels: telemetry_datetime,
-	    		    datasets: [{fill: false,
-			    label: "Температура по данным телеметрии",
-			    backgroundColor: 'rgb(0, 200, 0)',
-			    borderColor: 'rgb(0, 50, 0)',
-			    data: telemetry_temp1,}]
-		    },
-		    options: {}
-		});
-		var ctx = document.getElementById('chart3').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-		    data:  {labels: gprs_datetime,
-			    datasets: [{fill: false,
-			    label: "Давление по данным гпрс",
-			    backgroundColor: 'rgb(255, 135, 0)',
-			    borderColor: 'rgb(255, 0, 0)',
-			    data: gprs_pressure1,}]
-		    },
-
-		    options: {}
-		});
-		var ctx = document.getElementById('chart4').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-	    	    data:  {labels: aprs_datetime,
-			    datasets: [{
-			    fill: false,
-			    label: "Давление по данным апрс",
-			    backgroundColor: 'rgb(0, 150, 255)',
-			    borderColor: 'rgb(0, 0, 255)',
-			    data: aprs_pressure1,}]
-		    },
-		    options: {}
-		});
-		var ctx = document.getElementById('chart5').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-	    	    data:  {labels: telemetry_datetime,
-	    		    datasets: [{fill: false,
-			    label: "Давление по данным телеметрии",
-			    backgroundColor: 'rgb(0, 200, 0)',
-			    borderColor: 'rgb(0, 50, 0)',
-			    data: telemetry_pressure1,}]
-		    },
-		    options: {}
-		});
-	});
-	function parsMas(mas_input){
-		var len = mas_input.length;
-		var mas_out = [];
-		if (mas_input.length >50){
-			    console.log('длина больше 50');
-			    var step = parseInt(len / 50);
-			    var now = 0;
-			    var i = 0;
-			    //U can set counts of dots here
-			    while (i < 50)
-                    {
-
-				        mas_out[i]= mas_input[now]
-				        now = now + step;
-				        i = i+1;
-			        }
-		return mas_out;		
-        }
-        else{
-		return mas_input;}
-	};
-	function parsing_json(json_data) {
-			var json = JSON.parse(json_data);
-			var json = JSON.parse(json);
-			return json;
-	}
-	function replace_datetime(datetime, type_datetime,buf,i) {
-		buf[i]= type_datetime[i].replace( /-/g, "" );
-		buf[i]= buf[i].replace( / /g, "" );
-		buf[i]= buf[i].replace( /:/g, "" );
-		return buf;
-	}
-
-});
-
-</script>
+<script typr="text/javascript" src="{{ url_for('static', filename='js/report.js') }}"></script>
 
 </body>
 <html>
