@@ -41,7 +41,7 @@ $(document).ready(function () {
 
 
 		})
-        console.log(gprs_temp1)
+        
 
 		json = parsing_json(json_aprs)
 		json.forEach(function (item, i, json) {
@@ -76,24 +76,24 @@ $(document).ready(function () {
 
 		})
 
-		var gprs_list = [ gprs_datetime , gprs_temp1 , gprs_temp2 , gprs_pressure1 , gprs_pressure2 , gprs_bat_volt ,  gprs_vect_axel1x , gprs_vect_axel1y , gprs_vect_axel1z , gprs_vect_axel2x , gprs_vect_axel2y , gprs_vect_axel2z , gprs_ultraviolet1 , gprs_ultraviolet2 , gprs_infrared1 , gprs_infrared2 , gprs_hdop , gprs_vdop , gprs_sats , gprs_radiation , gprs_dust , gprs_ozone]
+		var gprs_list = [ gprs_datetime , gprs_temp1 , gprs_temp2 , gprs_pressure1 , gprs_pressure2 , gprs_bat_volt ,  gprs_vect_axel1x , gprs_vect_axel1y , gprs_vect_axel1z , gprs_ultraviolet1 , gprs_ultraviolet2 , gprs_infrared1 , gprs_infrared2 , gprs_hdop , gprs_vdop , gprs_sats , gprs_radiation , gprs_dust , gprs_ozone]
 		var telemetry_list = [ telemetry_datetime , telemetry_temp1 , telemetry_temp2 , telemetry_pressure1 , telemetry_pressure2 , telemetry_bat_volt ,  telemetry_vect_axel1x , telemetry_vect_axel1y , telemetry_vect_axel1z , telemetry_ultraviolet1 , telemetry_ultraviolet2 , telemetry_infrared1 , telemetry_infrared2 , telemetry_hdop , telemetry_vdop , telemetry_sats , telemetry_radiation , telemetry_dust , telemetry_ozone]
 		var aprs_list = [ aprs_datetime , aprs_temp1 , aprs_pressure1]
-
-		gprs_list.forEach(function (item, i, gprs_list) {
-			gprs_list[i]=parsMas(item);
-		})
         gprs_datetime = gprs_list[0], gprs_temp1 = gprs_list[1], gprs_temp2 = gprs_list[2], gprs_pressure1 = gprs_list[3], gprs_pressure2 = gprs_list[4], gprs_bat_volt = gprs_list[5],  gprs_vect_axel1x = gprs_list[6], gprs_vect_axel1y = gprs_list[7], gprs_vect_axel1z = gprs_list[8], gprs_ultraviolet1 = gprs_list[9], gprs_ultraviolet2 = gprs_list[10], gprs_infrared1 = gprs_list[11], gprs_infrared2 = gprs_list[12], gprs_hdop = gprs_list[13], gprs_vdop = gprs_list[14], gprs_sats = gprs_list[15], gprs_radiation = gprs_list[16], gprs_dust = gprs_list[17], gprs_ozone = gprs_list[18];
         telemetry_datetime = telemetry_list[0], telemetry_temp1 = telemetry_list[1], telemetry_temp2 = telemetry_list[2], telemetry_pressure1 = telemetry_list[3], telemetry_pressure2 = telemetry_list[4], telemetry_bat_volt = telemetry_list[5], telemetry_vect_axel1x = telemetry_list[6], telemetry_vect_axel1y = telemetry_list[7], telemetry_vect_axel1z = telemetry_list[8], telemetry_ultraviolet1 = telemetry_list[9], telemetry_ultraviolet2 = telemetry_list[10], telemetry_infrared1 = telemetry_list[11], telemetry_infrared2 = telemetry_list[12], telemetry_hdop = telemetry_list[13], telemetry_vdop = telemetry_list[14], telemetry_sats = telemetry_list[15], telemetry_radiation = telemetry_list[16], telemetry_dust = telemetry_list[17], telemetry_ozone = telemetry_list[18];
         aprs_datetime = aprs_list[0], aprs_temp1 =aprs_list[1], aprs_pressure1 = aprs_list[2];
 
+		gprs_list.forEach(function (item, i, gprs_list) {
+			gprs_list[i]=parsMas(item);
+		})
+        
         aprs_list.forEach(function (item, i, aprs_list) {
 			aprs_list[i]=parsMas(item);
 		})
         telemetry_list.forEach(function (item, i, telemetry_list) {
 			telemetry_list[i]=parsMas(item);
 		})
-        console.log(gprs_temp1)
+
 
 		var ctx = document.getElementById('chart').getContext('2d');
 		var chart = new Chart(ctx, {

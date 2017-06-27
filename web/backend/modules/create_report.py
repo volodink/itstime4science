@@ -100,11 +100,10 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_dat
     plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
-def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2, gprs_data,telemetry_data ):
+def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     gx1, gy1, gz1 = integration(gx1, gy1, gz1, N=2)
-    gx2, gy2, gz2 = integration(gx2, gy2, gz2, N=2)
     tx1, ty1, tz1 = integration(tx1, ty1, tz1, N=2)
-    tx2, ty2, tz2 = integration(tx2, ty2, tz2, N=2)
+
     length_list = len(gx1)
 
     fig = plt.figure()  # график траектории перемещения
@@ -178,64 +177,6 @@ def risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz
     plt.tight_layout()
     plt.savefig("backend/modules/img/XYZprojectionFirstAxel.png", fmt='png')
 
-    fig = plt.figure()  # графики изменения проекций ускорения по 3 осям
-    plt.subplot(321)
-    plt.plot(gprs, gx2)
-    plt.title('Акселерометр(x)')
-    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-    plt.subplot(323)
-    plt.plot(gprs, gy2)
-    plt.title('Акселерометр(y)')
-    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-    plt.subplot(325)
-    plt.plot(gprs, gz2)
-    plt.title('Акселерометр(z)')
-    plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-    plt.subplot(322)
-    plt.plot(telemetry, tx2)
-    plt.title('Акселерометр(x)')
-    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-    plt.subplot(324)
-    plt.plot(telemetry, ty2)
-    plt.title('Акселерометр(y)')
-    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-    plt.subplot(326)
-    plt.plot(telemetry,tz2)
-    plt.title('Акселерометр(z)')
-    plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
-    plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
-    plt.ylabel('Дистанция, метры')
-    plt.grid()
-
-
-    plt.tight_layout()
-    plt.savefig("backend/modules/img/XYZprojectionSecondAxel.png", fmt='png')
 
 
 def execute_from_db3(n, m, gprs, aprs, telemetry):
@@ -263,32 +204,22 @@ def execute_from_db2(n, gprs, telemetry):
 
 def execute_axels(gprs, telemetry):
     gx1 = []
-    gx2 = []
     gy1 = []
-    gy2 = []
     gz1 = []
-    gz2 = []
     tx1 = []
-    tx2 = []
     ty1 = []
-    ty2 = []
     tz1 = []
-    tz2 = []
+
     for i in range(len(gprs)):
-        gx1.append(gprs[i][12])
-        gy1.append(gprs[i][13])
-        gz1.append(gprs[i][14])
-        gx2.append(gprs[i][15])
-        gy2.append(gprs[i][16])
-        gz2.append(gprs[i][17])
+        gx1.append(gprs[i][11])
+        gy1.append(gprs[i][12])
+        gz1.append(gprs[i][13])
     for i in range(len(telemetry)):
-        tx1.append(telemetry[i][12])
-        ty1.append(telemetry[i][13])
-        tz1.append(telemetry[i][14])
-        tx2.append(telemetry[i][15])
-        ty2.append(telemetry[i][16])
-        tz2.append(telemetry[i][17])
-    return gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2
+        tx1.append(telemetry[i][11])
+        ty1.append(telemetry[i][12])
+        tz1.append(telemetry[i][13])
+
+    return gx1, gy1, gz1, tx1, ty1, tz1
 
 
 
@@ -301,8 +232,8 @@ def parsing_datas2(n, data1, title1, data2, title2, name, characteristic, gprs_d
     risovalka_for_2(d1, title1, d2, title2, name, characteristic, gprs_data,telemetry_data)
 
 def parsing_axels(data1, data2, gprs_data,telemetry_data ):
-    gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2 = execute_axels(data1, data2)
-    risovalka_for_axes(gx1, gy1, gz1, gx2, gy2, gz2, tx1, ty1, tz1, tx2, ty2, tz2, gprs_data,telemetry_data)
+    gx1, gy1, gz1, tx1, ty1, tz1 = execute_axels(data1, data2)
+    risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data)
 
 
 def hour_min_sec(tme):
@@ -361,20 +292,20 @@ def getData(mysql):
 
     parsing_axels(gprs,telemetry,gprs_data,telemetry_data)
 
-    parsing_datas2(18,gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(14,gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
 
-    parsing_datas2(19,gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(15,gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
 
-    parsing_datas2(20,gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry', 'infrared1', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(16,gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry', 'infrared1', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
 
-    parsing_datas2(21,gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry', 'infrared2', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(17,gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry', 'infrared2', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
 
-    parsing_datas2(22,gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop',gprs_data,telemetry_data)
+    parsing_datas2(18,gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop',gprs_data,telemetry_data)
 
-    parsing_datas2(23,gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop',gprs_data,telemetry_data)
+    parsing_datas2(19,gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop',gprs_data,telemetry_data)
 
-    parsing_datas2(24,gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS',gprs_data,telemetry_data)
+    parsing_datas2(20,gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS',gprs_data,telemetry_data)
 
-    parsing_datas2(25,gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation', 'Радиация, Рикрорентген',gprs_data,telemetry_data)
+    parsing_datas2(21,gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation', 'Радиация, Рикрорентген',gprs_data,telemetry_data)
 
-    parsing_datas2(26,gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон',gprs_data,telemetry_data)
+    parsing_datas2(22,gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон',gprs_data,telemetry_data)

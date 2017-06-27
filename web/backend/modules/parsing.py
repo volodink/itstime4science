@@ -1,6 +1,7 @@
 import json
 from flask import Flask,request,render_template
 import html
+import base64
 from datetime import datetime
 from flask.ext.mysql import MySQL
 def pars_gprs(mysql):
@@ -37,7 +38,7 @@ def pars_gprs(mysql):
         e['ozone'] = element[23]
         e['status'] = dict()
 
-        s = element[28].split(',')
+        s = element[24].split(',')
         e['status']['datetime'] = s[0]
         e['status']['lat'] = s[1]
         e['status']['lon'] = s[1]
@@ -131,40 +132,36 @@ def last_telemetry_dots(mysql):
         r.append(e)
     return json.dumps(r)
 def parsing_telem(mysql):
-    data = dict()
-    data['numberOfFlight']=10001
-    elements_float = ['lat', 'lon', 'alt', 'temp1', 'temp2', 'pressure1', 'pressure2', 'bat_volt', 'bat_temp','vect_axel1x' \
-        , 'vect_axel1y', 'vect_axel1z', 'vect_axel2x', 'vect_axel2y', 'vect_axel2z', 'ultraviolet1', 'ultraviolet2', \
-                      'infrared1', 'infrared2', 'hdop', 'vdop', 'radiation', 'dust']
-    elements_int = ['datetime', 'sats','ozone', 'status']
-    for el in range(len(elements_float)):
-        try:
-            data[elements_float[el]] = float(html.escape(request.args.get('{}'.format(elements_float[el]), '')))
-        except:
-            data[elements_float[el]] = 0.0
-    for el in range(len(elements_int)):
-        try:
-            data[elements_int[el]] = int(html.escape(request.args.get('{}'.format(elements_int[el]), '')))
-        except:
-            data[elements_int[el]] = 0
-    data['datetime'] = datetime.fromtimestamp(data['datetime'])
+
+    kek  = html.escape(request.args.get('bs64'))
+    kek = kek + '==='
+    kek = kek.encode('utf-8')
+    print(kek)
+    kek = base64.b64decode(kek)
+    kek = kek.decode('utf-8')
+    kek = kek.split(';')
+
+    kek.pop(0)
+    kek.insert(0, 10001)
+    print(kek)
+    kek[2] = datetime.fromtimestamp(kek[2])
     conn = mysql.connect()
     cursor = conn.cursor()
-    insert = "INSERT INTO telemetry(numberOfFlight, datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-                    bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,vect_axel2x,vect_axel2y,vect_axel2z,ultraviolet1,ultraviolet2,\
-                    infrared1,infrared2,hdop,vdop,sats,radiation,dust,ozone,status) VALUES({},'{}', {}, {}, {},  {}, {}, {}, {}, {}, \
-                    {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {}, '{}')".format(data['numberOfFlight'],data['datetime'], data['lat'], \
-                    data['lon'], data['alt'],data['temp1'], data['temp2'], data['pressure1'], data['pressure2'], \
-                    data['bat_volt'], data['bat_temp'], data['vect_axel1x'], data['vect_axel1y'], data['vect_axel1z'], data['vect_axel2x'], \
-                    data['vect_axel2y'], data['vect_axel2z'], data['ultraviolet1'], data['ultraviolet2'], data['infrared1'], \
-                    data['infrared2'], data['hdop'], data['vdop'], data['radiation'], data['sats'], data['dust'], data['ozone'],\
-                    data['status'])
+    insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+        bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
+        infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {})""".format(kek[0], kek[1],kek[2],','.join(kek[3]) , kek[4],kek[5], kek[6], kek[7], kek[8],
+                                                                                           kek[9], kek[10], kek[11],
+                                                                                           kek[12], kek[13], kek[14],
+                                                                                           kek[15], kek[16], kek[17],
+                                                                                           kek[18], kek[19], kek[20],
+                                                                                           kek[21], kek[22],kek[23])
     cursor.execute(insert)
     conn.commit()
     cur = mysql.connect().cursor()
     cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
     id = cur.fetchone()
-    return render_template('telem.html', **data, id=id[0], type='telem')
+    return render_template('telem.html',kek=kek, type='telem')
 
 
 
