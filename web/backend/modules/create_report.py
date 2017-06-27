@@ -307,11 +307,11 @@ def parsing_axels(data1, data2, gprs_data,telemetry_data ):
 
 def hour_min_sec(tme):
     mas =[]
-    print(type(tme))
+
     for i in range(len(tme)):
         t = strptime(str(tme[i]), '%Y-%m-%d %H:%M:%S')
         mas.append(strftime('%m-%d %H:%M',t))
-    print(mas)
+
     return mas
 
 
