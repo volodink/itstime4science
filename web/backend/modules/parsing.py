@@ -145,9 +145,8 @@ def parsing_telem(mysql):
     kek.insert(0, 10001)
     print(kek)
     kek[2] = datetime.fromtimestamp(kek[2])
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+    cur = mysql.connect().cursor()
+    cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
         bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
         infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
         {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {})""".format(kek[0], kek[1],kek[2],','.join(kek[3]) , kek[4],kek[5], kek[6], kek[7], kek[8],
@@ -156,8 +155,7 @@ def parsing_telem(mysql):
                                                                                            kek[15], kek[16], kek[17],
                                                                                            kek[18], kek[19], kek[20],
                                                                                            kek[21], kek[22],kek[23])
-    cursor.execute(insert)
-    conn.commit()
+    mysql.connect().commit
     cur = mysql.connect().cursor()
     cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
     id = cur.fetchone()

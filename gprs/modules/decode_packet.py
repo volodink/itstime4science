@@ -130,7 +130,7 @@ def insert(packet):
         d.append(clear_string(data))
 
 
-        print(d[27])
+
         print(len(d))
         for i in range(len(d)):
             f.write(str(d[i]) + '    ')
@@ -157,12 +157,7 @@ def insert(packet):
                                                                                                    d[18], d[19], d[20],
                                                                                                    d[21], d[22],d[23])
             cursor.execute(insert)
-
             db.commit()
-
-            #cursor.execute("select * from gprs")
-
-            #data = cursor.fetchall()
             f.close()
             print('Попытка сохранения данных gprs в бд завершилась успешно')
 
