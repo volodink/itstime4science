@@ -9,6 +9,7 @@ from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import json
 import aprslib
+
 import urllib.request
 from modules import create_report
 from modules import archivator
@@ -67,9 +68,16 @@ def download(filename):
 
 @app.route('/rep')
 def create():
-    create_report.getData(mysql)
-    archivator.img_zip()
-    return render_template('download.html', is_dev=is_dev)
+    try:
+        if (g != l_g) and (a !=l_a) and (t!=l_t):
+            g,a,t = create_report.getData(mysql)
+            l_g,l_a,l_t = g,a,t
+            archivator.img_zip()
+
+    except:
+        create_report.getData(mysql)
+        archivator.img_zip()
+
 
 @socketio.on('event_report', namespace='/report')
 def rep():

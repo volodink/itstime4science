@@ -159,7 +159,7 @@ def parsing_telem(mysql):
     cur = mysql.connect().cursor()
     cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
     id = cur.fetchone()
-    return render_template('telem.html',kek=kek, type='telem')
+
 
 
 

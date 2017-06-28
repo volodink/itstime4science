@@ -9,6 +9,7 @@ from time import strftime,strptime
 from threading import Thread
 import numpy as np
 
+import os
 
 def integration(*axis, N=1):
     for _ in range(N):
@@ -245,14 +246,28 @@ def hour_min_sec(tme):
 
     return mas
 
+def rem(path):
+   if os.path.isfile(path):
+     os.remove(path)
 
 def getData(mysql):
+    l = os.listdir('backend/modules/img/')
+    try:
+        os.remove('backend/modules/report.zip')
+    except:
+        pass
+    try:
+        for i in range(len(l)):
+            os.remove('backend/modules/img/{}'.format(l[i]))
+    except:
+        pass
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from gprs where numberOfFlight=10001")
     if l > 40:
         cur.execute("select * from gprs where id % (floor((select count(*) from gprs where numberOfFlight=10001)/4)) = 0")
     else: cur.execute("select * from gprs where numberOfFlight=10001")
     gprs = list(cur.fetchall())
+   
     mysql.connect().commit
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from aprs where numberOfFlight=10001")
@@ -260,6 +275,7 @@ def getData(mysql):
         cur.execute("select * from aprs where id % (floor((select count(*) from aprs where numberOfFlight=10001)/4)) = 0")
     else: cur.execute("select * from aprs where numberOfFlight=10001")
     aprs = list(cur.fetchall())
+
     mysql.connect().commit
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from telemetry where numberOfFlight=10001")
@@ -267,6 +283,7 @@ def getData(mysql):
         cur.execute("select * from telemetry where id % (floor((select count(*) from telemetry where numberOfFlight=10001)/4)) = 0")
     else: cur.execute("select * from telemetry where numberOfFlight=10001")
     telemetry = list(cur.fetchall())
+
     mysql.connect().commit
 
     gprs_data,aprs_data,telemetry_data  = execute_from_db3(2, 2, gprs, aprs, telemetry)
@@ -309,3 +326,15 @@ def getData(mysql):
     parsing_datas2(21,gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation', 'Радиация, Рикрорентген',gprs_data,telemetry_data)
 
     parsing_datas2(22,gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон',gprs_data,telemetry_data)
+    cur = mysql.connect().cursor()
+    last_id_gprs = cur.execute("select id from gprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    mysql.connect().commit
+    cur = mysql.connect().cursor()
+    last_id_aprs = cur.execute("select id from aprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    mysql.connect().commit
+    cur = mysql.connect().cursor()
+    last_id_telemetry = cur.execute("select id from telemetry where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    mysql.connect().commit
+    return last_id_gprs,last_id_aprs,last_id_telemetry
+
+
