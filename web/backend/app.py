@@ -62,22 +62,23 @@ def report():
 def telem():
     return parsing.parsing_telem(mysql)
 
+
 @app.route('/rep')
 def download():
-    create_report.getData(mysql)
-    archivator.img_zip()
-    return send_from_directory('modules/', 'report.zip')
-
-#@app.route('/rep')
-#def create():
-    #try:
-    #    if (g != l_g) and (a !=l_a) and (t!=l_t):
-    #        g,a,t = create_report.getData(mysql)
-    #        l_g,l_a,l_t = g,a,t
-    #        archivator.img_zip()
-
-    #except:
-
+    try:
+        if (g != l_g) and (a !=l_a) and (t!=l_t):
+            g,a,t = create_report.getData(mysql)
+            l_g,l_a,l_t = g,a,t
+            archivator.img_zip()
+            return send_from_directory('modules/', 'report.zip')
+        else:
+            return send_from_directory('modules/', 'report.zip')
+    except:
+        g,a,t = create_report.getData(mysql)
+        global g,a,t,l_g,l_a,l_t
+        l_g,l_a,l_t = g,a,t
+        archivator.img_zip()
+        return send_from_directory('modules/', 'report.zip')
 
 
 @socketio.on('event_report', namespace='/report')

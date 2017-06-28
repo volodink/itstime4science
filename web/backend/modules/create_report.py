@@ -11,6 +11,7 @@ import numpy as np
 
 import os
 
+
 def integration(*axis, N=1):
     for _ in range(N):
         axis = map(lambda x: list(itertools.accumulate(x)), axis)
@@ -250,6 +251,9 @@ def rem(path):
    if os.path.isfile(path):
      os.remove(path)
 
+
+
+
 def getData(mysql):
     l = os.listdir('backend/modules/img/')
 
@@ -261,74 +265,109 @@ def getData(mysql):
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from gprs where numberOfFlight=10001")
     if l > 40:
-        cur.execute("select * from gprs where id % (floor((select count(*) from gprs where numberOfFlight=10001)/4)) = 0")
-    else: cur.execute("select * from gprs where numberOfFlight=10001")
+        cur.execute(
+            "select * from gprs where id % (floor((select count(*) from gprs where numberOfFlight=10001)/4)) = 0")
+    else:
+        cur.execute("select * from gprs where numberOfFlight=10001")
     gprs = list(cur.fetchall())
-   
+
     mysql.connect().commit
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from aprs where numberOfFlight=10001")
     if l > 40:
-        cur.execute("select * from aprs where id % (floor((select count(*) from aprs where numberOfFlight=10001)/4)) = 0")
-    else: cur.execute("select * from aprs where numberOfFlight=10001")
+        cur.execute(
+            "select * from aprs where id % (floor((select count(*) from aprs where numberOfFlight=10001)/4)) = 0")
+    else:
+        cur.execute("select * from aprs where numberOfFlight=10001")
     aprs = list(cur.fetchall())
 
     mysql.connect().commit
     cur = mysql.connect().cursor()
     l = cur.execute("select count(*) from telemetry where numberOfFlight=10001")
     if l > 40:
-        cur.execute("select * from telemetry where id % (floor((select count(*) from telemetry where numberOfFlight=10001)/4)) = 0")
-    else: cur.execute("select * from telemetry where numberOfFlight=10001")
+        cur.execute(
+            "select * from telemetry where id % (floor((select count(*) from telemetry where numberOfFlight=10001)/4)) = 0")
+    else:
+        cur.execute("select * from telemetry where numberOfFlight=10001")
     telemetry = list(cur.fetchall())
 
     mysql.connect().commit
 
-    gprs_data,aprs_data,telemetry_data  = execute_from_db3(2, 2, gprs, aprs, telemetry)
+    gprs_data, aprs_data, telemetry_data = execute_from_db3(2, 2, gprs, aprs, telemetry)
 
     gprs_data = hour_min_sec(gprs_data)
     aprs_data = hour_min_sec(aprs_data)
     telemetry_data = hour_min_sec(telemetry_data)
 
-    matplotlib.rcParams['figure.figsize'] = (10,7)
+    matplotlib.rcParams['figure.figsize'] = (10, 7)
 
-    parsing_datas3(6,6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
-                   'Температура 1 по telemetry', 'temp1', 'Температура,°C',gprs_data,aprs_data,telemetry_data)
+    parsing_datas3(6, 6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
+                   'Температура 1 по telemetry', 'temp1', 'Температура,°C', gprs_data, aprs_data, telemetry_data)
 
-    parsing_datas3(8,7, gprs, 'Давление 1 по gprs', aprs, 'Давление 1 по aprs', telemetry, 'Давление 1 по telemetry',
-                   'pressure1', 'Давление,Паскаль',gprs_data,aprs_data,telemetry_data )
+    parsing_datas3(8, 7, gprs, 'Давление 1 по gprs', aprs, 'Давление 1 по aprs', telemetry, 'Давление 1 по telemetry',
+                   'pressure1', 'Давление,Паскаль', gprs_data, aprs_data, telemetry_data)
 
-    parsing_datas2(7, gprs, 'Температура 2 по gprs', telemetry, 'Температура 2 по telemetry', 'temp2', 'Температура,°C',gprs_data,telemetry_data )
+    parsing_datas2(7, gprs, 'Температура 2 по gprs', telemetry, 'Температура 2 по telemetry', 'temp2', 'Температура,°C',
+                   gprs_data, telemetry_data)
 
-    parsing_datas2(9,gprs, 'Давление 2 по gprs', telemetry, 'Давление 2 по telemetry', 'pressure2', 'Давление,Паскаль',gprs_data,telemetry_data)
+    parsing_datas2(9, gprs, 'Давление 2 по gprs', telemetry, 'Давление 2 по telemetry', 'pressure2', 'Давление,Паскаль',
+                   gprs_data, telemetry_data)
 
-    parsing_datas2(10,gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry', 'bat_volt',
-                    'Напряжение аккумулятора,Вольт',gprs_data,telemetry_data)
+    parsing_datas2(10, gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry',
+                   'bat_volt',
+                   'Напряжение аккумулятора,Вольт', gprs_data, telemetry_data)
 
-    parsing_axels(gprs,telemetry,gprs_data,telemetry_data)
+    parsing_axels(gprs, telemetry, gprs_data, telemetry_data)
 
-    parsing_datas2(14,gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(14, gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1',
+                   'Ультрафиолет,Люкс', gprs_data, telemetry_data)
 
-    parsing_datas2(15,gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2', 'Ультрафиолет,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(15, gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2',
+                   'Ультрафиолет,Люкс', gprs_data, telemetry_data)
 
-    parsing_datas2(16,gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry', 'infrared1', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(16, gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry',
+                   'infrared1', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data)
 
-    parsing_datas2(17,gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry', 'infrared2', 'Инфракрасное излучение,Люкс',gprs_data,telemetry_data)
+    parsing_datas2(17, gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry',
+                   'infrared2', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data)
 
-    parsing_datas2(18,gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop',gprs_data,telemetry_data)
+    parsing_datas2(18, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data)
 
-    parsing_datas2(19,gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop',gprs_data,telemetry_data)
+    parsing_datas2(19, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data)
 
-    parsing_datas2(20,gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS',gprs_data,telemetry_data)
+    parsing_datas2(20, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data)
 
-    parsing_datas2(21,gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation', 'Радиация, Рикрорентген',gprs_data,telemetry_data)
+    parsing_datas2(21, gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation',
+                   'Радиация, Рикрорентген', gprs_data, telemetry_data)
 
-    parsing_datas2(22,gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон',gprs_data,telemetry_data)
+    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data)
     cur = mysql.connect().cursor()
+    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data)
+
+    cur = mysql.connect().cursor()
+    cur.execute("select id from gprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    last_id_gprs = list(cur.fetchall())
+    last_id_gprs = last_id_gprs[0][0]
+    mysql.connect().commit
+
+
+    cur = mysql.connect().cursor()
+    cur.execute("select id from aprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    last_id_aprs = list(cur.fetchall())
+    last_id_aprs = last_id_aprs[0][0]
+
+    mysql.connect().commit
+
+    cur = mysql.connect().cursor()
+    cur.execute("select id from telemetry where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
+    last_id_telemetry = list(cur.fetchall())
+    last_id_telemetry = last_id_telemetry[0][0]
+    mysql.connect().commit
 
     try:
         os.remove('backend/modules/report.zip')
     except:
         pass
-    #return last_id_gprs,last_id_aprs,last_id_telemetry
+    return last_id_gprs,last_id_aprs,last_id_telemetry
 
 
