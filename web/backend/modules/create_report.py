@@ -252,10 +252,7 @@ def rem(path):
 
 def getData(mysql):
     l = os.listdir('backend/modules/img/')
-    try:
-        os.remove('backend/modules/report.zip')
-    except:
-        pass
+
     try:
         for i in range(len(l)):
             os.remove('backend/modules/img/{}'.format(l[i]))
@@ -335,6 +332,10 @@ def getData(mysql):
     cur = mysql.connect().cursor()
     last_id_telemetry = cur.execute("select id from telemetry where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
     mysql.connect().commit
+    try:
+        os.remove('backend/modules/report.zip')
+    except:
+        pass
     return last_id_gprs,last_id_aprs,last_id_telemetry
 
 
