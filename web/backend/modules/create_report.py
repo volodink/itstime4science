@@ -324,18 +324,11 @@ def getData(mysql):
 
     parsing_datas2(22,gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон',gprs_data,telemetry_data)
     cur = mysql.connect().cursor()
-    last_id_gprs = cur.execute("select id from gprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
-    mysql.connect().commit
-    cur = mysql.connect().cursor()
-    last_id_aprs = cur.execute("select id from aprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
-    mysql.connect().commit
-    cur = mysql.connect().cursor()
-    last_id_telemetry = cur.execute("select id from telemetry where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
-    mysql.connect().commit
+
     try:
         os.remove('backend/modules/report.zip')
     except:
         pass
-    return last_id_gprs,last_id_aprs,last_id_telemetry
+    #return last_id_gprs,last_id_aprs,last_id_telemetry
 
 

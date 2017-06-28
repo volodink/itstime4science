@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mcc.css') }}">
 
 </head>
- <a href="#" OnClick="create()">Подготовить отчёт</a>
 
- <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 <div>
     <span class = "chart-container" style = "display: inline-block; position: relative;  width:32vw"> <canvas id = "chart" > </canvas> </span>
@@ -71,13 +69,14 @@
 <script> 
 function create(){
     var HTTP = new XMLHttpRequest();
-    HTTP.open("get", "/rep", false);
+    HTTP.open("get", "/rep");
     HTTP.send();
     var response = HTTP.responseText;
-
 }
 </script>
+ <a href="#" OnClick="create()">Подготовить отчёт и скачать отчёт</a>
 
+ <a href="{{ url_for('download', filename='report.zip') }}">Скачать</a>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
 <script typr="text/javascript" src="{{ url_for('static', filename='js/report.js') }}"></script>
