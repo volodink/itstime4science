@@ -4,6 +4,14 @@ import html
 import base64
 from datetime import datetime
 from flask.ext.mysql import MySQL
+def toBitArray(val):
+    return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:016b}'.format(val)))
+
+def run(number):
+    print(toBitArray(number))
+    print(len(toBitArray(number)))
+    return toBitArray(number)
+
 def pars_gprs(mysql):
     cur = mysql.connect().cursor()
     cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
@@ -145,6 +153,7 @@ def parsing_telem(mysql):
     kek.insert(0, 10001)
     print(kek)
     kek[2] = datetime.fromtimestamp(kek[2])
+    kek[3] = run(kek[3])
     cur = mysql.connect().cursor()
     cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
         bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
