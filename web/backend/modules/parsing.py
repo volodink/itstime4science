@@ -141,14 +141,14 @@ def last_telemetry_dots(mysql):
     return json.dumps(r)
 def parsing_telem(mysql):
     try:
-        kek  = html.escape(request.args.get('bs64'))
+        kek = html.escape(request.args.get('bs64', ''))
         kek = kek + '==='
         kek = kek.encode('utf-8')
         print(kek)
         kek = base64.b64decode(kek)
         kek = kek.decode('utf-8')
         kek = kek.split(';')
-
+        result = kek
         kek.pop(0)
         kek.insert(0, 10001)
         print(kek)
@@ -168,9 +168,10 @@ def parsing_telem(mysql):
         cur = mysql.connect().cursor()
         cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
         id = cur.fetchone()
+        return render_template('telem.html', kek = result, id=id[0])
 
     except:
-        f = open('logs/telemetry_fails.log', 'a+')
+        f = open('backend/modules/telemetry_fails.log', 'a+')
         try:
             kek  = html.escape(request.args.get('bs64'))
             kek = kek + '==='
@@ -182,10 +183,11 @@ def parsing_telem(mysql):
             for i in range(len(kek)):
                         f.write(str(kek[i]) + '  ')
             f.close()
+            return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
         except:
             for i in range(len(kek)):
                 f.write(str(kek[i]) + '  ')
             f.close()
-
+            return render_template('telem.html', kek = 0)
 
 
