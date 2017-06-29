@@ -155,10 +155,15 @@ def parsing_telem(mysql):
         kek[2] = datetime.fromtimestamp(int(kek[2]))
         kek[3] = run(int(kek[3]))
         cur = mysql.connect().cursor()
+        f = open('backend/modules/telemetry_NOT_fails.log', 'a+')
+        for i in range(len(kek)):    
+            f.write(str(i)+str(kek[i]) + '\n')
+        f.write('24'+str(kek[23]) + '\n')
+        f.close()
         cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
             bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
             infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-            {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {}, {}, {}, {}, {})""".format(kek[0], kek[1],kek[2],','.join(kek[3]) , kek[4],kek[5], kek[6], kek[7], kek[8],
+            {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(kek[0], kek[1],kek[2],','.join(kek[3]) , kek[4],kek[5], kek[6], kek[7], kek[8],
                                                                                                kek[9], kek[10], kek[11],
                                                                                                kek[12], kek[13], kek[14],
                                                                                                kek[15], kek[16], kek[17],
@@ -179,12 +184,10 @@ def parsing_telem(mysql):
             print(kek)
             kek = base64.b64decode(kek)
             kek = kek.decode('utf-8')
-
             for i in range(len(kek)):
                         f.write(str(kek) + '  \n')
             f.close()
             return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
         except:
             kek  = html.escape(request.args.get('bs64'))
-            
             return render_template('telem.html', kek = 'Даже распарсить не могу')
