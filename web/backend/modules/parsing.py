@@ -181,7 +181,7 @@ def parsing_telem(mysql):
             kek = kek.decode('utf-8')
 
             for i in range(len(kek)):
-                        f.write(str(kek[i]) + '  \n')
+                        f.write(str(kek) + '  \n')
             f.close()
             return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
         except:
