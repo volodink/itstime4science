@@ -140,54 +140,54 @@ def last_telemetry_dots(mysql):
         r.append(e)
     return json.dumps(r)
 def parsing_telem(mysql):
-    try:
-        kek = html.escape(request.args.get('bs64', ''))
-        kek = kek + '==='
-        kek = kek.encode('utf-8')
-        print(kek)
-        kek = base64.b64decode(kek)
-        kek = kek.decode('utf-8')
-        kek = kek.split(';')
-        result = kek
-        kek.pop(0)
-        kek.insert(0, 10001)
-        print(kek)
-        kek[2] = datetime.fromtimestamp(int(kek[2]))
-        kek[3] = run(int(kek[3]))
-        cur = mysql.connect().cursor()
-        f = open('backend/modules/telemetry_NOT_fails.log', 'a+')
-        for i in range(len(kek)):    
-            f.write(str(i)+str(kek[i]) + '\n')
-        f.write('24'+str(kek[23]) + '\n')
-        f.close()
-        cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-            bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
-            infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-            {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(kek[0], kek[1],kek[2],','.join(kek[3]) , kek[4],kek[5], kek[6], kek[7], kek[8],
-                                                                                               kek[9], kek[10], kek[11],
-                                                                                               kek[12], kek[13], kek[14],
-                                                                                               kek[15], kek[16], kek[17],
-                                                                                               kek[18], kek[19], kek[20],
-                                                                                               kek[21], kek[22],kek[23])
-        mysql.connect().commit
-        cur = mysql.connect().cursor()
-        cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
-        id = cur.fetchone()
-        return render_template('telem.html', kek = result)
+    #try:
+    kek = html.escape(request.args.get('bs64', ''))
+    kek = kek + '==='
+    kek = kek.encode('utf-8')
+    print(kek)
+    kek = base64.b64decode(kek)
+    kek = kek.decode('utf-8')
+    kek = kek.split(';')
+    result = kek
+    kek.pop(0)
+    kek.insert(0, 10001)
+    print(kek)
+    kek[2] = datetime.fromtimestamp(int(kek[2]))
+    kek[3] = run(int(kek[3]))
+    cur = mysql.connect().cursor()
+    f = open('backend/modules/telemetry_NOT_fails.log', 'a+')
+    for i in range(len(kek)):    
+        f.write(str(i)+str(kek[i]) + '\n')
+    f.write('24'+str(kek[23]) + '\n')
+    f.close()
+    cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+        bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
+        infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]),kek[2],','.join(kek[3]) , float(kek[4]),float(kek[5]), float(kek[6]), float(kek[7]), float(kek[8]),
+                                                                                           float(kek[9]), float(kek[10]), float(kek[11]),
+                                                                                           float(kek[12]), float(kek[13]), float(kek[14]),
+                                                                                           float(kek[15]), float(kek[16]), float(kek[17]),
+                                                                                           float(kek[18]), float(kek[19]), float(kek[20]),
+                                                                                           float(kek[21]), float(kek[22]), float(kek[23]))
+    mysql.connect().commit
+    cur = mysql.connect().cursor()
+    cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
+    id = cur.fetchone()
+    return render_template('telem.html', kek = result)
 
-    except:
-        f = open('backend/modules/telemetry_fails.log', 'a+')
-        try:
-            kek  = html.escape(request.args.get('bs64'))
-            kek = kek + '==='
-            kek = kek.encode('utf-8')
-            print(kek)
-            kek = base64.b64decode(kek)
-            kek = kek.decode('utf-8')
-            for i in range(len(kek)):
-                        f.write(str(kek) + '  \n')
-            f.close()
-            return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
-        except:
-            kek  = html.escape(request.args.get('bs64'))
-            return render_template('telem.html', kek = 'Даже распарсить не могу')
+    #except:
+    #    f = open('backend/modules/telemetry_fails.log', 'a+')
+    #    try:
+    #        kek  = html.escape(request.args.get('bs64'))
+    #        kek = kek + '==='
+    #        kek = kek.encode('utf-8')
+    #        print(kek)
+    #        kek = base64.b64decode(kek)
+    #        kek = kek.decode('utf-8')
+    #        for i in range(len(kek)):
+    #                    f.write(str(kek) + '  \n')
+    #        f.close()
+    #        return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
+    #    except:
+    #        kek  = html.escape(request.args.get('bs64'))
+    #        return render_template('telem.html', kek = 'Даже распарсить не могу')
