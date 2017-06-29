@@ -181,13 +181,10 @@ def parsing_telem(mysql):
             kek = kek.decode('utf-8')
 
             for i in range(len(kek)):
-                        f.write(str(kek[i]) + '  ')
+                        f.write(str(kek[i]) + '  \n')
             f.close()
             return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
         except:
-            for i in range(len(kek)):
-                f.write(str(kek[i]) + '  ')
-            f.close()
-            return render_template('telem.html', kek = 0)
-
-
+            kek  = html.escape(request.args.get('bs64'))
+            
+            return render_template('telem.html', kek = 'Даже распарсить не могу')
