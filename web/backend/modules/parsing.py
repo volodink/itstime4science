@@ -152,8 +152,8 @@ def parsing_telem(mysql):
         kek.pop(0)
         kek.insert(0, 10001)
         print(kek)
-        kek[2] = datetime.fromtimestamp(kek[2])
-        kek[3] = run(kek[3])
+        kek[2] = datetime.fromtimestamp(int(kek[2]))
+        kek[3] = run(int(kek[3]))
         cur = mysql.connect().cursor()
         cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
             bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
