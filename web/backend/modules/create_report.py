@@ -36,7 +36,7 @@ def calculating_the_distance(func_data_x, func_data_y, func_data_z):  # функ
         track = track + length
     return track
 
-def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data ):
+def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data,gd,ad,td ):
     fig = plt.figure()  # графики
 
     gprs = np.arange(0, len(data1))
@@ -48,7 +48,7 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.title('{}'.format(title1))  # IR
     plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
@@ -57,7 +57,7 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.title('{}'.format(title2))
     plt.xticks(aprs, aprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(ad))
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
@@ -66,7 +66,7 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.title('{}'.format(title3))
     plt.xticks(telemetry, telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(td))
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
@@ -74,7 +74,7 @@ def risovalka_for_3(data1, title1, data2, title2, data3, title3, name, character
     plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
-def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data ):
+def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data,gd,td ):
     fig = plt.figure()  # графики
 
     gprs = np.arange(0, len(data1))
@@ -85,7 +85,7 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_dat
     plt.title('{}'.format(title1))  # IR
     plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
@@ -94,7 +94,7 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_dat
     plt.title('{}'.format(title2))
     plt.xticks(telemetry, telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(td))
     plt.ylabel('{}'.format(characteristic))
     plt.grid()
 
@@ -102,7 +102,7 @@ def risovalka_for_2(data1, title1, data2, title2, name, characteristic, gprs_dat
     plt.savefig("backend/modules/img/{}.png".format(name), fmt='png')
 
 
-def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
+def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data,gd,td ):
     gx1, gy1, gz1 = integration(gx1, gy1, gz1, N=2)
     tx1, ty1, tz1 = integration(tx1, ty1, tz1, N=2)
 
@@ -124,7 +124,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(x)')
     plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
@@ -134,7 +134,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(y)')
     plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
     
@@ -145,7 +145,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(z)')
     plt.xticks(gprs, gprs_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
@@ -154,7 +154,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(x)')
     plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
@@ -163,7 +163,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(y)')
     plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
@@ -172,7 +172,7 @@ def risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data ):
     plt.title('Акселерометр(z)')
     plt.xticks(telemetry,telemetry_data,fontsize='6',rotation= 60)
     plt.yticks(fontsize='10')
-    plt.xlabel('Дата и время')
+    plt.xlabel('Время на дату:{}'.format(gd))
     plt.ylabel('Дистанция, метры')
     plt.grid()
 
@@ -225,17 +225,17 @@ def execute_axels(gprs, telemetry):
 
 
 
-def parsing_datas3(n, m, data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data ):
+def parsing_datas3(n, m, data1, title1, data2, title2, data3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data,gd,ad,td ):
     d1, d2, d3 = execute_from_db3(n, m, data1, data2, data3)
-    risovalka_for_3(d1, title1, d2, title2, d3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data)
+    risovalka_for_3(d1, title1, d2, title2, d3, title3, name, characteristic, gprs_data,aprs_data,telemetry_data,gd,ad,td)
 
-def parsing_datas2(n, data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data):
+def parsing_datas2(n, data1, title1, data2, title2, name, characteristic, gprs_data,telemetry_data,gd,td):
     d1, d2 = execute_from_db2(n, data1, data2)
-    risovalka_for_2(d1, title1, d2, title2, name, characteristic, gprs_data,telemetry_data)
+    risovalka_for_2(d1, title1, d2, title2, name, characteristic, gprs_data,telemetry_data,gd,td)
 
-def parsing_axels(data1, data2, gprs_data,telemetry_data ):
+def parsing_axels(data1, data2, gprs_data,telemetry_data,gd,td ):
     gx1, gy1, gz1, tx1, ty1, tz1 = execute_axels(data1, data2)
-    risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data)
+    risovalka_for_axes(gx1, gy1, gz1, tx1, ty1, tz1, gprs_data,telemetry_data,gd,td)
 
 
 def hour_min_sec(tme):
@@ -243,9 +243,26 @@ def hour_min_sec(tme):
 
     for i in range(len(tme)):
         t = strptime(str(tme[i]), '%Y-%m-%d %H:%M:%S')
-        mas.append(strftime('%m-%d %H:%M',t))
+        mas.append(strftime('%H:%M:%S',t))
+    k = len(tme)-1
+    t1 = strptime(str(tme[0]), '%Y-%m-%d %H:%M:%S')
+    t2 = strptime(str(tme[k]), '%Y-%m-%d %H:%M:%S')
 
-    return mas
+    f =str(strftime('%B',t1))
+    l =str(strftime('%B',t2))
+
+    first=strftime('%d',t1)
+    last=strftime('%d',t2)
+
+    if f==l:
+        if first != last:
+            string =str(f) + ' ' + str(first)+ ' — ' + str(last)
+        if first == last:
+            string =str(f) + ' ' + str(first)
+    else:  
+        string =str(f) + ' ' + str(first)+ ' — ' +str(l)+ ' ' + str(last)
+
+    return mas,string
 
 def rem(path):
    if os.path.isfile(path):
@@ -295,54 +312,54 @@ def getData(mysql):
 
     gprs_data, aprs_data, telemetry_data = execute_from_db3(2, 2, gprs, aprs, telemetry)
 
-    gprs_data = hour_min_sec(gprs_data)
-    aprs_data = hour_min_sec(aprs_data)
-    telemetry_data = hour_min_sec(telemetry_data)
+    gprs_data,gd = hour_min_sec(gprs_data)
+    aprs_data,ad = hour_min_sec(aprs_data)
+    telemetry_data,td = hour_min_sec(telemetry_data)
 
     matplotlib.rcParams['figure.figsize'] = (10, 7)
 
     parsing_datas3(6, 6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
-                   'Температура 1 по telemetry', 'temp1', 'Температура,°C', gprs_data, aprs_data, telemetry_data)
+                   'Температура 1 по telemetry', 'temp1', 'Температура,°C', gprs_data, aprs_data, telemetry_data,gd,ad,td)
 
     parsing_datas3(8, 7, gprs, 'Давление 1 по gprs', aprs, 'Давление 1 по aprs', telemetry, 'Давление 1 по telemetry',
-                   'pressure1', 'Давление,Паскаль', gprs_data, aprs_data, telemetry_data)
+                   'pressure1', 'Давление,Паскаль', gprs_data, aprs_data, telemetry_data,gd,ad,td)
 
     parsing_datas2(7, gprs, 'Температура 2 по gprs', telemetry, 'Температура 2 по telemetry', 'temp2', 'Температура,°C',
-                   gprs_data, telemetry_data)
+                   gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(9, gprs, 'Давление 2 по gprs', telemetry, 'Давление 2 по telemetry', 'pressure2', 'Давление,Паскаль',
-                   gprs_data, telemetry_data)
+                   gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(10, gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry',
                    'bat_volt',
-                   'Напряжение аккумулятора,Вольт', gprs_data, telemetry_data)
+                   'Напряжение аккумулятора,Вольт', gprs_data, telemetry_data,gd,td)
 
-    parsing_axels(gprs, telemetry, gprs_data, telemetry_data)
+    parsing_axels(gprs, telemetry, gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(14, gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1',
-                   'Ультрафиолет,Люкс', gprs_data, telemetry_data)
+                   'Ультрафиолет,Люкс', gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(15, gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2',
-                   'Ультрафиолет,Люкс', gprs_data, telemetry_data)
+                   'Ультрафиолет,Люкс', gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(16, gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry',
-                   'infrared1', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data)
+                   'infrared1', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(17, gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry',
-                   'infrared2', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data)
+                   'infrared2', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(18, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data)
+    parsing_datas2(18, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(19, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data)
+    parsing_datas2(19, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(20, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data)
+    parsing_datas2(20, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
 
     parsing_datas2(21, gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation',
-                   'Радиация, Рикрорентген', gprs_data, telemetry_data)
+                   'Радиация, Рикрорентген', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data)
-    cur = mysql.connect().cursor()
-    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data)
+    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data,gd,td)
+
+    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data,gd,td)
 
     cur = mysql.connect().cursor()
     cur.execute("select id from gprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")
