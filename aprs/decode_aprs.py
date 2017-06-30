@@ -14,8 +14,12 @@ def run(number):
     print(toBitArray(number))
     print(len(toBitArray(number)))
     return toBitArray(number)
+def write_in_file(f,mas):
+    f.write(str(mas) + '\n')
+    f.close()
 def lets_try_pars(d):
     try:
+
         print(d)
         d = d[1].split(',')
         tm = time.localtime()
@@ -38,7 +42,10 @@ def lets_try_pars(d):
             cursor.execute(insert)
             db.commit()
             print('Попытка сохранения данных aprs в бд завершилась успешно')
-
+            try:
+                f = open('logs/aprs_FORMATED(normal).log', 'a+')
+                write_in_file(f, d)
+            except: print('Попытка сохранить логи провалилась')
         except:
             print('Попытка сохранения данных aprs в бд провалилась')
     except:
@@ -48,8 +55,12 @@ def callback(packet):
     packet = packet.decode('utf-8')
     if '# aprsc' in packet:
         print('Отчёт: ' + packet)
+        f = open('logs/aprs_all.log', 'a+')
+        write_in_file(f, packet)
     elif '# javAPRSSrvr' in packet:
         print('Отчёт: ' + packet)
+        f = open('logs/aprs_all.log', 'a+')
+        write_in_file(f, packet)
     elif 'UB4FEU-11>UB4FEU' in packet:
         print('Данные апрс: ' + packet)
         d=[]
@@ -61,7 +72,10 @@ def callback(packet):
             d = packet.split("UB4FEU-11>UB4FEU,WIDE1-1,WIDE2-2,qAR,RA4FHE-1:T#")
             print('Апрс пришёл по формату "UB4FEU-11>UB4FEU,WIDE1-1,WIDE2-2,qAR,RA4FHE-1:T#" + данные')
             lets_try_pars(d)
-        else: print('Чё происходит? Данные по апрс пришли какие-то странные, я не буду их записывать! (да, даже не попробую)')
+        else: 
+            f = open('logs/aprs_FAIL.log', 'a+')
+            write_in_file(f, packet)
+            print('Чё происходит? Данные по апрс пришли какие-то странные, я не буду их записывать! (Только в лог файл)')
 
     else: pass
          	

@@ -17,6 +17,7 @@ services:
     build: web
     volumes:
       - ./web:/code
+      - ${GPRS_LOGS}:/code/logs
     environment:
       - DEV=1
       - MYSQL_DATABASE_HOST

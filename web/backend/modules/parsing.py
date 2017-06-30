@@ -1,16 +1,20 @@
 import json
-from flask import Flask,request,render_template
+from flask import Flask, request, render_template
 import html
 import base64
 from datetime import datetime
 from flask.ext.mysql import MySQL
+
+
 def toBitArray(val):
     return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:016b}'.format(val)))
+
 
 def run(number):
     print(toBitArray(number))
     print(len(toBitArray(number)))
     return toBitArray(number)
+
 
 def pars_gprs(mysql):
     cur = mysql.connect().cursor()
@@ -71,6 +75,8 @@ def pars_gprs(mysql):
         r.append(e)
 
         return json.dumps(r)
+
+
 def pars_aprs(mysql):
     cur = mysql.connect().cursor()
     cur.execute("select * from aprs ORDER BY id DESC LIMIT 1")
@@ -89,7 +95,7 @@ def pars_aprs(mysql):
         e['pressure1'] = element[7]
         e['status'] = dict()
 
-        s = element[8].split(',') #ВОТ ТУТ УТОЧНИТЬ ПОРЯДОК СТАТУСА
+        s = element[8].split(',')  # ВОТ ТУТ УТОЧНИТЬ ПОРЯДОК СТАТУСА
         e['status']['lat'] = s[0]
         e['status']['lon'] = s[0]
         e['status']['alt'] = s[0]
@@ -99,10 +105,12 @@ def pars_aprs(mysql):
         r.append(e)
 
         return json.dumps(r)
+
+
 def last_gprs_dots(mysql):
     cur = mysql.connect().cursor()
     r = []
-    cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10",)
+    cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10", )
     data = list(cur.fetchall())
 
     mysql.connect().commit
@@ -112,11 +120,12 @@ def last_gprs_dots(mysql):
         e['lon'] = element[1]
         r.append(e)
     return json.dumps(r)
+
 
 def last_aprs_dots(mysql):
     cur = mysql.connect().cursor()
     r = []
-    cur.execute("select lat,lon from aprs ORDER BY id DESC LIMIT 10",)
+    cur.execute("select lat,lon from aprs ORDER BY id DESC LIMIT 10", )
     data = list(cur.fetchall())
 
     mysql.connect().commit
@@ -126,10 +135,12 @@ def last_aprs_dots(mysql):
         e['lon'] = element[1]
         r.append(e)
     return json.dumps(r)
+
+
 def last_telemetry_dots(mysql):
     cur = mysql.connect().cursor()
     r = []
-    cur.execute("select lat,lon from telemetry ORDER BY id DESC LIMIT 10",)
+    cur.execute("select lat,lon from telemetry ORDER BY id DESC LIMIT 10", )
     data = list(cur.fetchall())
 
     mysql.connect().commit
@@ -139,55 +150,72 @@ def last_telemetry_dots(mysql):
         e['lon'] = element[1]
         r.append(e)
     return json.dumps(r)
-def parsing_telem(mysql):
-    #try:
-    kek = html.escape(request.args.get('bs64', ''))
-    kek = kek + '==='
-    kek = kek.encode('utf-8')
-    print(kek)
-    kek = base64.b64decode(kek)
-    kek = kek.decode('utf-8')
-    kek = kek.split(';')
-    result = kek
-    kek.pop(0)
-    kek.insert(0, 10001)
-    print(kek)
-    kek[2] = datetime.fromtimestamp(int(kek[2]))
-    kek[3] = run(int(kek[3]))
-    cur = mysql.connect().cursor()
-    f = open('backend/modules/telemetry_NOT_fails.log', 'a+')
-    for i in range(len(kek)):    
-        f.write(str(i)+str(kek[i]) + '\n')
-    f.write('24'+str(kek[23]) + '\n')
-    f.close()
-    cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-        bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
-        infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-        {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]),kek[2],','.join(kek[3]) , float(kek[4]),float(kek[5]), float(kek[6]), float(kek[7]), float(kek[8]),
-                                                                                           float(kek[9]), float(kek[10]), float(kek[11]),
-                                                                                           float(kek[12]), float(kek[13]), float(kek[14]),
-                                                                                           float(kek[15]), float(kek[16]), float(kek[17]),
-                                                                                           float(kek[18]), float(kek[19]), float(kek[20]),
-                                                                                           float(kek[21]), float(kek[22]), float(kek[23]))
-    mysql.connect().commit
-    cur = mysql.connect().cursor()
-    cur.execute("select id from telemetry ORDER BY id DESC LIMIT 1")
-    id = cur.fetchone()
-    return render_template('telem.html', kek = result)
 
-    #except:
-    #    f = open('backend/modules/telemetry_fails.log', 'a+')
-    #    try:
-    #        kek  = html.escape(request.args.get('bs64'))
-    #        kek = kek + '==='
-    #        kek = kek.encode('utf-8')
-    #        print(kek)
-    #        kek = base64.b64decode(kek)
-    #        kek = kek.decode('utf-8')
-    #        for i in range(len(kek)):
-    #                    f.write(str(kek) + '  \n')
-    #        f.close()
-    #        return render_template('telem.html', kek = 'Данные фейловые и будут записаны в лог файл')
-    #    except:
-    #        kek  = html.escape(request.args.get('bs64'))
-    #        return render_template('telem.html', kek = 'Даже распарсить не могу')
+
+def write_in_file(f, mas):
+    f.write(str(mas) + '\n')
+    f.close()
+
+
+def parsing_telem(mysql):
+    try:
+
+        kek = html.escape(request.args.get('bs64', ''))
+        kek = kek + '==='
+        kek = kek.encode('utf-8')
+        print(kek)
+        kek = base64.b64decode(kek)
+        kek = kek.decode('utf-8')
+        try:
+            f = open('logs/telemetry_all_logs.log', 'a+')
+            write_in_file(f, kek)
+            try:
+                kek = kek.split(';')
+                result = kek
+                kek.pop(0)
+                kek.insert(0, 10001)
+                print(kek)
+                kek[2] = datetime.fromtimestamp(int(kek[2]))
+                kek[3] = run(int(kek[3]))
+
+                try:
+                    cur = mysql.connect().cursor()
+                    cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+                        bat_volt,bat_temp,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
+                        infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
+                        {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
+                                                                                     ','.join(kek[3]), float(kek[4]),
+                                                                                     float(kek[5]), float(kek[6]),
+                                                                                     float(kek[7]), float(kek[8]),
+                                                                                     float(kek[9]), float(kek[10]),
+                                                                                     float(kek[11]),
+                                                                                     float(kek[12]), float(kek[13]),
+                                                                                     float(kek[14]),
+                                                                                     float(kek[15]), float(kek[16]),
+                                                                                     float(kek[17]),
+                                                                                     float(kek[18]), float(kek[19]),
+                                                                                     float(kek[20]),
+                                                                                     float(kek[21]), float(kek[22]),
+                                                                                     float(kek[23]))
+                    mysql.connect().commit
+                    try:
+                        f = open('logs/telemetry_NOT_fails.log', 'a+')
+                        write_in_file(f, kek)
+                        return render_template('telem.html', kek=result)
+                    except:
+                        return render_template('telem.html',
+                                               kek='Не удалось сохранить логи в файл, хотя пакет данных валиден.')
+
+                except:
+                    return render_template('telem.html',
+                                           kek='Не удалось сохранить в базу данных. Проверьте порядок данных, их тип, а так же валидность данных для входа в бд.')
+            except:
+                return render_template('telem.html', kek='Принятый пакет не удалось распарсить.')
+        except:
+            return render_template('telem.html',
+                                   kek='Не удалось сохранить логи в файл, пакет был конвертирован, но не распаршен.')
+
+    except:
+        f = open('logs/telemetry_fails.log', 'a+')
+        write_in_file(f, kek)
+        return render_template('telem.html', kek='Данные фейловые и будут записаны в лог файл')
