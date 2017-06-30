@@ -4,8 +4,8 @@ import html
 import base64
 from datetime import datetime
 from flask.ext.mysql import MySQL
-
-
+import pymysql
+import os
 def toBitArray(val):
     return list(map(lambda x: 'false' if (x == '0') else 'ok', '{0:04}'.format(val)))
 
@@ -179,25 +179,35 @@ def parsing_telem(mysql):
                 kek[3] = run(int(kek[3]))
 
                 try:
-                    cur = mysql.connect().cursor()
-                    cur.insert = "INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-                        bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
-                        infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-                        {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
-                                                                                     ','.join(kek[3]), float(kek[4]),
-                                                                                     float(kek[5]), float(kek[6]),
-                                                                                     float(kek[7]), float(kek[8]),
-                                                                                     float(kek[9]), float(kek[10]),
-                                                                                     float(kek[11]),
-                                                                                     float(kek[12]), float(kek[13]),
-                                                                                     float(kek[14]),
-                                                                                     float(kek[15]), float(kek[16]),
-                                                                                     float(kek[17]),
-                                                                                     float(kek[18]), float(kek[19]),
-                                                                                     float(kek[20]),
-                                                                                     float(kek[21]), float(kek[22]),
-                                                                                     float(kek[23]))
-                    mysql.connect().commit
+                    db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
+                                 port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
+                                 user=os.getenv("MYSQL_DATABASE_USER", "0"),
+                                 passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
+                                 charset='utf8')
+
+                    cursor = db.cursor()
+
+                    cursor = db.cursor()
+                    insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+                                            bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
+                                            infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
+                                            {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
+                                                                                                         ','.join(kek[3]), float(kek[4]),
+                                                                                                         float(kek[5]), float(kek[6]),
+                                                                                                         float(kek[7]), float(kek[8]),
+                                                                                                         float(kek[9]), float(kek[10]),
+                                                                                                         float(kek[11]),
+                                                                                                         float(kek[12]), float(kek[13]),
+                                                                                                         float(kek[14]),
+                                                                                                         float(kek[15]), float(kek[16]),
+                                                                                                         float(kek[17]),
+                                                                                                         float(kek[18]), float(kek[19]),
+                                                                                                         float(kek[20]),
+                                                                                                         float(kek[21]), float(kek[22]),
+                                                                                                         float(kek[23]))
+                    cursor.execute(insert)
+                    db.commit()
+                            
                     try:
                         f = open('logs/telemetry_NOT_fails.log', 'a+')
                         write_in_file(f, kek)
