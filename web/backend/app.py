@@ -93,12 +93,12 @@ def rep():
 
 @socketio.on('my_event', namespace='/mcc')
 def message(message):
-        json_data = parsing.pars_gprs(mysql)
-        mas = json.loads(json_data)
-        if message['data'] != mas[0]['id']:
-            emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
-        else:
-            emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
+    json_data = parsing.pars_gprs(mysql)
+    mas = json.loads(json_data)
+    if message['data'] != mas[0]['id']:
+        emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
+    else:
+        emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
 
 @socketio.on('my_event2', namespace='/mcc')
 def message(message):
