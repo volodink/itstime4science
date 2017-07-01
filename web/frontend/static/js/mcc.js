@@ -45,7 +45,7 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
 		    })
-        
+        }
 })
 socket.emit('my_event',{data: 0});
 k=0;
