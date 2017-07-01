@@ -97,7 +97,7 @@ def message(message):
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
         if json_data == 0:
-            emit('gprs', {'json_data': 'nothing', 'type': 'gprs'}, namespace='/mcc')
+            emit('gprs', {'json_data': -1, 'type': 'gprs'}, namespace='/mcc')
         else:
             emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
     else:
@@ -109,7 +109,7 @@ def message(message):
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
         if json_data == 0:
-            emit('aprs', {'json_data': 'nothing', 'type': 'aprs'}, namespace='/mcc')
+            emit('aprs', {'json_data': -1, 'type': 'aprs'}, namespace='/mcc')
         else:
             emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
     else:
@@ -121,7 +121,7 @@ def message(message):
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
         if json_data == 0:
-                emit('telemetry', {'json_data': 'nothing', 'type': 'telemetry'}, namespace='/mcc')
+                emit('telemetry', {'json_data': -1, 'type': 'telemetry'}, namespace='/mcc')
         else:        
             emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
     else:
