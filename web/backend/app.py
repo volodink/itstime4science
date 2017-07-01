@@ -109,21 +109,21 @@ def message(message):
     else:
         emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
 
-#@socketio.on('my_event3', namespace='/mcc')
-#def message(message):
-#    json_data = parsing.pars_telemetry(mysql)
-#    mas = json.loads(json_data)
-#    if message['data'] != mas[0]['id']:
-#        emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
-#    else:
-#        emit('telemetry', {'json_data': 0, 'type': 'telemetry'}, namespace='/mcc')
+@socketio.on('my_event3', namespace='/mcc')
+def message(message):
+    json_data = parsing.pars_telemetry(mysql)
+    mas = json.loads(json_data)
+    if message['data'] != mas[0]['id']:
+        emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
+    else:
+        emit('telemetry', {'json_data': 0, 'type': 'telemetry'}, namespace='/mcc')
 
 
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
     gprs = parsing.last_gprs_dots(mysql)
     aprs = parsing.last_aprs_dots(mysql)
-    #telemetry = parsing.last_telemetry_dots(mysql)
+    telemetry = parsing.last_telemetry_dots(mysql)
     emit('lastMarkers', {'gprs': gprs,'aprs':aprs, 'telemetry': telemetry}, namespace='/mcc')
 
 

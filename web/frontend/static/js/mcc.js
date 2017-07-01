@@ -31,8 +31,9 @@ socket.on('lastMarkers', function (msg) {
 			var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			addMarker(position,map,lat,lon,markers_aprs,'aprs');
 		})
-        /*
+        console.log('Данные телеметрии: ');
         console.log(msg['telemetry']);
+        console.log('-----------------');
 		var telemetry = msg['telemetry'];
 		var json = JSON.parse(telemetry);
 
@@ -42,7 +43,7 @@ socket.on('lastMarkers', function (msg) {
 			lon = j.lon;
 			var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
-		})*/
+		})
 
 })
 socket.emit('my_event',{data: 0});
@@ -71,11 +72,11 @@ socket.on('aprs', function (msg) {
 	else	{
 			setTimeout(function(){
 	  		APRS(msg,markers_aprs);
-			}, 300000);
+			}, 60000);
 		}
 });
 
-/*g=0
+g=0
 socket.emit('my_event3',{data: 0});
 console.log('отправил запрос на телеметрию')
 socket.on('telemetry', function (msg) {
@@ -89,7 +90,7 @@ socket.on('telemetry', function (msg) {
 	  		TELEMETRY(msg,markers_telemetry);
 			}, 10000);
 		}
-});*/
+});
 
 
 $("#telemetry").change(function(){
