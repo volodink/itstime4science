@@ -129,7 +129,7 @@ function APRS(msg,markers_aprs){
 				        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				        addMarker(position,map,lat,lon,markers_aprs,'aprs');
 				        console.log("Данные aпрс есть, омномном");
-                        socket.emit('my_even2t',{data: j.id});
+                        socket.emit('my_even2',{data: j.id});
 
 			    })
           }
@@ -189,8 +189,6 @@ function TELEMETRY(msg,markers_telemetry){
 
 					if (msg['json_data'] != 0){     
                 	    if (msg['json_data'] != 'nothing'){
-
-
 						    var json_packet = msg['json_data'];
 						    var json = JSON.parse(json_packet);
 									    json.forEach(function (item, i, json) {
