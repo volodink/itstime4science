@@ -96,7 +96,7 @@ def message(message):
     json_data = parsing.pars_gprs(mysql)
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
-        if message['data'] == -1:
+        if json_data == 0:
             emit('gprs', {'json_data': 'nothing', 'type': 'gprs'}, namespace='/mcc')
         else:
             emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
@@ -108,7 +108,7 @@ def message(message):
     json_data = parsing.pars_aprs(mysql)
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
-        if message['data'] == -1:
+        if json_data == 0:
             emit('aprs', {'json_data': 'nothing', 'type': 'aprs'}, namespace='/mcc')
         else:
             emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
@@ -120,7 +120,7 @@ def message(message):
     json_data = parsing.pars_telemetry(mysql)
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
-        if message['data'] == -1:
+        if json_data == 0:
                 emit('telemetry', {'json_data': 'nothing', 'type': 'telemetry'}, namespace='/mcc')
         else:        
             emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
@@ -138,7 +138,8 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-
+    print(parsing.pars_gprs(mysql))
+    
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:

@@ -47,7 +47,7 @@ def telemetry(mysql):
     r=[]
     w =[]
     for element in data:
-                e = dict()
+        e = dict()
         e['id'] = element[0]
         e['numberOfFlight'] = element[1]
         e['datetime'] = str(element[2])

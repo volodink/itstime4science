@@ -79,7 +79,7 @@ socket.on('aprs', function (msg) {
 
 g=0
 socket.emit('my_event3',{data: 0});
-console.log('отправил запрос на телеметрию')
+
 socket.on('telemetry', function (msg) {
     console.log(msg['json_data'])
 	if (g==0){
@@ -145,7 +145,7 @@ function APRS(msg,markers_aprs){
 function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
                 	    if (msg['json_data'] != 'nothing'){
-                            change_data(msg['type'],k);
+
 						    var json_packet = msg['json_data'];
 						    var json = JSON.parse(json_packet);
 									    json.forEach(function (item, i, json) {
@@ -170,7 +170,7 @@ function GPRS(msg,markers_gprs){
 									        $('#vdop').html(j.vdop);
 									        $('#sats').html(j.sats);
 									        $('#radiation').html(j.radiation);
-
+                                            change_data(msg['type'],k);
 									        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
 									        addMarker(position,map,lat,lon,markers_gprs,'gprs');
@@ -190,7 +190,7 @@ function TELEMETRY(msg,markers_telemetry){
 
 					if (msg['json_data'] != 0){     
                 	    if (msg['json_data'] != 'nothing'){
-                            change_data(msg['type'],k);
+
 
 						    var json_packet = msg['json_data'];
 						    var json = JSON.parse(json_packet);
@@ -217,7 +217,7 @@ function TELEMETRY(msg,markers_telemetry){
 									        $('#sats').html(j.sats);
 									        $('#radiation').html(j.radiation);
 									        
-
+                                            change_data(msg['type'],k);
 									        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
 									        addMarker(position,map,lat,lon,markers_telemetry,'telemetry');

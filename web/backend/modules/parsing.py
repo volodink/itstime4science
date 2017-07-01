@@ -17,87 +17,93 @@ def run(number):
 
 
 def pars_gprs(mysql):
-    cur = mysql.connect().cursor()
-    cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
-    data = list(cur.fetchall())
-    mysql.connect().commit
-    r = []
-    for element in data:
-        e = dict()
-        e['id'] = element[0]
-        e['numberOfFlight'] = element[1]
-        e['datetime'] = str(element[2])
-        e['lat'] = element[3]
-        e['lon'] = element[4]
-        e['alt'] = element[5]
-        e['temp1'] = element[6]
-        e['temp2'] = element[7]
-        e['pressure1'] = element[8]
-        e['pressure2'] = element[9]
-        e['bat_volt'] = element[10]
-        e['vect_axel1x'] = element[11]
-        e['vect_axel1y'] = element[12]
-        e['vect_axel1z'] = element[13]
-        e['hdop'] = element[14]
-        e['vdop'] = element[15]
-        e['sats'] = element[16]
-        e['radiation'] = element[17]
-        
-        
-        r.append(e)
-
-        return json.dumps(r)
+    try:
+        cur = mysql.connect().cursor()
+        cur.execute("select * from gprs ORDER BY id DESC LIMIT 1")
+        data = list(cur.fetchall())
+        mysql.connect().commit
+        r = []
+        for element in data:
+            e = dict()
+            e['id'] = element[0]
+            e['numberOfFlight'] = element[1]
+            e['datetime'] = str(element[2])
+            e['lat'] = element[3]
+            e['lon'] = element[4]
+            e['alt'] = element[5]
+            e['temp1'] = element[6]
+            e['temp2'] = element[7]
+            e['pressure1'] = element[8]
+            e['pressure2'] = element[9]
+            e['bat_volt'] = element[10]
+            e['vect_axel1x'] = element[11]
+            e['vect_axel1y'] = element[12]
+            e['vect_axel1z'] = element[13]
+            e['hdop'] = element[14]
+            e['vdop'] = element[15]
+            e['sats'] = element[16]
+            e['radiation'] = element[17]
+            r.append(e)
+            return json.dumps(r)
+    except:
+        return 0
 def pars_telemetry(mysql):
-    cur = mysql.connect().cursor()
-    cur.execute("select * from telemetry ORDER BY id DESC LIMIT 1")
-    data = list(cur.fetchall())
-    mysql.connect().commit
-    r = []
-    for element in data:
-        e = dict()
-        e['id'] = element[0]
-        e['numberOfFlight'] = element[1]
-        e['datetime'] = str(element[2])
-        e['lat'] = element[3]
-        e['lon'] = element[4]
-        e['alt'] = element[5]
-        e['temp1'] = element[6]
-        e['temp2'] = element[7]
-        e['pressure1'] = element[8]
-        e['pressure2'] = element[9]
-        e['bat_volt'] = element[10]
-        e['vect_axel1x'] = element[11]
-        e['vect_axel1y'] = element[12]
-        e['vect_axel1z'] = element[13]
-        e['hdop'] = element[14]
-        e['vdop'] = element[15]
-        e['sats'] = element[16]
-        e['radiation'] = element[17]
-       
-        r.append(e)
+    try:
+        cur = mysql.connect().cursor()
+        cur.execute("select * from telemetry ORDER BY id DESC LIMIT 1")
+        data = list(cur.fetchall())
+        mysql.connect().commit
+        r = []
+        for element in data:
+            e = dict()
+            e['id'] = element[0]
+            e['numberOfFlight'] = element[1]
+            e['datetime'] = str(element[2])
+            e['lat'] = element[3]
+            e['lon'] = element[4]
+            e['alt'] = element[5]
+            e['temp1'] = element[6]
+            e['temp2'] = element[7]
+            e['pressure1'] = element[8]
+            e['pressure2'] = element[9]
+            e['bat_volt'] = element[10]
+            e['vect_axel1x'] = element[11]
+            e['vect_axel1y'] = element[12]
+            e['vect_axel1z'] = element[13]
+            e['hdop'] = element[14]
+            e['vdop'] = element[15]
+            e['sats'] = element[16]
+            e['radiation'] = element[17]
 
-        return json.dumps(r)
+            r.append(e)
+
+            return json.dumps(r)
+    except:
+        return 0
 
 def pars_aprs(mysql):
-    cur = mysql.connect().cursor()
-    cur.execute("select * from aprs ORDER BY id DESC LIMIT 1")
-    data = list(cur.fetchall())
-    mysql.connect().commit
-    r = []
-    for element in data:
-        e = dict()
-        e['id'] = element[0]
-        e['numberOfFlight'] = element[1]
-        e['datetime'] = str(element[2])
-        e['lat'] = element[3]
-        e['lon'] = element[4]
-        e['alt'] = element[5]
-        e['temp1'] = element[6]
-        e['pressure1'] = element[7]
+    try:
+        cur = mysql.connect().cursor()
+        cur.execute("select * from aprs ORDER BY id DESC LIMIT 1")
+        data = list(cur.fetchall())
+        mysql.connect().commit
+        r = []
+        for element in data:
+            e = dict()
+            e['id'] = element[0]
+            e['numberOfFlight'] = element[1]
+            e['datetime'] = str(element[2])
+            e['lat'] = element[3]
+            e['lon'] = element[4]
+            e['alt'] = element[5]
+            e['temp1'] = element[6]
+            e['pressure1'] = element[7]
 
-        r.append(e)
+            r.append(e)
 
-        return json.dumps(r)
+            return json.dumps(r)
+    except:
+        return 0
 
 
 def last_gprs_dots(mysql):
