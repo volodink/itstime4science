@@ -125,11 +125,11 @@ function APRS(msg,markers_aprs){
 				        $('#temp1').html(j.temp1);
 				        $('#pressure1').html(j.pressure);
 
-				        
+                        change_data(msg['type'],k);
 				        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				        addMarker(position,map,lat,lon,markers_aprs,'aprs');
 				        console.log("Данные aпрс есть, омномном");
-                        change_data(msg['type'],k);
+                        socket.emit('my_even2t',{data: j.id};
 
 			    })
           }
@@ -144,48 +144,47 @@ function APRS(msg,markers_aprs){
 }
 function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
-                	    if (msg['json_data'] != 'nothing'){
-
-						    var json_packet = msg['json_data'];
-						    var json = JSON.parse(json_packet);
-									    json.forEach(function (item, i, json) {
-									        j = json[i];
-									        lat = j.lat;
-									        lon = j.lon;
-									        $('#id').html(j.id);
-									        $('#numberOfFlight').html(j.numberOfFlight);
-									        $('#datetime').html(j.datetime);
-									        $('#lat').html(j.lat);
-									        $('#lon').html(j.lon);
-									        $('#alt').html(j.alt);
-									        $('#temp1').html(j.temp1);
-									        $('#temp2').html(j.temp2);
-									        $('#pressure1').html(j.pressure1);
-									        $('#pressure2').html(j.pressure2);
-									        $('#bat_volt').html(j.bat_volt);
-									        $('#vect_axel1x').html(j.vect_axel1x);
-									        $('#vect_axel1y').html(j.vect_axel1y);
-									        $('#vect_axel1z').html(j.vect_axel1z);
-									        $('#hdop').html(j.hdop);
-									        $('#vdop').html(j.vdop);
-									        $('#sats').html(j.sats);
-									        $('#radiation').html(j.radiation);
-                                            change_data(msg['type'],k);
-									        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+                                    	    if (msg['json_data'] != 'nothing'){
+						                                        var json_packet = msg['json_data'];
+						                                        var json = JSON.parse(json_packet);
+						                                        json.forEach(function (item, i, json) {
+									                                            j = json[i];
+									                                            lat = j.lat;
+									                                            lon = j.lon;
+									                                            $('#id').html(j.id);
+									                                            $('#numberOfFlight').html(j.numberOfFlight);
+									                                            $('#datetime').html(j.datetime);
+									                                            $('#lat').html(j.lat);
+									                                            $('#lon').html(j.lon);
+									                                            $('#alt').html(j.alt);
+									                                            $('#temp1').html(j.temp1);
+									                                            $('#temp2').html(j.temp2);
+									                                            $('#pressure1').html(j.pressure1);
+									                                            $('#pressure2').html(j.pressure2);
+									                                            $('#bat_volt').html(j.bat_volt);
+									                                            $('#vect_axel1x').html(j.vect_axel1x);
+									                                            $('#vect_axel1y').html(j.vect_axel1y);
+									                                            $('#vect_axel1z').html(j.vect_axel1z);
+									                                            $('#hdop').html(j.hdop);
+									                                            $('#vdop').html(j.vdop);
+									                                            $('#sats').html(j.sats);
+									                                            $('#radiation').html(j.radiation);
+                                                                                change_data(msg['type'],k);
+									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
-									        addMarker(position,map,lat,lon,markers_gprs,'gprs');
-									        console.log("Данные гпрс есть, омномном");
-
-									    })
-                        }
-                        else {console.log("Данных гпрс в базе данных нет, хозяина");
-                            socket.emit('my_event',{data: 0});}
+									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs');
+									                                            console.log("Данные гпрс есть, омномном");
+                                                                                socket.emit('my_event',{data: j.id};
+									                                        })
+                                            }
+                                            else {console.log("Данных гпрс в базе данных нет, хозяина");
+                                                socket.emit('my_event',{data: 0});}
 					}    
-			console.log("Данных гпрс нема, хозяина");
-            socket.emit('my_event',{data: j.id});
+			        console.log("Данных гпрс нема, хозяина");
+                    socket.emit('my_event',{data: j.id});
 
 	
-};
+                            };
 function TELEMETRY(msg,markers_telemetry){
 
 					if (msg['json_data'] != 0){     
@@ -223,7 +222,7 @@ function TELEMETRY(msg,markers_telemetry){
 									        addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
 									        console.log("Данные телеметрии есть, омномном");
 
-                                            socket.emit('my_event3',{data: j.id});}
+                                            socket.emit('my_event3',{data: j.id};}
         
 									    })
                         }
