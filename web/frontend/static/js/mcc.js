@@ -129,7 +129,7 @@ function APRS(msg,markers_aprs){
 				        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				        addMarker(position,map,lat,lon,markers_aprs,'aprs');
 				        console.log("Данные aпрс есть, омномном");
-                        socket.emit('my_even2t',{data: j.id};
+                        socket.emit('my_even2t',{data: j.id});
 
 			    })
           }
@@ -174,7 +174,7 @@ function GPRS(msg,markers_gprs){
 										
 									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs');
 									                                            console.log("Данные гпрс есть, омномном");
-                                                                                socket.emit('my_event',{data: j.id};
+                                                                                socket.emit('my_event',{data: j.id});
 									                                        })
                                             }
                                             else {console.log("Данных гпрс в базе данных нет, хозяина");
@@ -222,7 +222,7 @@ function TELEMETRY(msg,markers_telemetry){
 									        addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
 									        console.log("Данные телеметрии есть, омномном");
 
-                                            socket.emit('my_event3',{data: j.id};}
+                                            socket.emit('my_event3',{data: j.id});}
         
 									    })
                         }
