@@ -102,12 +102,12 @@ def message(message):
 
 @socketio.on('my_event2', namespace='/mcc')
 def message(message):
-    json_data = parsing.pars_aprs(mysql)
-    mas = json.loads(json_data)
-    if message['data'] != mas[0]['id']:
-        emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')
-    else:
-        emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
+        json_data = parsing.pars_aprs(mysql)
+        mas = json.loads(json_data)
+        if message['data'] != mas[0]['id']:
+            emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')
+        else:
+            emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
 
 @socketio.on('my_event3', namespace='/mcc')
 def message(message):

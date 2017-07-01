@@ -135,7 +135,15 @@ function APRS(msg,markers_aprs){
 			})
 	}    
 	console.log("Данных апрс нема, хозяина");
-	socket.emit('my_event2',{data: j.id});
+	try {
+
+              socket.emit('my_event2',{data: j.id});
+
+            } catch (err) {
+
+              socket.emit('my_event2',{data: 0});
+
+            }
 }
 function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
@@ -186,7 +194,15 @@ function GPRS(msg,markers_gprs){
 									})
 					}    
 			console.log("Данных гпрс нема, хозяина");
-			socket.emit('my_event',{data: j.id}); 	
+			try {
+
+              socket.emit('my_event',{data: j.id});
+
+            } catch (err) {
+
+              socket.emit('my_event',{data: 0});
+
+            } 	
 	
 };
 function TELEMETRY(msg,markers_telemetry){
@@ -239,7 +255,16 @@ function TELEMETRY(msg,markers_telemetry){
 									})
 					}    
 			console.log("Данных телеметрии нема, хозяина");
-			socket.emit('my_event3',{data: j.id}); 	
+            try {
+
+              socket.emit('my_event3',{data: j.id});
+
+            } catch (err) {
+
+              socket.emit('my_event3',{data: 0});
+
+            }
+			 	
 	
 };
 });
