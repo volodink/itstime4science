@@ -143,9 +143,9 @@ function APRS(msg,markers_aprs){
 	
 }
 function GPRS(msg,markers_gprs){    
-                    console.log('ПРОВЕРКА ГПРС')
-					if (msg['json_data'] != 0){                     console.log('ПРОВЕРКА ГПРС №2')
-                                    	    if (msg['json_data'] != -1){console.log('ПРОВЕРКА ГПРС №3')
+                    
+					if (msg['json_data'] != 0){                     
+                                    	    if (msg['json_data'] != -1){
 						                                        var json_packet = msg['json_data'];
 						                                        var json = JSON.parse(json_packet);
 						                                        json.forEach(function (item, i, json) {

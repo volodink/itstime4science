@@ -138,7 +138,7 @@ def msg():
 
 if __name__ == '__main__':
     mysql.init_app(app)
-    print(parsing.pars_gprs(mysql))
+    
     
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
