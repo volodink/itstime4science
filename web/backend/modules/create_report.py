@@ -336,30 +336,15 @@ def getData(mysql):
 
     parsing_axels(gprs, telemetry, gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(14, gprs, 'Ультрафиолет 1 по gprs', telemetry, 'Ультрафиолет 1 по telemetry', 'ultraviolet1',
-                   'Ультрафиолет,Люкс', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(14, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(15, gprs, 'Ультрафиолет 2 по gprs', telemetry, 'Ультрафиолет 2 по telemetry', 'ultraviolet2',
-                   'Ультрафиолет,Люкс', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(15, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(16, gprs, 'Инфракрасное излучение 1 по gprs', telemetry, 'Инфракрасное излучение 1 по telemetry',
-                   'infrared1', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(16, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(17, gprs, 'Инфракрасное излучение 2 по gprs', telemetry, 'Инфракрасное излучение 2 по telemetry',
-                   'infrared2', 'Инфракрасное излучение,Люкс', gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(18, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(19, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(20, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(21, gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation',
+    parsing_datas2(17, gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation',
                    'Радиация, Рикрорентген', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(22, gprs, 'Озон по gprs', telemetry, 'Озон по telemetry', 'ozone', 'Озон', gprs_data, telemetry_data,gd,td)
 
     cur = mysql.connect().cursor()
     cur.execute("select id from gprs where numberOfFlight=10001 ORDER BY id DESC LIMIT 1 ")

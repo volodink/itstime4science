@@ -49,10 +49,7 @@ def insert(packet):
         d.append(databin)
         databin = float(data['pressure'])
         d.append(databin)
-        print(run(data))
-        l = run(int(databin['status']))  # Эта штука будет творить магию с статусами модулей
-        d.append(l)
-        print(len(d))
+        
 
         db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
                              port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
@@ -64,7 +61,7 @@ def insert(packet):
         
         print('Принятый пакет:' + str(d))
         
-        insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp1, pressure1, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6],','.join(d[7]))
+        insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp1, pressure1) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6])
         cursor.execute(insert)
         db.commit()
 

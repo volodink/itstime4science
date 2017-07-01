@@ -38,40 +38,12 @@ def pars_gprs(mysql):
         e['vect_axel1x'] = element[11]
         e['vect_axel1y'] = element[12]
         e['vect_axel1z'] = element[13]
-        e['ultraviolet1'] = element[14]
-        e['ultraviolet2'] = element[15]
-        e['infrared1'] = element[16]
-        e['infrared2'] = element[17]
-        e['hdop'] = element[18]
-        e['vdop'] = element[19]
-        e['sats'] = element[20]
-        e['radiation'] = element[21]
-        e['dust'] = element[22]
-        e['ozone'] = element[23]
-        e['status'] = dict()
-
-        s = element[24].split(',')
-        e['status']['datetime'] = s[0]
-        e['status']['lat'] = s[1]
-        e['status']['lon'] = s[1]
-        e['status']['alt'] = s[1]
-        e['status']['temp1'] = s[2]
-        e['status']['temp2'] = s[3]
-        e['status']['pressure1'] = s[4]
-        e['status']['pressure2'] = s[5]
-        e['status']['bat_volt'] = s[6]
-        e['status']['vect_axel1x'] = s[7]
-        e['status']['vect_axel1y'] = s[7]
-        e['status']['vect_axel1z'] = s[7]
-        e['status']['ultraviolet1'] = s[8]
-        e['status']['ultraviolet2'] = s[9]
-        e['status']['infrared1'] = s[10]
-        e['status']['infrared2'] = s[11]
-        e['status']['hdop'] = s[12]
-        e['status']['vdop'] = s[13]
-        e['status']['sats'] = s[14]
-        e['status']['radiation'] = s[15]
-        e['status']['ozone'] = s[16]
+        e['hdop'] = element[14]
+        e['vdop'] = element[15]
+        e['sats'] = element[16]
+        e['radiation'] = element[17]
+        
+        
         r.append(e)
 
         return json.dumps(r)
@@ -97,40 +69,11 @@ def pars_telemetry(mysql):
         e['vect_axel1x'] = element[11]
         e['vect_axel1y'] = element[12]
         e['vect_axel1z'] = element[13]
-        e['ultraviolet1'] = element[14]
-        e['ultraviolet2'] = element[15]
-        e['infrared1'] = element[16]
-        e['infrared2'] = element[17]
-        e['hdop'] = element[18]
-        e['vdop'] = element[19]
-        e['sats'] = element[20]
-        e['radiation'] = element[21]
-        e['dust'] = element[22]
-        e['ozone'] = element[23]
-        e['status'] = dict()
-
-        s = element[24].split(',')
-        e['status']['datetime'] = s[0]
-        e['status']['lat'] = s[1]
-        e['status']['lon'] = s[1]
-        e['status']['alt'] = s[1]
-        e['status']['temp1'] = s[2]
-        e['status']['temp2'] = s[3]
-        e['status']['pressure1'] = s[4]
-        e['status']['pressure2'] = s[5]
-        e['status']['bat_volt'] = s[6]
-        e['status']['vect_axel1x'] = s[7]
-        e['status']['vect_axel1y'] = s[7]
-        e['status']['vect_axel1z'] = s[7]
-        e['status']['ultraviolet1'] = s[8]
-        e['status']['ultraviolet2'] = s[9]
-        e['status']['infrared1'] = s[10]
-        e['status']['infrared2'] = s[11]
-        e['status']['hdop'] = s[12]
-        e['status']['vdop'] = s[13]
-        e['status']['sats'] = s[14]
-        e['status']['radiation'] = s[15]
-        e['status']['ozone'] = s[16]
+        e['hdop'] = element[14]
+        e['vdop'] = element[15]
+        e['sats'] = element[16]
+        e['radiation'] = element[17]
+       
         r.append(e)
 
         return json.dumps(r)
@@ -151,15 +94,7 @@ def pars_aprs(mysql):
         e['alt'] = element[5]
         e['temp1'] = element[6]
         e['pressure1'] = element[7]
-        e['status'] = dict()
 
-        s = element[8].split(',')  # ВОТ ТУТ УТОЧНИТЬ ПОРЯДОК СТАТУСА
-        e['status']['lat'] = s[0]
-        e['status']['lon'] = s[0]
-        e['status']['alt'] = s[0]
-        e['status']['temp1'] = s[1]
-        e['status']['pressure1'] = s[2]
-        e['status']['modul'] = s[3]
         r.append(e)
 
         return json.dumps(r)
@@ -234,7 +169,6 @@ def parsing_telem(mysql):
                 kek.insert(0, 10001)
                 print(kek)
                 kek[2] = datetime.fromtimestamp(int(kek[2]))
-                kek[3] = run(int(kek[3]))
 
                 try:
                     db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
@@ -243,26 +177,20 @@ def parsing_telem(mysql):
                                  passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
                                  charset='utf8')
 
-                    cursor = db.cursor()
 
                     cursor = db.cursor()
-                    insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-                                            bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\
-                                            infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-                                            {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
-                                                                                                         ','.join(kek[3]), float(kek[4]),
+                    insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+                                            bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,hdop,vdop,radiation)\
+                                             VALUES({},{}, '{}', {}, {}, {}, {}, {}, {}, {},  \
+                                            {}, {}, {}, {}, {}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
+                                                                                                         float(kek[3]), float(kek[4]),
                                                                                                          float(kek[5]), float(kek[6]),
                                                                                                          float(kek[7]), float(kek[8]),
                                                                                                          float(kek[9]), float(kek[10]),
                                                                                                          float(kek[11]),
                                                                                                          float(kek[12]), float(kek[13]),
                                                                                                          float(kek[14]),
-                                                                                                         float(kek[15]), float(kek[16]),
-                                                                                                         float(kek[17]),
-                                                                                                         float(kek[18]), float(kek[19]),
-                                                                                                         float(kek[20]),
-                                                                                                         float(kek[21]), float(kek[22]),
-                                                                                                         float(kek[23]))
+                                                                                                         float(kek[15]), float(kek[16]))
                     cursor.execute(insert)
                     db.commit()
                             

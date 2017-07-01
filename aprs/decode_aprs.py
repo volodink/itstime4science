@@ -27,7 +27,7 @@ def lets_try_pars(d):
         print('Время прибытия данных: ' + tm)
         d.insert(0,tm)
         d.insert(0,10001)
-        d[8] = run(int(d[8]))
+
         print('Распаршенные данные апрс: ' + str(d))
         try:
             db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
@@ -38,7 +38,7 @@ def lets_try_pars(d):
 
             cursor = db.cursor()
 
-            insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp1, pressure1, status) VALUES({},'{}',{},{},{},{},{},'{}')""".format(d[0], d[1],d[3], d[4], d[5],d[6],d[7],','.join(d[8]))
+            insert = """INSERT INTO aprs(numberOfFlight, datetime, lat, lon, alt, temp1, pressure1) VALUES({},'{}',{},{},{},{},{})""".format(d[0], d[1], d[2],d[3], d[4], d[5],d[6])
             cursor.execute(insert)
             db.commit()
             print('Попытка сохранения данных aprs в бд завершилась успешно')

@@ -44,91 +44,61 @@ def insert(packet):
         data = str(data)
         d.append(data)
 
-        data = packet[8:12]  # status
-        databin = int.from_bytes(data, byteorder='little')
-        l = run(databin)
-        d.append(l)
-
-        data = packet[12:16]  # lat
+        data = packet[8:12]  # lat
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[16:20]  # lon
+        data = packet[12:16]  # lon
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[20:24]  # alt
+        data = packet[16:20]  # alt
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[24:28]  # temp1
+        data = packet[20:24]  # temp1
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[28:32]  # temp2
+        data = packet[24:28]  # temp2
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[32:36]  # pressure1
+        data = packet[28:32]  # pressure1
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[36:40]  # pressure2
+        data = packet[32:36]  # pressure2
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[40:44]  # bat_volt
+        data = packet[36:40]  # bat_volt
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[44:48]  # vect_axel1x
+        data = packet[40:44]  # vect_axel1x
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[48:52]  # vect_axel1y
+        data = packet[44:48]  # vect_axel1y
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[52:56]  # vect_axel1z
+        data = packet[48:52]  # vect_axel1z
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[60:64]  # ultraviolet1
+        data = packet[52:56]  # hdop
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[64:68]  # ultraviolet2
+        data = packet[56:60]  # vdop
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[68:72]  # infrared1
+        data = packet[60:64]  # radiation
         data = struct.unpack('f', data)
         d.append(clear_string(data))
-
-        data = packet[76:80]  # infrared2
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[80:84]  # hdop
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[84:88]  # vdop
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[88:92]  # radiation
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[92:96]  # dust
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[96:100]  # ozone
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
 
 
         print(len(d))
@@ -147,15 +117,12 @@ def insert(packet):
 
             print('Принятый пакет:' + str(d))
 
-            insert = """INSERT INTO gprs(numberOfFlight, sats,datetime,status, lat, lon,alt,temp1,temp2,pressure1,pressure2,\ 
-                bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,ultraviolet1,ultraviolet2,\ 
-                infrared1,infrared2,hdop,vdop,radiation,dust,ozone) VALUES({},{}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}, \
-                {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}, {}, {})""".format(d[0], d[1],d[2],','.join(d[3]) , d[4],d[5], d[6], d[7], d[8],
+            insert = """INSERT INTO gprs(numberOfFlight, sats,datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\ 
+                bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,hdop,vdop,radiation) VALUES({},{}, '{}', {}, {}, {}, {}, {}, {}, {}, \
+                {}, {}, {}, {}, {}, {}, {})""".format(d[0], d[1],d[2],d[3] , d[4],d[5], d[6], d[7], d[8],
                                                                                                    d[9], d[10], d[11],
                                                                                                    d[12], d[13], d[14],
-                                                                                                   d[15], d[16], d[17],
-                                                                                                   d[18], d[19], d[20],
-                                                                                                   d[21], d[22],d[23])
+                                                                                                   d[15], d[16])
             cursor.execute(insert)
             db.commit()
             f.close()
