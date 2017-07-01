@@ -107,49 +107,55 @@ def pars_aprs(mysql):
 
 
 def last_gprs_dots(mysql):
-    cur = mysql.connect().cursor()
-    r = []
-    cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10", )
-    data = list(cur.fetchall())
+    try:
+        cur = mysql.connect().cursor()
+        r = []
+        cur.execute("select lat,lon from gprs ORDER BY id DESC LIMIT 10", )
+        data = list(cur.fetchall())
 
-    mysql.connect().commit
-    for element in data:
-        e = dict()
-        e['lat'] = element[0]
-        e['lon'] = element[1]
-        r.append(e)
-    return json.dumps(r)
-
+        mysql.connect().commit
+        for element in data:
+            e = dict()
+            e['lat'] = element[0]
+            e['lon'] = element[1]
+            r.append(e)
+        return json.dumps(r)
+    except:
+        return 'Nan'
 
 def last_aprs_dots(mysql):
-    cur = mysql.connect().cursor()
-    r = []
-    cur.execute("select lat,lon from aprs ORDER BY id DESC LIMIT 10", )
-    data = list(cur.fetchall())
+    try:
+        cur = mysql.connect().cursor()
+        r = []
+        cur.execute("select lat,lon from aprs ORDER BY id DESC LIMIT 10", )
+        data = list(cur.fetchall())
 
-    mysql.connect().commit
-    for element in data:
-        e = dict()
-        e['lat'] = element[0]
-        e['lon'] = element[1]
-        r.append(e)
-    return json.dumps(r)
-
+        mysql.connect().commit
+        for element in data:
+            e = dict()
+            e['lat'] = element[0]
+            e['lon'] = element[1]
+            r.append(e)
+        return json.dumps(r)
+    except:
+        return 'Nan'
 
 def last_telemetry_dots(mysql):
-    cur = mysql.connect().cursor()
-    r = []
-    cur.execute("select lat,lon from telemetry ORDER BY id DESC LIMIT 10", )
-    data = list(cur.fetchall())
+    try:
+        cur = mysql.connect().cursor()
+        r = []
+        cur.execute("select lat,lon from telemetry ORDER BY id DESC LIMIT 10", )
+        data = list(cur.fetchall())
 
-    mysql.connect().commit
-    for element in data:
-        e = dict()
-        e['lat'] = element[0]
-        e['lon'] = element[1]
-        r.append(e)
-    return json.dumps(r)
-
+        mysql.connect().commit
+        for element in data:
+            e = dict()
+            e['lat'] = element[0]
+            e['lon'] = element[1]
+            r.append(e)
+        return json.dumps(r)
+    except:
+        return 'Nan'
 
 def write_in_file(f, mas):
     f.write(str(mas) + '\n')
