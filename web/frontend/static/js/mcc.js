@@ -12,7 +12,7 @@ var socket = io.connect(url + "/mcc");
 socket.on('lastMarkers', function (msg) {
 
 		var gprs = msg['gprs'];
-        if (gprs != 'Nan'){
+
 		    var json = JSON.parse(gprs);
 		    json.forEach(function (item, i, json) {
 			    j = json[i];
@@ -21,10 +21,10 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_gprs,'gprs');
 		    })
-        }
+        
         
 		var aprs = msg['aprs'];
-        if (aprs != 'Nan'){		
+
             var json = JSON.parse(aprs);
 		    json.forEach(function (item, i, json) {
 			    j = json[i];
@@ -33,9 +33,9 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_aprs,'aprs');
 		    })
-        }
+        
 		var telemetry = msg['telemetry'];
-        if (telemetry != 'Nan'){
+
 		    var json = JSON.parse(telemetry);
 
 		    json.forEach(function (item, i, json) {
@@ -45,7 +45,7 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
 		    })
-        }
+        
 })
 socket.emit('my_event',{data: 0});
 k=0;
@@ -81,7 +81,6 @@ g=0
 socket.emit('my_event3',{data: 0});
 
 socket.on('telemetry', function (msg) {
-    console.log(msg['json_data'])
 	if (g==0){
   		TELEMETRY(msg,markers_telemetry);
 		g=1;
@@ -216,7 +215,7 @@ function TELEMETRY(msg,markers_gprs){
                                                                                 change_data(msg['type'],k);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
-									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs');
+									                                            addMarker(position,map,lat,lon,markers_gprs,'telemetry');
 									                                            console.log("Данные телеметрии есть, омномном");
                                                                                 socket.emit('my_event3',{data: j.id});
 									                                        })
