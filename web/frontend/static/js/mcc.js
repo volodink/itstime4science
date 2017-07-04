@@ -189,10 +189,10 @@ function GPRS(msg,markers_gprs){
 									                                        })
                                             
                                            
-					}    
+					}    else{
 			        console.log("Данных гпрс нема, хозяина");
                     socket.emit('my_event',{data: j.id});
-
+					}
 	
                             };
 function TELEMETRY(msg,markers_gprs){
@@ -228,12 +228,12 @@ function TELEMETRY(msg,markers_gprs){
                                                                                 socket.emit('my_event3',{data: j.id});
 									                                        })
                                             
-					
+					}else{
 			        console.log("Данных телеметрии нема, хозяина");
-                    socket.emit('my_event3',{data: j.id});
+                    socket.emit('my_event3',{data: j.id});}
 
 	
-                            };
+                            
 });
 
 function changeMarkers(map,mas) {
