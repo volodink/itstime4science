@@ -96,10 +96,7 @@ def message(message):
     json_data = parsing.pars_gprs(mysql)
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
-        if json_data == 0:
-            emit('gprs', {'json_data': -1, 'type': 'gprs'}, namespace='/mcc')
-        else:
-            emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
+        emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
     else:
         emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
 
@@ -108,10 +105,7 @@ def message(message):
     json_data = parsing.pars_aprs(mysql)
     mas = json.loads(json_data)
     if message['data'] != mas[0]['id']:
-        if json_data == 0:
-            emit('aprs', {'json_data': -1, 'type': 'aprs'}, namespace='/mcc')
-        else:
-            emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
+        emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
     else:
         emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
 
@@ -119,11 +113,8 @@ def message(message):
 def message(message):
     json_data = parsing.pars_telemetry(mysql)
     mas = json.loads(json_data)
-    if message['data'] != mas[0]['id']:
-        if json_data == 0:
-                emit('telemetry', {'json_data': -1, 'type': 'telemetry'}, namespace='/mcc')
-        else:        
-            emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
+    if message['data'] != mas[0]['id']:       
+        emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
     else:
         emit('telemetry', {'json_data': 0, 'type': 'telemetry'}, namespace='/mcc')
 
