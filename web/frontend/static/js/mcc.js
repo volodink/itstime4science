@@ -125,7 +125,6 @@ function APRS(msg,markers_aprs){
 
 	if (msg['json_data'] != 0){
 	    if (msg['json_data'] != -1){
-            change_data(msg['type'],k);
 		    var json_packet = msg['json_data'];
 		    var json = JSON.parse(json_packet);
 			    json.forEach(function (item, i, json) {
@@ -141,7 +140,7 @@ function APRS(msg,markers_aprs){
 				        $('#temp1').html(j.temp1);
 				        $('#pressure1').html(j.pressure);
 
-                        change_data(msg['type'],k);
+                        change_data(msg['type']);
 				        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				        addMarker(position,map,lat,lon,markers_aprs,'aprs',9);
 				        console.log("Данные aпрс есть, омномном");
@@ -185,7 +184,7 @@ function GPRS(msg,markers_gprs){
 									                                            $('#hdop').html(j.hdop);
 									                                            $('#vdop').html(j.vdop);
 									                                            $('#sats').html(j.sats);
-                                                                                change_data(msg['type'],k);
+                                                                                change_data(msg['type']);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
 									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs',9);
@@ -227,7 +226,7 @@ function TELEMETRY(msg,markers_gprs){
 									                                            $('#hdop').html(j.hdop);
 									                                            $('#vdop').html(j.vdop);
 									                                            $('#sats').html(j.sats);
-                                                                                change_data(msg['type'],k);
+                                                                                change_data(msg['type']);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
 									                                            addMarker(position,map,lat,lon,markers_gprs,'telemetry',9);
