@@ -342,8 +342,6 @@ def getData(mysql):
 
     parsing_datas2(16, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(17, gprs, 'Радиация по gprs', telemetry, 'Радиация по telemetry', 'radiation',
-                   'Радиация, Рикрорентген', gprs_data, telemetry_data,gd,td)
 
 
     cur = mysql.connect().cursor()

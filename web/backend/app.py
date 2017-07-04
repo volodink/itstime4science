@@ -135,6 +135,11 @@ def msg():
     telemetry = parsing.last_telemetry_dots(mysql)
     emit('lastMarkers', {'gprs': gprs,'aprs':aprs, 'telemetry': telemetry}, namespace='/mcc')
 
+@socketio.on('Oleg', namespace='/mcc')
+def msg():
+    data = parsing.pars_Oleg(mysql):
+    emit('lastMarkerOleg', {'Oleg'=data}, namespace='/mcc')
+
 
 if __name__ == '__main__':
     mysql.init_app(app)

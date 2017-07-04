@@ -2,13 +2,30 @@ $(document).ready(function () {
 var markers_gprs = [];
 var markers_aprs = [];
 var markers_telemetry = [];
+var markers_Oleg = [];
 
 var url = 'http://' + document.domain + ':' + location.port;
 var socket = io.connect(url + "/mcc");
 	socket.on('connect', function() {
 		socket.emit('last_dots');
 	});
+socket.emit('Oleg');
 
+socket.on('lastMarkerOleg', function (msg) {
+	setTimeout(function(){
+		    var gprs = msg['Oleg'];
+		    var json = JSON.parse(gprs);
+		    json.forEach(function (item, i, json) {
+			    j = json[i];
+			    lat = j.lat;
+			    lon = j.lon;
+			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+			    addMarker(position,map,lat,lon,markers_Oleg,'----',1);
+		    })
+            socket.emit('Oleg');
+}, 60000);  
+});
+          
 socket.on('lastMarkers', function (msg) {
 
 		var gprs = msg['gprs'];
@@ -19,7 +36,7 @@ socket.on('lastMarkers', function (msg) {
 			    lat = j.lat;
 			    lon = j.lon;
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-			    addMarker(position,map,lat,lon,markers_gprs,'gprs');
+			    addMarker(position,map,lat,lon,markers_gprs,'gprs',9);
 		    })
         
         
@@ -31,7 +48,7 @@ socket.on('lastMarkers', function (msg) {
 			    lat = j.lat;
 			    lon = j.lon;
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-			    addMarker(position,map,lat,lon,markers_aprs,'aprs');
+			    addMarker(position,map,lat,lon,markers_aprs,'aprs',9);
 		    })
         
 		var telemetry = msg['telemetry'];
@@ -43,7 +60,7 @@ socket.on('lastMarkers', function (msg) {
 			    lat = j.lat;
 			    lon = j.lon;
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-			    addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
+			    addMarker(position,map,lat,lon,markers_telemetry,'telemetry',9);
 		    })
         
 })
@@ -126,7 +143,7 @@ function APRS(msg,markers_aprs){
 
                         change_data(msg['type'],k);
 				        var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-				        addMarker(position,map,lat,lon,markers_aprs,'aprs');
+				        addMarker(position,map,lat,lon,markers_aprs,'aprs',9);
 				        console.log("Данные aпрс есть, омномном");
                         socket.emit('my_even2',{data: j.id});
 
@@ -172,7 +189,7 @@ function GPRS(msg,markers_gprs){
                                                                                 change_data(msg['type'],k);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
-									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs');
+									                                            addMarker(position,map,lat,lon,markers_gprs,'gprs',9);
 									                                            console.log("Данные гпрс есть, омномном");
                                                                                 socket.emit('my_event',{data: j.id});
 									                                        })
@@ -215,7 +232,7 @@ function TELEMETRY(msg,markers_gprs){
                                                                                 change_data(msg['type'],k);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
-									                                            addMarker(position,map,lat,lon,markers_gprs,'telemetry');
+									                                            addMarker(position,map,lat,lon,markers_gprs,'telemetry',9);
 									                                            console.log("Данные телеметрии есть, омномном");
                                                                                 socket.emit('my_event3',{data: j.id});
 									                                        })
@@ -236,11 +253,13 @@ function changeMarkers(map,mas) {
         }
 }
 
-function addMarker(location, map,lat,lon,massive,type){
+function addMarker(location, map,lat,lon,massive,type, l){
 
 	
 	if ($("#follow").prop("checked")){map.setCenter(location)};
-
+    if(type == '----'){
+		var marker = new google.maps.Marker({position: location,map: map});
+	}
 	if(type == 'gprs'){
 		var marker = new google.maps.Marker({position: location,map: map,icon: "../static/img/icon.ico"});
 	}
@@ -251,7 +270,7 @@ function addMarker(location, map,lat,lon,massive,type){
 		var marker = new google.maps.Marker({position: location,map: map,icon: "../static/img/icon2.png"});
 	}
 	marker.setMap(map);
-	if (!!massive[9]){
+	if (!!massive[l]){
 		el = massive.shift();
 		el.setMap(null)
 		massive.push(marker);

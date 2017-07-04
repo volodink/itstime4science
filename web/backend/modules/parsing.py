@@ -42,7 +42,6 @@ def pars_gprs(mysql):
             e['hdop'] = element[14]
             e['vdop'] = element[15]
             e['sats'] = element[16]
-            e['radiation'] = element[17]
             r.append(e)
             return json.dumps(r)
     except:
@@ -73,14 +72,27 @@ def pars_telemetry(mysql):
             e['hdop'] = element[14]
             e['vdop'] = element[15]
             e['sats'] = element[16]
-            e['radiation'] = element[17]
-
             r.append(e)
 
             return json.dumps(r)
     except:
         return 0
-
+def pars_Oleg(mysql):
+    try:
+        cur = mysql.connect().cursor()
+        cur.execute("select * from Oleg ORDER BY id DESC LIMIT 1")
+        data = list(cur.fetchall())
+        mysql.connect().commit
+        r = []
+        for element in data:
+            e = dict()
+            e['id'] = element[0]
+            e['lat']=element[1]
+            e['lon'] = element[2]
+            r.append(e)
+            return json.dumps(r)
+    except:
+        return 0
 def pars_aprs(mysql):
     try:
         cur = mysql.connect().cursor()

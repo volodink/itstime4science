@@ -76,6 +76,23 @@ def callback(packet):
             f = open('logs/aprs_FAIL.log', 'a+')
             write_in_file(f, packet)
             print('Чё происходит? Данные по апрс пришли какие-то странные, я не буду их записывать! (Только в лог файл)')
+    elif ' UB4FEU-6>' in packet:
+        try:
+                s = aprslib.parse(l)
+                try:
+                    db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
+                                         port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
+                                         user=os.getenv("MYSQL_DATABASE_USER", "0"),
+                                         passwd=os.getenv("MYSQL_DATABASE_PASSWORD", "0"), db=os.getenv("MYSQL_DATABASE_DB", "0"),
+                                         charset='utf8')
+
+                    cursor = db.cursor()
+
+                    insert = """INSERT INTO Oleg(lat, lon) VALUES({},{})""".format(s['latitude'], s['longitude'])
+                    cursor.execute(insert)
+                    db.commit(
+        except:
+            print('Парсинг координат пользователя не удался')
 
     else: pass
          	
