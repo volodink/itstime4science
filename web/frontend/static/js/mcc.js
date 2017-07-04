@@ -185,7 +185,6 @@ function GPRS(msg,markers_gprs){
 									                                            $('#hdop').html(j.hdop);
 									                                            $('#vdop').html(j.vdop);
 									                                            $('#sats').html(j.sats);
-									                                            $('#radiation').html(j.radiation);
                                                                                 change_data(msg['type'],k);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
@@ -228,7 +227,6 @@ function TELEMETRY(msg,markers_gprs){
 									                                            $('#hdop').html(j.hdop);
 									                                            $('#vdop').html(j.vdop);
 									                                            $('#sats').html(j.sats);
-									                                            $('#radiation').html(j.radiation);
                                                                                 change_data(msg['type'],k);
 									                                            var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 										
