@@ -78,7 +78,7 @@ def callback(packet):
             print('Чё происходит? Данные по апрс пришли какие-то странные, я не буду их записывать! (Только в лог файл)')
     elif ' UB4FEU-6>' in packet:
         try:
-                s = aprslib.parse(l)
+                s = aprslib.parse(packet)
                 try:
                     db = pymysql.connect(host=os.getenv("MYSQL_DATABASE_HOST", "0"),
                                          port=int(os.getenv("MYSQL_DATABASE_PORT", "0")),
@@ -90,7 +90,9 @@ def callback(packet):
 
                     insert = """INSERT INTO Oleg(lat, lon) VALUES({},{})""".format(s['latitude'], s['longitude'])
                     cursor.execute(insert)
-                    db.commit(
+                    db.commit()
+                except:
+                    print('Не удалось сохранить в бд')
         except:
             print('Парсинг координат пользователя не удался')
 

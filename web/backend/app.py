@@ -137,8 +137,8 @@ def msg():
 
 @socketio.on('Oleg', namespace='/mcc')
 def msg():
-    data = parsing.pars_Oleg(mysql):
-    emit('lastMarkerOleg', {'Oleg'=data}, namespace='/mcc')
+    data = parsing.pars_Oleg(mysql)
+    emit('lastMarkerOleg', {'Oleg': data}, namespace='/mcc')
 
 
 if __name__ == '__main__':
