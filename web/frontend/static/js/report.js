@@ -32,7 +32,7 @@ $(document).ready(function () {
             gprs_sats [i]=j.sats;
             
 		})
-        
+     
 
 		json = parsing_json(json_aprs)
 		json.forEach(function (item, i, json) {
