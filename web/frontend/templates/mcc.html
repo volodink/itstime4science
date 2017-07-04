@@ -103,7 +103,7 @@
 
                         };
                         infoWindow.setPosition(pos);
-                        infoWindow.setContent(position.coords.accuracy);
+                        infoWindow.setContent(String(position.coords.accuracy));
                         map.setCenter(pos);
                       }, function() {
                             handleLocationError(true, infoWindow, map.getCenter());
