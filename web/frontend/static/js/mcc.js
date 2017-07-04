@@ -124,7 +124,6 @@ $("#aprs").change(function(){
 function APRS(msg,markers_aprs){
 
 	if (msg['json_data'] != 0){
-	    if (msg['json_data'] != -1){
 		    var json_packet = msg['json_data'];
 		    var json = JSON.parse(json_packet);
 			    json.forEach(function (item, i, json) {
@@ -147,9 +146,7 @@ function APRS(msg,markers_aprs){
                         socket.emit('my_even2',{data: j.id});
 
 			    })
-          }
-            else {console.log("Данных апрс в базе данных нет, хозяина");
-                                socket.emit('my_event2',{data: 0});}
+          
 	}   
     else{
         console.log("Данных апрс нема, хозяина");
@@ -160,7 +157,6 @@ function APRS(msg,markers_aprs){
 function GPRS(msg,markers_gprs){    
                     
 					if (msg['json_data'] != 0){                     
-                                    	    if (msg['json_data'] != -1){
 						                                        var json_packet = msg['json_data'];
 						                                        var json = JSON.parse(json_packet);
 						                                        json.forEach(function (item, i, json) {
@@ -191,9 +187,8 @@ function GPRS(msg,markers_gprs){
 									                                            console.log("Данные гпрс есть, омномном");
                                                                                 socket.emit('my_event',{data: j.id});
 									                                        })
-                                            }
-                                            else {console.log("Данных гпрс в базе данных нет, хозяина");
-                                                socket.emit('my_event',{data: 0});}
+                                            
+                                           
 					}    
 			        console.log("Данных гпрс нема, хозяина");
                     socket.emit('my_event',{data: j.id});
@@ -202,7 +197,6 @@ function GPRS(msg,markers_gprs){
                             };
 function TELEMETRY(msg,markers_gprs){
 					if (msg['json_data'] != 0){
-                                    	    if (msg['json_data'] != -1){
 						                                        var json_packet = msg['json_data'];
 						                                        var json = JSON.parse(json_packet);
 						                                        json.forEach(function (item, i, json) {
@@ -233,10 +227,8 @@ function TELEMETRY(msg,markers_gprs){
 									                                            console.log("Данные телеметрии есть, омномном");
                                                                                 socket.emit('my_event3',{data: j.id});
 									                                        })
-                                            }
-                                            else {console.log("Данных телеметрии в базе данных нет, хозяина");
-                                                socket.emit('my_event3',{data: 0});}
-					}    
+                                            
+					
 			        console.log("Данных телеметрии нема, хозяина");
                     socket.emit('my_event3',{data: j.id});
 
