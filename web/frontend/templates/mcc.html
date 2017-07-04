@@ -99,10 +99,12 @@
                       navigator.geolocation.getCurrentPosition(function(position) {
                         var pos = {
                             lat: position.coords.latitude,
-                            lng: position.coords.longitude
+                            lng: position.coords.longitude,
+			    accur: position.coords.accuracy
+
                         };
                         infoWindow.setPosition(pos);
-                        infoWindow.setContent('Location found.');
+                        infoWindow.setContent(accur);
                         map.setCenter(pos);
                       }, function() {
                             handleLocationError(true, infoWindow, map.getCenter());
