@@ -204,9 +204,9 @@ def parsing_telem(mysql):
 
                     cursor = db.cursor()
                     insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
-                                            bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,hdop,vdop,radiation)\
+                                            bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,hdop,vdop)\
                                              VALUES({},{}, '{}', {}, {}, {}, {}, {}, {}, {},  \
-                                            {}, {}, {}, {}, {}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
+                                            {}, {}, {}, {}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
                                                                                                          float(kek[3]), float(kek[4]),
                                                                                                          float(kek[5]), float(kek[6]),
                                                                                                          float(kek[7]), float(kek[8]),
@@ -214,7 +214,7 @@ def parsing_telem(mysql):
                                                                                                          float(kek[11]),
                                                                                                          float(kek[12]), float(kek[13]),
                                                                                                          float(kek[14]),
-                                                                                                         float(kek[15]), float(kek[16]))
+                                                                                                         float(kek[15]))
                     cursor.execute(insert)
                     db.commit()
                             
