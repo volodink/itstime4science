@@ -95,7 +95,7 @@ function change_data(type){
 		let list = document.querySelectorAll(`ul.param_data > li:nth-child(n+2)`);
 		    	var k=1;
 		    	for(let i = 0; i < list.length; i++) {
-				if(i ==0 || i==1 || i==2 || i==3 || i ==4 || i == 5 || i==7 || i == 9|| i==11 || i==12 || i==13) {
+				if(i ==0 || i==1 || i==2 || i==3 || i ==4 || i == 5 || i==7 || i == 8|| i==10 || i==11 || i==12) {
 				    visiblePanel(list[i]);
 			    	}
 				else {

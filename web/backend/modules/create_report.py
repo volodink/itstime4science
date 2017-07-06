@@ -321,26 +321,25 @@ def getData(mysql):
     parsing_datas3(6, 6, gprs, 'Температура 1 по gprs', aprs, 'Температура 1 по aprs', telemetry,
                    'Температура 1 по telemetry', 'temp1', 'Температура,°C', gprs_data, aprs_data, telemetry_data,gd,ad,td)
 
-    parsing_datas3(8, 7, gprs, 'Давление 1 по gprs', aprs, 'Давление 1 по aprs', telemetry, 'Давление 1 по telemetry',
+    parsing_datas3(7, 7, gprs, 'Давление 1 по gprs', aprs, 'Давление 1 по aprs', telemetry, 'Давление 1 по telemetry',
                    'pressure1', 'Давление,Паскаль', gprs_data, aprs_data, telemetry_data,gd,ad,td)
 
-    parsing_datas2(7, gprs, 'Температура 2 по gprs', telemetry, 'Температура 2 по telemetry', 'temp2', 'Температура,°C',
+
+
+    parsing_datas2(8, gprs, 'Давление 2 по gprs', telemetry, 'Давление 2 по telemetry', 'pressure2', 'Давление,Паскаль',
                    gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(9, gprs, 'Давление 2 по gprs', telemetry, 'Давление 2 по telemetry', 'pressure2', 'Давление,Паскаль',
-                   gprs_data, telemetry_data,gd,td)
-
-    parsing_datas2(10, gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry',
+    parsing_datas2(9, gprs, 'Напряжение аккумулятора по gprs', telemetry, 'Напряжение аккумулятора по telemetry',
                    'bat_volt',
                    'Напряжение аккумулятора,Вольт', gprs_data, telemetry_data,gd,td)
 
     parsing_axels(gprs, telemetry, gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(14, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(13, gprs, 'Hdop по gprs', telemetry, 'Hdop по telemetry', 'hdop', 'Hdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(15, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(14, gprs, 'Vdop по gprs', telemetry, 'Vdop по telemetry', 'vdop', 'Vdop', gprs_data, telemetry_data,gd,td)
 
-    parsing_datas2(16, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
+    parsing_datas2(15, gprs, 'SATS по gprs', telemetry, 'SATS по telemetry', 'sats', 'SATS', gprs_data, telemetry_data,gd,td)
 
 
 

@@ -167,7 +167,6 @@ function GPRS(msg,markers_gprs){
 									    $('#lon').html(j.lon);
 									    $('#alt').html(j.alt);
 									    $('#temp1').html(j.temp1);
-									    $('#temp2').html(j.temp2);
 									    $('#pressure1').html(j.pressure1);
 									    $('#pressure2').html(j.pressure2);
 									    $('#bat_volt').html(j.bat_volt);
@@ -206,7 +205,7 @@ function TELEMETRY(msg,markers_telemetry){
 									    $('#lon').html(j.lon);
 									    $('#alt').html(j.alt);
 									    $('#temp1').html(j.temp1);
-									    $('#temp2').html(j.temp2);
+
 									    $('#pressure1').html(j.pressure1);
 									    $('#pressure2').html(j.pressure2);
 									    $('#bat_volt').html(j.bat_volt);

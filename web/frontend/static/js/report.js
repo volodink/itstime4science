@@ -11,15 +11,14 @@ $(document).ready(function () {
 
 		var datetime =[];
 		var buf = [];
-		var gprs_datetime = [];var gprs_temp1 = [];var gprs_temp2 = [];var gprs_pressure1 = [];var gprs_pressure2 = [];var gprs_bat_volt = [];var gprs_vect_axel1x = [];var gprs_vect_axel1y = [];var gprs_vect_axel1z = [];var gprs_hdop = [];var gprs_vdop = [];var gprs_sats = [];
+		var gprs_datetime = [];var gprs_temp1 = [];var gprs_pressure1 = [];var gprs_pressure2 = [];var gprs_bat_volt = [];var gprs_vect_axel1x = [];var gprs_vect_axel1y = [];var gprs_vect_axel1z = [];var gprs_hdop = [];var gprs_vdop = [];var gprs_sats = [];
 		var aprs_datetime = [];var aprs_temp1 = [];var aprs_pressure1 = [];
-		var telemetry_datetime = [];var telemetry_temp1 = [];var telemetry_temp2 = [];var telemetry_pressure1 = [];var telemetry_pressure2 = [];var telemetry_bat_volt = [];var telemetry_vect_axel1x = [];var telemetry_vect_axel1y = [];var telemetry_vect_axel1z = [];var telemetry_hdop = [];var telemetry_vdop = [];var telemetry_sats = [];
+		var telemetry_datetime = [];var telemetry_temp1 = [];var telemetry_pressure1 = [];var telemetry_pressure2 = [];var telemetry_bat_volt = [];var telemetry_vect_axel1x = [];var telemetry_vect_axel1y = [];var telemetry_vect_axel1z = [];var telemetry_hdop = [];var telemetry_vdop = [];var telemetry_sats = [];
 
 		json = parsing_json(json_gprs)
 		json.forEach(function (item, i, json) {
 			j = json[i];
 			gprs_temp1[i] = j.temp1;
-            gprs_temp2[i] = j.temp2;
 			gprs_pressure1[i] = j.pressure1;
 			gprs_datetime[i]= j.datetime;
             gprs_pressure2[i]=j.pressure2;
@@ -46,7 +45,6 @@ $(document).ready(function () {
 		json.forEach(function (item, i, json) {
 			j = json[i];
 			telemetry_temp1[i] = j.temp1;
-            telemetry_temp2[i] = j.temp2;
 			telemetry_pressure1[i] = j.pressure1;
 			telemetry_datetime[i]= j.datetime;
             telemetry_pressure2[i]=j.pressure2;
@@ -61,11 +59,11 @@ $(document).ready(function () {
 
 		})
 
-		var gprs_list = [ gprs_datetime , gprs_temp1 , gprs_temp2 , gprs_pressure1 , gprs_pressure2 , gprs_bat_volt ,  gprs_vect_axel1x , gprs_vect_axel1y , gprs_vect_axel1z ,   gprs_hdop , gprs_vdop , gprs_sats ]
-		var telemetry_list = [ telemetry_datetime , telemetry_temp1 , telemetry_temp2 , telemetry_pressure1 , telemetry_pressure2 , telemetry_bat_volt ,  telemetry_vect_axel1x , telemetry_vect_axel1y , telemetry_vect_axel1z ,   telemetry_hdop , telemetry_vdop , telemetry_sats]
+		var gprs_list = [ gprs_datetime , gprs_temp1 , gprs_pressure1 , gprs_pressure2 , gprs_bat_volt ,  gprs_vect_axel1x , gprs_vect_axel1y , gprs_vect_axel1z ,   gprs_hdop , gprs_vdop , gprs_sats ]
+		var telemetry_list = [ telemetry_datetime , telemetry_temp1 ,  telemetry_pressure1 , telemetry_pressure2 , telemetry_bat_volt ,  telemetry_vect_axel1x , telemetry_vect_axel1y , telemetry_vect_axel1z ,   telemetry_hdop , telemetry_vdop , telemetry_sats]
 		var aprs_list = [ aprs_datetime , aprs_temp1 , aprs_pressure1]
-        gprs_datetime = gprs_list[0], gprs_temp1 = gprs_list[1], gprs_temp2 = gprs_list[2], gprs_pressure1 = gprs_list[3], gprs_pressure2 = gprs_list[4], gprs_bat_volt = gprs_list[5],  gprs_vect_axel1x = gprs_list[6], gprs_vect_axel1y = gprs_list[7], gprs_vect_axel1z = gprs_list[8], gprs_hdop = gprs_list[9], gprs_vdop = gprs_list[10], gprs_sats = gprs_list[11];
-        telemetry_datetime = telemetry_list[0], telemetry_temp1 = telemetry_list[1], telemetry_temp2 = telemetry_list[2], telemetry_pressure1 = telemetry_list[3], telemetry_pressure2 = telemetry_list[4], telemetry_bat_volt = telemetry_list[5], telemetry_vect_axel1x = telemetry_list[6], telemetry_vect_axel1y = telemetry_list[7], telemetry_vect_axel1z = telemetry_list[8], telemetry_hdop = telemetry_list[9], telemetry_vdop = telemetry_list[10], telemetry_sats = telemetry_list[11];
+        gprs_datetime = gprs_list[0], gprs_temp1 = gprs_list[1],  gprs_pressure1 = gprs_list[2], gprs_pressure2 = gprs_list[3], gprs_bat_volt = gprs_list[4],  gprs_vect_axel1x = gprs_list[5], gprs_vect_axel1y = gprs_list[6], gprs_vect_axel1z = gprs_list[7], gprs_hdop = gprs_list[8], gprs_vdop = gprs_list[9], gprs_sats = gprs_list[10];
+        telemetry_datetime = telemetry_list[0], telemetry_temp1 = telemetry_list[1], telemetry_pressure1 = telemetry_list[2], telemetry_pressure2 = telemetry_list[3], telemetry_bat_volt = telemetry_list[4], telemetry_vect_axel1x = telemetry_list[5], telemetry_vect_axel1y = telemetry_list[6], telemetry_vect_axel1z = telemetry_list[7], telemetry_hdop = telemetry_list[8], telemetry_vdop = telemetry_list[9], telemetry_sats = telemetry_list[10];
         aprs_datetime = aprs_list[0], aprs_temp1 =aprs_list[1], aprs_pressure1 = aprs_list[2];
 
 		gprs_list.forEach(function (item, i, gprs_list) {
@@ -157,31 +155,7 @@ $(document).ready(function () {
 		    },
 		    options: {}
 		});
-    var ctx = document.getElementById('chart6').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-		    data:  {labels: gprs_datetime,
-			    datasets: [{fill: false,
-			    label: "Температура 2 по данным гпрс",
-			    backgroundColor: 'rgb(255, 135, 0)',
-			    borderColor: 'rgb(255, 0, 0)',
-			    data: gprs_temp2}]
-		    },
-
-		    options: {}
-		});
-		var ctx = document.getElementById('chart7').getContext('2d');
-		var chart = new Chart(ctx, {
-		    type: 'line',
-	    	    data:  {labels: telemetry_datetime,
-	    		    datasets: [{fill: false,
-			    label: "Температура 2 по данным телеметрии",
-			    backgroundColor: 'rgb(0, 200, 0)',
-			    borderColor: 'rgb(0, 50, 0)',
-			    data: telemetry_temp2}]
-		    },
-		    options: {}
-		});
+  
 		    var ctx = document.getElementById('chart8').getContext('2d');
 		var chart = new Chart(ctx, {
 		    type: 'line',

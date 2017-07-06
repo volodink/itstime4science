@@ -13,24 +13,22 @@ def gprs(mysql):
     w =[]
     for element in data:
         e = dict()
-        e['id'] = element[0]
+        ['id'] = element[0]
         e['numberOfFlight'] = element[1]
         e['datetime'] = str(element[2])
         e['lat'] = element[3]
         e['lon'] = element[4]
         e['alt'] = element[5]
         e['temp1'] = element[6]
-        e['temp2'] = element[7]
-        e['pressure1'] = element[8]
-        e['pressure2'] = element[9]
-        e['bat_volt'] = element[10]
-        e['vect_axel1x'] = element[11]
-        e['vect_axel1y'] = element[12]
-        e['vect_axel1z'] = element[13]
-        e['hdop'] = element[14]
-        e['vdop'] = element[15]
-        e['sats'] = element[16]
-        e['radiation'] = element[17]
+        e['pressure1'] = element[7]
+        e['pressure2'] = element[8]
+        e['bat_volt'] = element[9]
+        e['vect_axel1x'] = element[10]
+        e['vect_axel1y'] = element[11]
+        e['vect_axel1z'] = element[12]
+        e['hdop'] = element[13]
+        e['vdop'] = element[14]
+        e['sats'] = element[15]
         
         r.append(e)
     w.append(json.dumps(r))
@@ -48,24 +46,22 @@ def telemetry(mysql):
     w =[]
     for element in data:
         e = dict()
-        e['id'] = element[0]
+        ['id'] = element[0]
         e['numberOfFlight'] = element[1]
         e['datetime'] = str(element[2])
         e['lat'] = element[3]
         e['lon'] = element[4]
         e['alt'] = element[5]
         e['temp1'] = element[6]
-        e['temp2'] = element[7]
-        e['pressure1'] = element[8]
-        e['pressure2'] = element[9]
-        e['bat_volt'] = element[10]
-        e['vect_axel1x'] = element[11]
-        e['vect_axel1y'] = element[12]
-        e['vect_axel1z'] = element[13]
-        e['hdop'] = element[14]
-        e['vdop'] = element[15]
-        e['sats'] = element[16]
-        e['radiation'] = element[17]
+        e['pressure1'] = element[7]
+        e['pressure2'] = element[8]
+        e['bat_volt'] = element[9]
+        e['vect_axel1x'] = element[10]
+        e['vect_axel1y'] = element[11]
+        e['vect_axel1z'] = element[12]
+        e['hdop'] = element[13]
+        e['vdop'] = element[14]
+        e['sats'] = element[15]
         r.append(e)
     w.append(json.dumps(r))
     #print(json.dumps(w))

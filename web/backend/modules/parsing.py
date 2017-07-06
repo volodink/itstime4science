@@ -32,16 +32,15 @@ def pars_gprs(mysql):
             e['lon'] = element[4]
             e['alt'] = element[5]
             e['temp1'] = element[6]
-            e['temp2'] = element[7]
-            e['pressure1'] = element[8]
-            e['pressure2'] = element[9]
-            e['bat_volt'] = element[10]
-            e['vect_axel1x'] = element[11]
-            e['vect_axel1y'] = element[12]
-            e['vect_axel1z'] = element[13]
-            e['hdop'] = element[14]
-            e['vdop'] = element[15]
-            e['sats'] = element[16]
+            e['pressure1'] = element[7]
+            e['pressure2'] = element[8]
+            e['bat_volt'] = element[9]
+            e['vect_axel1x'] = element[10]
+            e['vect_axel1y'] = element[11]
+            e['vect_axel1z'] = element[12]
+            e['hdop'] = element[13]
+            e['vdop'] = element[14]
+            e['sats'] = element[15]
             r.append(e)
             return json.dumps(r)
     except:
@@ -62,16 +61,15 @@ def pars_telemetry(mysql):
             e['lon'] = element[4]
             e['alt'] = element[5]
             e['temp1'] = element[6]
-            e['temp2'] = element[7]
-            e['pressure1'] = element[8]
-            e['pressure2'] = element[9]
-            e['bat_volt'] = element[10]
-            e['vect_axel1x'] = element[11]
-            e['vect_axel1y'] = element[12]
-            e['vect_axel1z'] = element[13]
-            e['hdop'] = element[14]
-            e['vdop'] = element[15]
-            e['sats'] = element[16]
+            e['pressure1'] = element[7]
+            e['pressure2'] = element[8]
+            e['bat_volt'] = element[9]
+            e['vect_axel1x'] = element[10]
+            e['vect_axel1y'] = element[11]
+            e['vect_axel1z'] = element[12]
+            e['hdop'] = element[13]
+            e['vdop'] = element[14]
+            e['sats'] = element[15]
             r.append(e)
 
             return json.dumps(r)
@@ -203,9 +201,9 @@ def parsing_telem(mysql):
 
 
                     cursor = db.cursor()
-                    insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime, lat, lon,alt,temp1,temp2,pressure1,pressure2,\
+                    insert ="""INSERT INTO telemetry(numberOfFlight, sats,datetime, lat, lon,alt,temp1,pressure1,pressure2,\
                                             bat_volt,vect_axel1x,vect_axel1y,vect_axel1z,hdop,vdop)\
-                                             VALUES({},{}, '{}', {}, {}, {}, {}, {}, {}, {},  \
+                                             VALUES({},{}, '{}', {}, {}, {}, {}, {}, {},  \
                                             {}, {}, {}, {}, {}, {})""".format(int(kek[0]), int(kek[1]), kek[2],
                                                                                                          float(kek[3]), float(kek[4]),
                                                                                                          float(kek[5]), float(kek[6]),
@@ -213,8 +211,7 @@ def parsing_telem(mysql):
                                                                                                          float(kek[9]), float(kek[10]),
                                                                                                          float(kek[11]),
                                                                                                          float(kek[12]), float(kek[13]),
-                                                                                                         float(kek[14]),
-                                                                                                         float(kek[15]))
+                                                                                                         float(kek[14]))
                     cursor.execute(insert)
                     db.commit()
                             
