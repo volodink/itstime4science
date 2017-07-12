@@ -90,7 +90,7 @@ socket.on('aprs', function (msg) {
 	else	{
 			setTimeout(function(){
 	  		APRS(msg,markers_aprs);
-			}, 60000);
+			}, 10000);
 		}
 });
 
@@ -122,11 +122,12 @@ $("#aprs").change(function(){
 
 
 function APRS(msg,markers_aprs){
-    console.log(msg['json_data'])
 	if (msg['json_data'] != 0){
 		var json_packet = msg['json_data'];
+        change_data(msg['type'],k);
 		var json = JSON.parse(json_packet);
 			json.forEach(function (item, i, json) {
+
 				    j = json[i];
 				    lat = j.lat;
 				    lon = j.lon;
@@ -139,22 +140,23 @@ function APRS(msg,markers_aprs){
 				    $('#temp1').html(j.temp1);
 				    $('#pressure1').html(j.pressure);
 
-				    
+				    id_aprs = j.id;
 				    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 				    addMarker(position,map,lat,lon,markers_aprs,'aprs');
 				    console.log("Данные aпрс есть, омномном");
-                    change_data(msg['type'],k);
 
+                    socket.emit('my_event2',{data: id_aprs});
 			})
-	}    
+	}  else {  
 	console.log("Данных апрс нема, хозяина");
-	socket.emit('my_event2',{data: j.id});
+	socket.emit('my_event2',{data: id_aprs});}
 }
 function GPRS(msg,markers_gprs){
 					if (msg['json_data'] != 0){
                         change_data(msg['type'],k);
 
 						var json_packet = msg['json_data'];
+
 						var json = JSON.parse(json_packet);
 									json.forEach(function (item, i, json) {
 									    j = json[i];
@@ -177,22 +179,23 @@ function GPRS(msg,markers_gprs){
 									    $('#hdop').html(j.hdop);
 									    $('#vdop').html(j.vdop);
 									    $('#sats').html(j.sats);
-									    									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-										
+									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+										id_gprs = j.id;
 									    addMarker(position,map,lat,lon,markers_gprs,'gprs');
 									    console.log("Данные гпрс есть, омномном");
-
+                                        socket.emit('my_event',{data: id_gprs});
 									})
-					}    
+					}   else { 
 			console.log("Данных гпрс нема, хозяина");
-			socket.emit('my_event',{data: j.id}); 	
+			socket.emit('my_event',{data: id_gprs}); }	
 	
 };
-function TELEMETRY(msg,markers_telemetry){
+function TELEMETRY(msg,markers_telemetry) {
 					if (msg['json_data'] != 0){
                         change_data(msg['type'],k);
 
 						var json_packet = msg['json_data'];
+
 						var json = JSON.parse(json_packet);
 									json.forEach(function (item, i, json) {
 									    j = json[i];
@@ -216,15 +219,15 @@ function TELEMETRY(msg,markers_telemetry){
 									    $('#hdop').html(j.hdop);
 									    $('#vdop').html(j.vdop);
 									    $('#sats').html(j.sats);
-									    									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-										
+									    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
+										id_telemetry = j.id;
 									    addMarker(position,map,lat,lon,markers_telemetry,'telemetry');
 									    console.log("Данные телеметрии есть, омномном");
-
+                                        socket.emit('my_event3',{data: id_telemetry});
 									})
-					}    
+					}    else {
 			console.log("Данных телеметрии нема, хозяина");
-			socket.emit('my_event3',{data: j.id}); 	
+			socket.emit('my_event3',{data: id_telemetry}); 	}
 	
 };
 

@@ -13,7 +13,7 @@ def gprs(mysql):
     w =[]
     for element in data:
         e = dict()
-        ['id'] = element[0]
+        e['id'] = element[0]
         e['numberOfFlight'] = element[1]
         e['datetime'] = str(element[2])
         e['lat'] = element[3]
@@ -46,7 +46,7 @@ def telemetry(mysql):
     w =[]
     for element in data:
         e = dict()
-        ['id'] = element[0]
+        e['id'] = element[0]
         e['numberOfFlight'] = element[1]
         e['datetime'] = str(element[2])
         e['lat'] = element[3]
