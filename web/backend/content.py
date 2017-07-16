@@ -49,7 +49,6 @@ def getContent():
 				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d33/CwSrB0ZM6Y0.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
-
 	kopylovv = {"name": "Вадим Копылов",
 				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18ca1/zg1YdCWAHNY.jpg",
 				"job_title": "Лаборант",
@@ -74,7 +73,11 @@ def getContent():
 				"link_to_photo": "https://pp.vk.me/c638023/v638023262/1bc8c/d83ROGuf4Pc.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
-
+	
+	bochkovm =  {"name": "Максим Бочков",
+				"link_to_photo": "https://pp.userapi.com/c841225/v841225770/2516/5kNj7ugmnuQ.jpg",
+				"job_title": "Лаборант",
+				"comment": ""}
 
 
 
@@ -96,7 +99,7 @@ def getContent():
 										caplinm,
 										baikova,
 										volckovs,
-										kopylovv,
+										bochkovm,
 										# kolodkin,
 										volkova)},
 			"description": """ 
@@ -190,8 +193,8 @@ def getContent():
 										kedelidzeo,
 										caplinm,
 										volckovs,
-										# kolodkin,
-										kopylovv)},
+										bochkovm,
+)},
 				"description": """
 					<p align='right'><i>SpaceY - потому, что SpaceX уже есть.</i></p>
 										
@@ -230,7 +233,8 @@ def getContent():
 
 	return {"main": main,
 			"copter": copter,
-			"satellite": satellite}
+            "satellite": satellite}
+
 
 if __name__ == "__main__":
 	
