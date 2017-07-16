@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 def setGalleryImg(*tuplePhoto):
+
 	return tuple((count, tuplePhoto[count]) for count in range(len(tuplePhoto))) 
 
 def setTemaData(*tupleData):
+
 	return dict({"name":tupleData})
 
 
@@ -48,6 +49,10 @@ def getContent():
 				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18d33/CwSrB0ZM6Y0.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
+	bochkovm = {"name": "Максим Бочков",
+				"link_to_photo": "https://pp.userapi.com/c841225/v841225770/2516/5kNj7ugmnuQ.jpg",
+				"job_title": "Лаборант",
+				"comment": ""}
 	kopylovv = {"name": "Вадим Копылов",
 				"link_to_photo": "https://pp.vk.me/c638419/v638419262/18ca1/zg1YdCWAHNY.jpg",
 				"job_title": "Лаборант",
@@ -72,11 +77,7 @@ def getContent():
 				"link_to_photo": "https://pp.vk.me/c638023/v638023262/1bc8c/d83ROGuf4Pc.jpg",
 				"job_title": "Лаборант",
 				"comment": ""}
-	
-	bochkovm =  {"name": "Максим Бочков",
-				"link_to_photo": "https://pp.userapi.com/c841225/v841225770/2516/5kNj7ugmnuQ.jpg",
-				"job_title": "Лаборант",
-				"comment": ""}
+
 
 
 
@@ -98,7 +99,8 @@ def getContent():
 										caplinm,
 										baikova,
 										volckovs,
-										bochkovm,
+										kopylovv,
+								                bockovm,
 										# kolodkin,
 										volkova)},
 			"description": """ 
@@ -192,8 +194,8 @@ def getContent():
 										kedelidzeo,
 										caplinm,
 										volckovs,
-										bochkovm,
-)},
+										# kolodkin,
+										 bochkovm)},
 				"description": """
 					<p align='right'><i>SpaceY - потому, что SpaceX уже есть.</i></p>
 										
@@ -234,39 +236,9 @@ def getContent():
 			"copter": copter,
 			"satellite": satellite}
 
-panel_tags = [
-	('ID', 'id', '', ''),
-	('Номер полёта', 'numberOfFlight','', ''),
-	('Дата и время', 'datetime','', 'srtc'),
-	('Широта°', 'lat','градус северной широты', 'sgps'),
-	('Долгота,°', 'lon','градус восточной долготы', ''),
-	('Высота', 'alt', 'Метры', ''),
-	('Напряжение аккумулятора', 'bat_volt', 'Вольт','sbat_volt'),
-	('Температура аккумулятора', 'bat_temp', '°С','sbat_temp'),
-	('Датчик температуры №1', 'temp1', '°С','stermometr1'),
-	('Датчик температуры №2', 'temp2', '°С','stermometr2'),
-	('Датчик давления №1', 'pressure1', 'Паскаль','sbarometr1'),
-	('Датчик давления №2', 'pressure2', 'Паскаль','sbarometr2'),
-	('Вектор аксе-ра 1 по x', 'vect_axel1x', 'м/с^2','svect_axel1'),
-	('Вектор аксе-ра 1 по y', 'vect_axel1y', 'м/с^2',''),
-	('Вектор аксе-ра 1 по z', 'vect_axel1z', 'м/с^2',''),
-	('Вектор аксе-ра 2 по x', 'vect_axel2x', 'м/с^2','svect_axel2'),
-	('Вектор аксе-ра 2 по y', 'vect_axel2y', 'м/с^2',''),
-	('Вектор аксе-ра 2 по z', 'vect_axel2z', 'м/с^2',''),
-	('Датчик ультрафиолета №1', 'ultraviolet1','Люкс','sultraviolet1'),
-	('Датчик ультрафиолета №2', 'ultraviolet2','Люкс','sultraviolet2'),
-	('Датчик инфр. излуч. №1', 'infrared1','Люкс','sinfrared1'),
-	('Датчик инфр. излуч. №2', 'infrared2','Люкс','sinfrared2'),
-	('HDOP', 'hdop','Cнижение точности в горизонтальной плоскости','shdop'),
-	('VDOP', 'vdop','Снижение точности в вертикальной плоскости','svdop'),
-	('Количество спутников', 'sats','','ssats'),
-	('Радиация', 'radiation','ренген/час','sradiation'),
-	('Датчик пыли', 'dust','мг/м^3','sdust'),
-	('Датчик озона', 'ozone','','sozone'),
-	('Модуль научной миссии','modul','','smodul')
-]
-communication_channel_panel=[('Телеметрия','telemetry'),('GPRS','gprs'),('APRS','aprs')]
 if __name__ == "__main__":
+	
 	lal = getContent()
+
 	for i in lal["main"]["gallery"]:
 		print(i)

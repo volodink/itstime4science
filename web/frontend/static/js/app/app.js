@@ -1,175 +1,124 @@
 var markers = [];
 var map;
-console.log(123)
-    <script type="text/javascript" charset="utf-8">
-	    $(document).ready(function () {
-		var url = 'http://' + document.domain + ':' + location.port;
-		var socket = io.connect(url + "/mcc");
-		console.log(234)
 
-socket.on('data', function (msg) {
-  var numberOfFlight = msg['numberOfFlight'];
-  var datatime = msg['datatime'];
-  var lat = msg['lat'];
-  var lon = msg['lon'];
-  var alt = msg['alt'];
-  var temp1 = msg['temp1'];
-  var temp2 = msg['temp2'];
-  var pressure1 = msg['pressure1'];
-  var pressure2 = msg['pressure2'];
-  var bat_crg = msg['bat_crg'];
-  var bat_volt = msg['bat_volt'];
-  var bat_temp = msg['bat_temp'];
-  var vect_axel1x = msg['vect_axel1x'];
-  var vect_axel1y = msg['vect_axel1y'];
-  var vect_axel1z = msg['vect_axel1z'];
-  var vect_axel2x = msg['vect_axel2x'];
-  var vect_axel2y = msg['vect_axel2y'];
-  var vect_axel2z = msg['vect_axel2z'];
-  var ultraviolet1 = msg['ultraviolet1'];
-  var ultraviolet2 = msg['ultraviolet2'];
-  var infrared1 = msg['infrared1'];
-  var infrared2 = msg['infrared2'];
-  var hdop = msg['hdop'];
-  var vdop = msg['vdop'];
-  var sats = msg['sats'];
-  var radiation = msg['radiation'];
-  var dust = msg['dust'];
-  var ozone = msg['ozone'];
+function genData(count) {
 
-  $('#numberOfFlight').text(numberOfFlight)
-  $('#datatime').text(datatime)
-  $('#lat').text(lat)
-  $('#lon').text(lon)
-  $('#alt').text(alt)
-  $('#temp1').text(temp1)
-  $('#temp2').text(temp2)
-  $('#pressure1').text(pressure1)
-  $('#pressure2').text(pressure2)
-  $('#bat_crg').text(bat_crg)
-  $('#bat_volt').text(bat_volt)
-  $('#bat_temp').text(bat_temp)
-  $('#vect_axel1x').text(vect_axel1x)
-  $('#vect_axel1y').text(vect_axel1y)
-  $('#vect_axel1z').text(vect_axel1z)
-  $('#vect_axel2x').text(vect_axel2x)
-  $('#vect_axel2y').text(vect_axel2y)
-  $('#vect_axel2z').text(vect_axel2z)
-  $('#ultraviolet1').text(ultraviolet1)
-  $('#ultraviolet2').text(ultraviolet2)
-  $('#infrared1').text(infrared1)
-  $('#infrared2').text(infrared2)
-  $('#hdop').text(hdop)
-  $('#vdop').text(vdop)
-  $('#sats').text(sats)
-  $('#radiation').text(radiation)
-  $('#dust').text(dust)
-  $('#ozone').text(ozone)
-});
+	return data = {
+		ts: tipoMap(0, 10000, count),	
+		lat: tipoMap(53.22544088, 58.0, count),
+		lon: tipoMap(45.00208070, 45.9, count),
+		alt: tipoMap(0.0, 30.0, count),
+		bat: tipoMap(99.0, 45.0, count)
+	};
+}
 
-socket.on('status', function (msg) {
-  var datatime = msg['datatime'];
-  var lat = msg['lat'];
-  var lon = msg['lon'];
-  var alt = msg['alt'];
-  var temp1 = msg['temp1'];
-  var temp2 = msg['temp2'];
-  var pressure1 = msg['pressure1'];
-  var pressure2 = msg['pressure2'];
-  var bat_crg = msg['bat_crg'];
-  var bat_volt = msg['bat_volt'];
-  var bat_temp = msg['bat_temp'];
-  var vect_axel1x = msg['vect_axel1x'];
-  var vect_axel1y = msg['vect_axel1y'];
-  var vect_axel1z = msg['vect_axel1z'];
-  var vect_axel2x = msg['vect_axel2x'];
-  var vect_axel2y = msg['vect_axel2y'];
-  var vect_axel2z = msg['vect_axel2z'];
-  var ultraviolet1 = msg['ultraviolet1'];
-  var ultraviolet2 = msg['ultraviolet2'];
-  var infrared1 = msg['infrared1'];
-  var infrared2 = msg['infrared2'];
-  var hdop = msg['hdop'];
-  var vdop = msg['vdop'];
-  var sats = msg['sats'];
-  var radiation = msg['radiation'];
-  var dust = msg['dust'];
-  var ozone = msg['ozone'];
+// function sizeSlider() {
+// 	size = document.getElementById("size").value;
+// 	$("#slider").html(size);
+// }
 
-  $('#datatime').append(datatime)
-  $('#lat').append(lat)
-  $('#lon').append(lon)
-  $('#alt').append(alt)
-  $('#temp1').append(temp1)
-  $('#temp2').append(temp2)
-  $('#pressure1').append(pressure1)
-  $('#pressure2').append(pressure2)
-  $('#bat_crg').append(bat_crg)
-  $('#bat_volt').append(bat_volt)
-  $('#bat_temp').append(bat_temp)
-  $('#vect_axel1x').append(vect_axel1x)
-  $('#vect_axel1y').append(vect_axel1y)
-  $('#vect_axel1z').append(vect_axel1z)
-  $('#vect_axel2x').append(vect_axel2x)
-  $('#vect_axel2y').append(vect_axel2y)
-  $('#vect_axel2z').append(vect_axel2z)
-  $('#ultraviolet1').append(ultraviolet1)
-  $('#ultraviolet2').append(ultraviolet2)
-  $('#infrared1').append(infrared1)
-  $('#infrared2').append(infrared2)
-  $('#hdop').append(hdop)
-  $('#vdop').append(vdop)
-  $('#sats').append(sats)
-  $('#radiation').append(radiation)
-  $('#dust').append(dust)
-  $('#ozone').append(ozone)
-});
-var markers = [];
-var map;
+// while(true)
+// 	sizeSlider();
+function tipoMap(start, stop, step) {
 
-function getSomething(data) {
-  var position = {lat: Number(data["lat"][count]), lng: Number(data["lon"][count])}
-  addMarker(position, map);
+	finalArr = [];
+	for( var i = 0; i < step; i++) {
+
+		finalArr[i] = (start - (start - stop)*i/step).toFixed(3);
+	}
+	console.log(finalArr)
+	return finalArr;
+}
+
+function getSomething(data, max_count) {
+
+	$("#ts").html(data["ts"][count]);
+	$("#lat").html(data["lat"][count]);
+	$("#lon").html(data["lon"][count]);
+	$("#alt").html(data["alt"][count]);
+	$("#bat").html(data["bat"][count]);
+	// sizeSlider();
+	var position = {lat: Number(data["lat"][count]), lng: Number(data["lon"][count])}
+	addMarker(position, map);
+	// console.log(size);
+	count++;
+	if(count == max_count){
+		count = 0;
+	}
 }
 
 function addMarker(location, map) {
-  if ($("#follow").prop('checked'))
-      map.setCenter(location);
+  // Add the marker at the clicked location, and add the next-available label
+  // from the array of alphabetical characters.
+	if($("#follow").prop('checked'))
+ 		 map.setCenter(location);
   var marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
+    position: location,
+    map: map,
+    icon: "https://raw.githubusercontent.com/volodink/itstime4science/dev/web/frontend/static/img/title_icon.ico"
   });
 }
 
 
-function printData(data, sleep) {
-  console.log(data)
-  setInterval(function () {
-      getSomething(data)
+function printData(data, sleep, max_count){
+	// console.log(data);
 
-  }, sleep);
-}
+	// for(var i = 0; i < 5; i++){
+		console.log(data)
+		setInterval(function(){
+		    getSomething(data, max_count) 
+		    // console.log(size);
+		}, sleep);
+	// }
+
+
+		}
 
 
 function initMap() {
-  var myLatLng = {lat: 53.22544088, lng: 45.00208070};
+  var myLatLng = {lat:  53.22544088, lng: 45.00208070};
 
-  map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 11,
-      center: myLatLng
+  	map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: myLatLng
   });
 
 }
 
+
+$(document).ready(function () {
+	$('#myModal').modal('show');
+	$('#startDemo').bind('click', startAll);
+});
+
+// Gen data
+
 var count = 0;
+var MAX_COUNT = 1000;
+
+// $(document).ready(function () {
+// 	 $('#startDemo').bind('click', 
+//  	var arr = genData(MAX_COUNT);
+// 	console.log(arr);
+// 	printData(arr, 500, MAX_COUNT);
+// );
+	
+// });
 
 function startAll() {
-  printData(arr, 500);
+	var arr = genData(MAX_COUNT);
+	console.log(arr);
+	printData(arr, 500, MAX_COUNT);
 }
-});
-printData(arr, 500);
-}
+
+
+
+// $(document).ready(function () {
+// 	var arr = genData(MAX_COUNT);
+// 	console.log(arr);
+// 	printData(arr, 500, MAX_COUNT);
+	
+// });
 
 
 

@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx
 MAINTAINER Konstantin Volodin, volodin.konstantin@gmail.com
 
 COPY nginx.conf /etc/nginx

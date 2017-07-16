@@ -5,7 +5,7 @@ import argparse
 class Parser:
     def createParser(self):
         self.parser = argparse.ArgumentParser()
-        self.parser.add_argument('-i', '--ip', default="0.0.0.0")
+        self.parser.add_argument('-i', '--ip', default="localhost")
         self.parser.add_argument('-p', '--port', default=5000, type=int)
 
         return self.parser
