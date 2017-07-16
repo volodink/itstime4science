@@ -3,7 +3,9 @@ var markers_gprs = [];
 var markers_aprs = [];
 var markers_telemetry = [];
 var markers_Oleg = [];
-
+var id_gprs = 0;
+var id_aprs = 0;
+var id_telemetry = 0;
 var url = 'http://' + document.domain + ':' + location.port;
 var socket = io.connect(url + "/mcc");
 	socket.on('connect', function() {
