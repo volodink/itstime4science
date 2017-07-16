@@ -13,7 +13,7 @@ from params import Parser
 
 app = Flask(__name__)
 app.template_folder = '../frontend/templates/'
-app.static_folder = '../frontend/static/'
+app.static_folder = "../frontend/static/"
 
 data = content.getContent() # Новый контент можно добавить в файл
 							# /web/backend/content.py
