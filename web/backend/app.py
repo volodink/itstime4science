@@ -25,7 +25,7 @@ app.config['MYSQL_DATABASE_DB'] = os.getenv("MYSQL_DATABASE_DB", "0")
 
 
 app.template_folder = '../frontend/templates/'
-app.static_folder = "../frontend/static/"
+app.static_folder = '../frontend/static/'
 
 
 socketio = SocketIO(app)
@@ -93,32 +93,37 @@ def rep():
 
 @socketio.on('my_event', namespace='/mcc')
 def message(message):
-    json_data = parsing.pars_gprs(mysql)
-    mas = json.loads(json_data)
-    if message['data'] != mas[0]['id']:
-        emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
-    else:
+    try:
+        json_data = parsing.pars_gprs(mysql)
+        mas = json.loads(json_data)
+        if message['data'] != mas[0]['id']:
+            emit('gprs', {'json_data': json_data,'type': 'gprs'}, namespace='/mcc')
+        else:
+            emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
+    except:
         emit('gprs', {'json_data': 0,'type': 'gprs'}, namespace='/mcc')
-
 @socketio.on('my_event2', namespace='/mcc')
 def message(message):
-    json_data = parsing.pars_aprs(mysql)
-    mas = json.loads(json_data)
-    if message['data'] != mas[0]['id']:
-        emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
-    else:
+    try:
+        json_data = parsing.pars_aprs(mysql)
+        mas = json.loads(json_data)
+        if message['data'] != mas[0]['id']:
+            emit('aprs', {'json_data': json_data, 'type': 'aprs'}, namespace='/mcc')    
+        else:
+            emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
+    except:
         emit('aprs', {'json_data': 0, 'type': 'aprs'}, namespace='/mcc')
-
 @socketio.on('my_event3', namespace='/mcc')
 def message(message):
-    json_data = parsing.pars_telemetry(mysql)
-    mas = json.loads(json_data)
-    if message['data'] != mas[0]['id']:       
-        emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
-    else:
+    try:
+        json_data = parsing.pars_telemetry(mysql)
+        mas = json.loads(json_data)
+        if message['data'] != mas[0]['id']:       
+            emit('telemetry', {'json_data': json_data, 'type': 'telemetry'}, namespace='/mcc')
+        else:
+            emit('telemetry', {'json_data': 0, 'type': 'telemetry'}, namespace='/mcc')
+    except:
         emit('telemetry', {'json_data': 0, 'type': 'telemetry'}, namespace='/mcc')
-
-
 @socketio.on('last_dots', namespace='/mcc')
 def msg():
     gprs = parsing.last_gprs_dots(mysql)
@@ -133,9 +138,7 @@ def msg():
 
 
 if __name__ == '__main__':
-    mysql.init_app(app)
-
-    
+    mysql.init_app(app)    
     if is_dev == 1:
         socketio.run(app, host='0.0.0.0', debug=True)
     else:
