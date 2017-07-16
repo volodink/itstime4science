@@ -1,8 +1,0 @@
-flask
-flask-socketio
-flask-mysql
-pymysql
-eventlet
-gevent
-gevent-websocket
-aprslib
