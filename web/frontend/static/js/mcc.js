@@ -16,6 +16,7 @@ socket.emit('Oleg');
 
 socket.on('lastMarkerOleg', function (msg) {
 	setTimeout(function(){
+		try{
 		    var gprs = msg['Oleg'];
 		    var json = JSON.parse(gprs);
 		    json.forEach(function (item, i, json) {
@@ -25,14 +26,15 @@ socket.on('lastMarkerOleg', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_Oleg,'----',1);
 		    })
+		} catch {console.log("Не удалось взять данные с трекера");}
             socket.emit('Oleg');
 }, 60000);  
 });
           
 socket.on('lastMarkers', function (msg) {
-
+		
 		var gprs = msg['gprs'];
-
+		try{
 		    var json = JSON.parse(gprs);
 		    json.forEach(function (item, i, json) {
 			    j = json[i];
@@ -41,9 +43,10 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_gprs,'gprs',9);
 		    })
-        
+		}catch{console.log("Не удалось взять последние точки gprs");}
         
 		var aprs = msg['aprs'];
+		try{
 
             var json = JSON.parse(aprs);
 		    json.forEach(function (item, i, json) {
@@ -53,8 +56,10 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_aprs,'aprs',9);
 		    })
-        
+		}catch{console.log("Не удалось взять последние точки aprs");}
+
 		var telemetry = msg['telemetry'];
+		try{
 
 		    var json = JSON.parse(telemetry);
 
@@ -65,7 +70,8 @@ socket.on('lastMarkers', function (msg) {
 			    var position = {lat: parseFloat(lat), lng: parseFloat(lon)};
 			    addMarker(position,map,lat,lon,markers_telemetry,'telemetry',9);
 		    })
-        
+	}catch{console.log("Не удалось взять последние точки телеметрии");}
+
 })
 socket.emit('my_event',{data: 0});
 k=0;
