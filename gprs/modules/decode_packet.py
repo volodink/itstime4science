@@ -60,39 +60,35 @@ def insert(packet):
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[24:28]  # temp2
+        data = packet[24:28]  # pressure1
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[28:32]  # pressure1
+        data = packet[28:32]  # pressure2
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[32:36]  # pressure2
+        data = packet[32:36]  # bat_volt
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[36:40]  # bat_volt
+        data = packet[36:40]  # vect_axel1x
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[40:44]  # vect_axel1x
+        data = packet[40:44]  # vect_axel1y
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[44:48]  # vect_axel1y
+        data = packet[44:48]  # vect_axel1z
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[48:52]  # vect_axel1z
+        data = packet[48:52]  # hdop
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
-        data = packet[52:56]  # hdop
-        data = struct.unpack('f', data)
-        d.append(clear_string(data))
-
-        data = packet[56:60]  # vdop
+        data = packet[52:56]  # vdop
         data = struct.unpack('f', data)
         d.append(clear_string(data))
 
